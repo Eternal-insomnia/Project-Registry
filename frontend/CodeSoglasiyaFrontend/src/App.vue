@@ -1,19 +1,23 @@
-<script setup>
-
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-    <!-- change logo -->
-  </header>
   <main>
-    <p>GOAL</p>
+    <div class="application-container">
+      <AppComponent/>
+      <!-- <TestComponent/> -->
+    </div>
   </main>
 </template>
 
-<style scoped>
-  p {
-    color: blue;
+<script>
+import AppComponent from "./components/AppComponent.vue";
+//import TestComponent from "./test/TestComponent.vue";
+
+export default {
+  components: {
+    AppComponent
+    //TestComponent
   }
+}
+</script>
+
+<style>
 </style>
