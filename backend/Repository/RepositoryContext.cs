@@ -1,5 +1,4 @@
 ﻿using ConsentCode.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConsentCode.Repository
@@ -12,8 +11,5 @@ namespace ConsentCode.Repository
         {
             modelBuilder.ApplyConfiguration(new ProjectGeneralInfoConfiruation());
         }
-
-        public async Task<List<ProjectGeneralInfo>> GetAllProjectsGeneralInfo() =>
-            await ProjectsGeneralInfo.ToListAsync();
     }
 }

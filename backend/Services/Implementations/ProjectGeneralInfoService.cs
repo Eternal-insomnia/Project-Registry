@@ -1,24 +1,24 @@
-﻿using ConsentCode.Models;
-using ConsentCode.Repository;
+﻿using ConsentCode.DTOs;
+using ConsentCode.Repository.Interfaces;
 using ConsentCode.Services.Interfaces;
 
 namespace ConsentCode.Services.Implementations
 {
-    public class ProjectGeneralInfoService : IBaseService<ProjectGeneralInfo>
+    public class ProjectGeneralInfoService : IProjectGeneralInfoService
     {
         private readonly ILogger<ProjectGeneralInfoService> _logger;
-        private readonly RepositoryContext _dbContext;
+        private readonly IProjectGeneralInfoRepository _projectGeneralInfoRepository;
 
-        public async Task<List<ProjectGeneralInfo>> GetAll()
+        public async Task<List<ProjectGeneralInfoDTO>> GetAll()
         {
             _logger.LogInformation("Get All ProjectGeneralInfo Service");
-            return await _dbContext.GetAllProjectsGeneralInfo();
+            return await _projectGeneralInfoRepository.GetAll();
         }
 
-        public ProjectGeneralInfoService(ILogger<ProjectGeneralInfoService> logger, RepositoryContext dbContext)
+        public ProjectGeneralInfoService(ILogger<ProjectGeneralInfoService> logger, IProjectGeneralInfoRepository projectGeneralInfoRepository)
         {
             _logger = logger;
-            _dbContext = dbContext;
+            _projectGeneralInfoRepository = projectGeneralInfoRepository;
         }
     }
 }

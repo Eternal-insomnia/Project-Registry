@@ -1,11 +1,13 @@
-﻿using ConsentCode.Services.Implementations;
+﻿using ConsentCode.Models;
+using ConsentCode.Services.Implementations;
+using ConsentCode.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConsentCode.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class ProjectRegistryController : ControllerBase
     {
         private readonly ILogger<ProjectRegistryController> _logger;
