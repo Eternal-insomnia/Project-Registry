@@ -14,7 +14,7 @@
         Группировать
       </button>
       Поиск:
-      <input @keydown.enter="(event) => searchRequest = event.target.value">
+      <input @keydown.enter="(event) => searchQuery = event.target.value">
     </div>
 
     <div class="filter-buttons">
@@ -31,7 +31,9 @@
   </div>
 
   <div class="projects-table">
-    <TableComponent>
+    <TableComponent
+      :data="tableData"
+      :columns="tableHead">
     </TableComponent>
   </div>
 </template>
@@ -39,13 +41,19 @@
 <script>
 import TableComponent from "./Table/TableComponent.vue"
 
+import tableData from "@/data/projects-table.json"
+import tableHead from "@/data/general-info-head.json"
+
 export default {
   components: {
+    // TableComponent,
     TableComponent
   },
   data() {
     return {
-      searchRequest: ""
+      searchQuery: "",
+      tableData: tableData,
+      tableHead: tableHead
     }
   },
   methods: {
@@ -62,6 +70,11 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   background-color: #5f9ea0;
+}
+.functional-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
 }
 .home-button {
   background-color: #9c1c1c;

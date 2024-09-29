@@ -1,41 +1,117 @@
 <template>
-  Ваша таблица
-  <table>
+  <table v-if="filteredData.length">
     <thead>
       <tr>
-        <th v-for="header in headers" :key="header">
-          {{ header }}
+        <th v-for="key in Object.keys(columns[0])"
+          @click="sortBy(key)"
+          :class="{ active: sortKey == key }">
+          {{ capitalize(columns[0][key]) }}
+          <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+          </span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="project in projects" :key="project.id">
-        <td v-for="state in project" :key="state">{{ state }}</td>
+      <tr v-for="entry in filteredData">
+        <td v-for="key in Object.keys(columns[0])">
+          {{entry[key]}}
+        </td>
       </tr>
     </tbody>
   </table>
+  <p v-else>Совпадений не найдено.</p>
 </template>
 
 <script>
-import tableData from "@/data/projects-table.json"
-import tableHead from "@/data/general-info-head.json"
-
 export default {
+  props: {
+    data: Array,
+    columns: Array
+  },
   data() {
     return {
-      projects: tableData,
-      headers: tableHead
+      sortKey: '',
+      sortOrders: Object.keys(this.columns[0]).reduce((o, key) => ((o[key] = 1), o), {})
+    }
+  },
+  computed: {
+    filteredData() {
+      const sortKey = this.sortKey
+      const order = this.sortOrders[sortKey] || 1
+      let data = this.data
+      if (sortKey) {
+        data = data.slice().sort((a, b) => {
+          a = a[sortKey]
+          b = b[sortKey]
+          return (a === b ? 0 : a > b ? 1 : -1) * order
+        })
+      }
+      return data
+    }
+  },
+  methods: {
+    sortBy(key) {
+      this.sortKey = key
+      this.sortOrders[key] = this.sortOrders[key] * -1
+    },
+    capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1)
     }
   }
 }
-// В папке с таблицами
 </script>
 
 <style>
 table {
-  text-align: left;
+  border: 2px solid #42b983;
+  border-radius: 3px;
+  background-color: #fff;
+  width: 100%;
 }
-tr {
-  height: 15px;
+
+th {
+  background-color: #42b983;
+  color: rgba(255, 255, 255, 0.66);
+  cursor: pointer;
+  user-select: none;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+th,
+td {
+  min-width: 50px;
+  font-size: 15px;
+}
+
+th.active {
+  color: #fff;
+}
+
+th.active .arrow {
+  opacity: 1;
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.66;
+}
+
+.arrow.asc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #fff;
+}
+
+.arrow.dsc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #fff;
 }
 </style>
