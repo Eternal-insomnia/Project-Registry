@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AutoMapper;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ConsentCode.Models
@@ -6,7 +7,7 @@ namespace ConsentCode.Models
     public class ProjectGeneralInfo
     {
         [Key]
-        public Guid Id { get; set; }
+        public required Guid Id { get; set; }
 
         public required string Year { get; set; }
         public required string Status { get; set; }
@@ -26,5 +27,7 @@ namespace ConsentCode.Models
         [Column(TypeName = "char")]
         public string? RGT { get; set; }
 
+
+        public required ProjectCondition Condition { get; set; }
     }
 }

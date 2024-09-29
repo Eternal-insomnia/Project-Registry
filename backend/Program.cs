@@ -16,9 +16,11 @@ builder.Services.AddDbContext<RepositoryContext>(options =>
 
 // Add services to the container.
 builder.Services.AddScoped(typeof(IProjectGeneralInfoRepository), typeof(ProjectGeneralInfoRepository));
+builder.Services.AddScoped(typeof(IProjectConditionViewRepository), typeof(ProjectConditionViewRepository));
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<ProjectGeneralInfoService>();
+builder.Services.AddScoped<ProjectConditionViewService>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

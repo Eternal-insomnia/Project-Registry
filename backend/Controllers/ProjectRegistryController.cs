@@ -12,18 +12,29 @@ namespace ConsentCode.Controllers
     {
         private readonly ILogger<ProjectRegistryController> _logger;
         private readonly ProjectGeneralInfoService _projectGeneralInfoService;
+        private readonly ProjectConditionViewService _projectConditionViewService;
 
         [HttpGet("ProjectsGeneralInfo")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetProjectsGeneralInfo()
         {
             var projectsGeneralInfo = await _projectGeneralInfoService.GetAll();
             return Ok(projectsGeneralInfo);
         }
 
-        public ProjectRegistryController(ILogger<ProjectRegistryController> logger, ProjectGeneralInfoService projectGeneralInfoService)
+        [HttpGet("ProjectsCondition")]
+        public async Task<IActionResult> GetProjectsCondition()
+        {
+            var projectsCondition = await _projectConditionViewService.GetAll();
+            return Ok(projectsCondition);
+        }
+
+        public ProjectRegistryController(ILogger<ProjectRegistryController> logger,
+            ProjectGeneralInfoService projectGeneralInfoService,
+            ProjectConditionViewService projectConditionViewService)
         {
             _logger = logger;
             _projectGeneralInfoService = projectGeneralInfoService;
+            _projectConditionViewService = projectConditionViewService;
         }
     }
 }
