@@ -21,23 +21,28 @@
       <button class="home-button">
         <img src="@/assets/svg/home.svg" width="16px" height="16px">
       </button>
-      <button>Общая информация</button>
-      <button>Состояние</button>
-      <button>Команда проекта</button>
-      <button>Сроки</button>
-      <button>Стоимость</button>
-      <button>Документация</button>
+      <button @click="console.log('Общая информация')">Общая информация</button>
+      <button @click="console.log('Состояние')">Состояние</button>
+      <button @click="console.log('Команда проекта')">Команда проекта</button>
+      <button @click="console.log('Сроки')">Сроки</button>
+      <button @click="console.log('Стоимость')">Стоимость</button>
+      <button @click="console.log('Документация')">Документация</button>
     </div>
   </div>
 
   <div class="projects-table">
-    <!-- Сделать нормальную таблицу через v-for в отдельном компоненте -->
-    Тут могла быть ваша таблица, но вы не передали JSON
+    <TableComponent>
+    </TableComponent>
   </div>
 </template>
 
 <script>
+import TableComponent from "./Table/TableComponent.vue"
+
 export default {
+  components: {
+    TableComponent
+  },
   data() {
     return {
       searchRequest: ""

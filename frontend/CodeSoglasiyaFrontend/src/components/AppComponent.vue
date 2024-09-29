@@ -7,7 +7,7 @@
       <button @click="currentComponent = 'MainPageComponent'">
         Главная
       </button>
-      <button @click="currentComponent = 'ProjectRejistryComponent'">
+      <button @click="currentComponent = 'ProjectRegistryComponent'">
         Реестр проектов
       </button>
       <button @click="currentComponent = 'LibraryComponent'">
@@ -23,13 +23,13 @@
 <script>
 import LibraryComponent from './Menu/LibraryComponent.vue';
 import MainPageComponent from './Menu/MainPageComponent.vue';
-import ProjectRejistryComponent from './Menu/ProjectRejistryComponent.vue';
+import ProjectRegistryComponent from './Menu/ProjectRegistryComponent.vue';
 
 export default {
   components: {
     LibraryComponent,
     MainPageComponent,
-    ProjectRejistryComponent
+    ProjectRegistryComponent
   },
   data() {
     return {
