@@ -1,8 +1,7 @@
 <template>
-  <p>Реестр проектов</p>
   <div class="filters">
-    <input type="checkbox">Портфель проектов 2024
-    <input type="checkbox">Архивные проекты
+    <input type="checkbox" v-model="thisYearProjects" @click="thisYearProjects = !thisYearProjects" checked>Портфель проектов 2024
+    <input type="checkbox" v-model="archiveProjects" @click="archiveProjects = !archiveProjects">Архивные проекты
   </div>
 
   <div class="buttons">
@@ -14,19 +13,19 @@
         Группировать
       </button>
       Поиск:
-      <input @keydown.enter="(event) => searchQuery = event.target.value">
+      <input @keydown.enter="search" v-model="searchQuery">
     </div>
 
     <div class="filter-buttons">
-      <button class="home-button">
+      <button class="home-button" @click="goHome">
         <img src="@/assets/svg/home.svg" width="16px" height="16px">
       </button>
-      <button @click="console.log('Общая информация')">Общая информация</button>
-      <button @click="console.log('Состояние')">Состояние</button>
-      <button @click="console.log('Команда проекта')">Команда проекта</button>
-      <button @click="console.log('Сроки')">Сроки</button>
-      <button @click="console.log('Стоимость')">Стоимость</button>
-      <button @click="console.log('Документация')">Документация</button>
+      <button @click="tableHead = generalInfo">Общая информация</button>
+      <button @click="tableHead = states">Состояние</button>
+      <button @click="tableHead = projectTeam">Команда проекта</button>
+      <button @click="tableHead = deadlines">Сроки</button>
+      <button @click="tableHead = costs">Стоимость</button>
+      <button @click="tableHead = documents">Документация</button>
     </div>
   </div>
 
@@ -41,24 +40,44 @@
 <script>
 import TableComponent from "./Table/TableComponent.vue"
 
+import defaultColumns from "@/data/default-head.json"
 import tableData from "@/data/projects-table.json"
-import tableHead from "@/data/general-info-head.json"
+import generalInfo from "@/data/general-info-head.json"
+import states from "@/data/states-head.json"
+import projectTeam from "@/data/project-team-head.json"
+import deadlines from "@/data/deadlines-head.json"
+import costs from "@/data/cost-head.json"
+import documents from "@/data/docs-head.json"
 
 export default {
   components: {
-    // TableComponent,
     TableComponent
   },
   data() {
     return {
-      searchQuery: "",
+      defaultColumns: defaultColumns,
       tableData: tableData,
-      tableHead: tableHead
+      tableHead: defaultColumns,
+      generalInfo: generalInfo,
+      states: states,
+      projectTeam: projectTeam,
+      deadlines: deadlines,
+      costs: costs,
+      documents: documents,
+      searchQuery: "",
+      thisYearProjects: true,
+      archiveProjects: false
     }
   },
   methods: {
-    search(event) {
-      event.target
+    search() {
+      console.log(this.searchQuery)
+      // request to backend
+    },
+    goHome() {
+      this.thisYearProjects = true
+      this.archiveProjects = false
+      this.tableHead = this.defaultColumns
     }
   }
 }
@@ -69,17 +88,17 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #5f9ea0;
 }
 .functional-buttons {
   display: flex;
   flex-direction: row;
   align-items: end;
+  padding: 10px 0 0 0;
 }
 .home-button {
   background-color: #9c1c1c;
 }
 .projects-table {
-  background-color: #29da12;
+  padding: 5px 0;
 }
 </style>

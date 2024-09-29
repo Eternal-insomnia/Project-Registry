@@ -63,15 +63,14 @@ export default {
 
 <style>
 table {
-  border: 2px solid #42b983;
   border-radius: 3px;
-  background-color: #fff;
+  background-color: #969696;
   width: 100%;
 }
 
 th {
   background-color: #42b983;
-  color: rgba(255, 255, 255, 0.66);
+  color: #ffffff;
   cursor: pointer;
   user-select: none;
 }

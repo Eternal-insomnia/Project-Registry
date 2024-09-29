@@ -33,17 +33,24 @@ export default {
   },
   data() {
     return {
-      currentComponent: "ProjectRejistryComponent"
+      currentComponent: "MainPageComponent"
     }
   }
 }
 </script>
 
 <style scoped>
-.app {
-  background-color: #00ffff;
+.banner img{
+  width: 100%;
 }
-.menu-page {
-  background-color: #ff7f50;
+.menu {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+.menu button {
+  margin: 0 10px;
+  min-width: 150px;
+  min-height: 40px;
 }
 </style>
