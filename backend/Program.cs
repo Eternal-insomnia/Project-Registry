@@ -11,6 +11,14 @@ builder.Logging.AddSimpleConsole();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+});
+
 builder.Services.AddDbContext<RepositoryContext>(options =>
     options.UseNpgsql(connectionString));
 
