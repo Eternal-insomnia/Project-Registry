@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="banner">
-      <img src="@/assets/images/zaglushka.png">
+      <img src="@/assets/images/zaglushka.jpg">
     </div>
     <div class="menu">
       <button @click="currentComponent = 'MainPageComponent'">
@@ -42,6 +42,7 @@ export default {
 <style scoped>
 .banner img{
   width: 100%;
+  max-height: 100px;
 }
 .menu {
   display: flex;
