@@ -13,10 +13,13 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy", builder =>
-    builder.AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+    options.AddPolicy("CorsFrontendPolicy",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:5173")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
 });
 
 builder.Services.AddDbContext<RepositoryContext>(options =>
@@ -37,6 +40,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseCors("CorsFrontendPolicy");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
