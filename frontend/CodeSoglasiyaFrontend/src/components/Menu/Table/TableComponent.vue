@@ -2,19 +2,24 @@
   <table v-if="filteredData.length">
     <thead>
       <tr>
-        <th v-for="key in Object.keys(columns[0])"
+        <th v-for="(value, key) in columns[0]"
           @click="sortBy(key)"
           :class="{ active: sortKey == key }">
-          {{ capitalize(columns[0][key]) }}
+          {{ capitalize(value) }}
           <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
           </span>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="entry in filteredData">
+      <tr v-for="(entry, index) in filteredData">
         <td v-for="key in Object.keys(columns[0])">
-          {{entry[key]}}
+          <span v-if="key === 'id'">
+            {{ incrementIndex(index) }}
+          </span>
+          <span v-else>
+            {{ entry[key] }}
+          </span>
         </td>
       </tr>
     </tbody>
@@ -56,6 +61,9 @@ export default {
     },
     capitalize(str) {
       return str.charAt(0).toUpperCase() + str.slice(1)
+    },
+    incrementIndex(index) {
+      return index + 1
     }
   }
 }
