@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using ConsentCode.DTOs;
-using ConsentCode.Models;
-using ConsentCode.Repository.Interfaces;
+using Backend.DTOs;
+using Backend.Models;
+using Backend.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace ConsentCode.Repository.Implementations
+namespace Backend.Repository.Implementations
 {
     public class ProjectGeneralInfoRepository : RepositoryBase<ProjectGeneralInfo>, IProjectGeneralInfoRepository
     {

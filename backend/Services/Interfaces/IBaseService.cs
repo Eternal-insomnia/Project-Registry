@@ -1,4 +1,4 @@
-﻿namespace ConsentCode.Services.Interfaces
+﻿namespace Backend.Services.Interfaces
 {
     public interface IBaseService<T> where T : class
     {

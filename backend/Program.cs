@@ -1,7 +1,7 @@
-using ConsentCode.Repository;
-using ConsentCode.Repository.Implementations;
-using ConsentCode.Repository.Interfaces;
-using ConsentCode.Services.Implementations;
+using Backend.Repository;
+using Backend.Repository.Implementations;
+using Backend.Repository.Interfaces;
+using Backend.Services.Implementations;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.AddSimpleConsole();
 
-var connectionString = builder.Configuration.GetConnectionString("dbConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<RepositoryContext>(options =>
     options.UseNpgsql(connectionString));

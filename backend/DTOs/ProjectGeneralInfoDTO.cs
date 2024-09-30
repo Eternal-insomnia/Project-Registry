@@ -1,4 +1,4 @@
-﻿namespace ConsentCode.DTOs
+﻿namespace Backend.DTOs
 {
     public class ProjectGeneralInfoDTO
     {

@@ -1,4 +1,4 @@
-﻿namespace ConsentCode.Models
+﻿namespace Backend.Models
 {
     public class ProjectConditionView
     {

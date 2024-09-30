@@ -1,6 +1,6 @@
-﻿using ConsentCode.Repository.Interfaces;
+﻿using Backend.Repository.Interfaces;
 
-namespace ConsentCode.Repository.Implementations
+namespace Backend.Repository.Implementations
 {
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
     {

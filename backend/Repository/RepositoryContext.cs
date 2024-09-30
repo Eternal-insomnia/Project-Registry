@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using ConsentCode.Models;
-using ConsentCode.Repository.Configurations;
+using Backend.Models;
+using Backend.Repository.Configurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace ConsentCode.Repository
+namespace Backend.Repository
 {
     public class RepositoryContext(DbContextOptions options) : DbContext(options)
     {

@@ -1,6 +1,6 @@
-﻿using ConsentCode.DTOs;
+﻿using Backend.DTOs;
 
-namespace ConsentCode.Repository.Interfaces
+namespace Backend.Repository.Interfaces
 {
     public interface IProjectConditionViewRepository
     {

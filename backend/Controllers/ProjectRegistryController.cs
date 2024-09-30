@@ -1,10 +1,10 @@
-﻿using ConsentCode.Models;
-using ConsentCode.Services.Implementations;
-using ConsentCode.Services.Interfaces;
+﻿using Backend.Models;
+using Backend.Services.Implementations;
+using Backend.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ConsentCode.Controllers
+namespace Backend.Controllers
 {
     [ApiController]
     [Route("[controller]")]

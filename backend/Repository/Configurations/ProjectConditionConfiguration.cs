@@ -1,8 +1,8 @@
-﻿using ConsentCode.Models;
+﻿using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ConsentCode.Repository.Configurations
+namespace Backend.Repository.Configurations
 {
     public class ProjectConditionConfiguration : IEntityTypeConfiguration<ProjectCondition>
     {

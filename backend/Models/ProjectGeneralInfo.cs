@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ConsentCode.Models
+namespace Backend.Models
 {
     public class ProjectGeneralInfo
     {

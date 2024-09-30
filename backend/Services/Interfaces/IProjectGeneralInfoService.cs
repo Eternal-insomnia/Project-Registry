@@ -1,6 +1,6 @@
-﻿using ConsentCode.DTOs;
+﻿using Backend.DTOs;
 
-namespace ConsentCode.Services.Interfaces
+namespace Backend.Services.Interfaces
 {
     public interface IProjectGeneralInfoService : IBaseService<ProjectGeneralInfoDTO>
     {

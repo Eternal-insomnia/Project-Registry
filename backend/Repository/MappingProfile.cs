@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using ConsentCode.DTOs;
-using ConsentCode.Models;
+using Backend.DTOs;
+using Backend.Models;
 
-namespace ConsentCode.Repository
+namespace Backend.Repository
 {
     public class MappingProfile : Profile
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ConsentCode.Migrations
+namespace Backend.Migrations
 {
     /// <inheritdoc />
     public partial class CreateDatabase : Migration

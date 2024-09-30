@@ -1,8 +1,8 @@
-﻿using ConsentCode.DTOs;
-using ConsentCode.Repository.Interfaces;
-using ConsentCode.Services.Interfaces;
+﻿using Backend.DTOs;
+using Backend.Repository.Interfaces;
+using Backend.Services.Interfaces;
 
-namespace ConsentCode.Services.Implementations
+namespace Backend.Services.Implementations
 {
     public class ProjectGeneralInfoService : IProjectGeneralInfoService
     {
