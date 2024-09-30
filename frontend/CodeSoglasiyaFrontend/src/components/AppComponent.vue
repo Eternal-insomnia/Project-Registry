@@ -4,13 +4,13 @@
       <img src="@/assets/images/zaglushka.jpg">
     </div>
     <div class="menu">
-      <button @click="currentComponent = 'MainPageComponent'">
+      <button :class="{'picked-button': currentComponent === 'MainPageComponent'}" @click="currentComponent = 'MainPageComponent'">
         Главная
       </button>
-      <button @click="currentComponent = 'ProjectRegistryComponent'">
+      <button :class="{'picked-button': currentComponent === 'ProjectRegistryComponent'}" @click="currentComponent = 'ProjectRegistryComponent'">
         Реестр проектов
       </button>
-      <button @click="currentComponent = 'LibraryComponent'">
+      <button :class="{'picked-button': currentComponent === 'LibraryComponent'}" @click="currentComponent = 'LibraryComponent'">
         Библиотека
       </button>
     </div>

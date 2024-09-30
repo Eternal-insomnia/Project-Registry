@@ -1,5 +1,5 @@
 <template>
-  <div class="filters">
+  <div class="checkboxes">
     <input type="checkbox" v-model="thisYearProjects" @click="thisYearProjects = !thisYearProjects" checked>Портфель проектов 2024
     <input type="checkbox" v-model="archiveProjects" @click="archiveProjects = !archiveProjects">Архивные проекты
   </div>
@@ -20,12 +20,12 @@
       <button class="home-button" @click="goHome">
         <img src="@/assets/svg/home.svg" width="16px" height="16px">
       </button>
-      <button @click="tableHead = generalInfo">Общая информация</button>
-      <button @click="tableHead = states">Состояние</button>
-      <button @click="tableHead = projectTeam">Команда проекта</button>
-      <button @click="tableHead = deadlines">Сроки</button>
-      <button @click="tableHead = costs">Стоимость</button>
-      <button @click="tableHead = documents">Документация</button>
+      <button :class="{'picked-button': tableHead === generalInfo}" @click="tableHead = generalInfo">Общая информация</button>
+      <button :class="{'picked-button': tableHead === states}" @click="tableHead = states">Состояние</button>
+      <button :class="{'picked-button': tableHead === projectTeam}" @click="tableHead = projectTeam">Команда проекта</button>
+      <button :class="{'picked-button': tableHead === deadlines}" @click="tableHead = deadlines">Сроки</button>
+      <button :class="{'picked-button': tableHead === costs}" @click="tableHead = costs">Стоимость</button>
+      <button :class="{'picked-button': tableHead === documents}" @click="tableHead = documents">Документация</button>
     </div>
   </div>
 
@@ -84,16 +84,29 @@ export default {
 </script>
 
 <style scoped>
+.checkboxes input {
+  cursor: pointer;
+}
 .buttons {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 10px 0 0 0;
 }
 .functional-buttons {
   display: flex;
   flex-direction: row;
   align-items: end;
-  padding: 10px 0 0 0;
+}
+.functional-buttons button {
+  margin-right: 5px;
+}
+.filter-buttons {
+  display: flex;
+  flex-direction: row;
+}
+.filter-buttons button {
+  margin-left: 5px;
 }
 .home-button {
   background-color: #9c1c1c;

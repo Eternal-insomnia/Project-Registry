@@ -2,6 +2,7 @@ button {
   background-color: #2f4566;
   color: #eee;
   border: 0;
+  cursor: pointer;
 }
 .picked-button {
   background-color: #b20000;
