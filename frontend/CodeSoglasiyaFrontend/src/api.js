@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost:5265',
+    baseURL: 'http://localhost:5000',
     timeout: 1000,
     headers: {
         'Content-Type': 'application/json',
@@ -10,15 +10,9 @@ const apiClient = axios.create({
 
 export default {
     getItems() {
-        return apiClient.get('/items');
+        return apiClient.get('/ProjectRegistry/ProjectsGeneralInfo');
     },
     createItem(data) {
-        return apiClient.post('/items', data);
-    },
-    updateItem(id, data) {
-        return apiClient.put(`/items/${id}`, data);
-    },
-    deleteItem(id) {
-        return apiClient.delete(`/items/${id}`);
+        return apiClient.get('/items', data);
     },
 };

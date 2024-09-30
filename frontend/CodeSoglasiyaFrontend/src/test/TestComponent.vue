@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>Items</h1>
-    <ul>
-      <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+    <ul v-for="item in items" :key="item.id">
+      <li v-for="(col, key) in item">{{ key }} : {{ col }}</li>
     </ul>
     <button @click="fetchItems">Load Items</button>
     <button @click="addItem">Add Item</button>
