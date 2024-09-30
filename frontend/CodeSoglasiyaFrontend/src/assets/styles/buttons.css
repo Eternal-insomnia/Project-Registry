@@ -1,0 +1,8 @@
+button {
+  background-color: #2f4566;
+  color: #eee;
+  border: 0;
+}
+.picked-button {
+  background-color: #b20000;
+}
