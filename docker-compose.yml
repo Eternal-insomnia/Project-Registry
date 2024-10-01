@@ -1,5 +1,7 @@
 version: '3.8'
 
+name: consent-code
+
 services:
   backend:
     build: Backend/

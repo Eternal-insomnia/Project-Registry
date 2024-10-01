@@ -2,7 +2,7 @@
 
 namespace Backend.Services.Interfaces
 {
-    public interface IProjectGeneralInfoService : IBaseService<ProjectGeneralInfoDTO>
+    public interface IProjectGeneralInfoService : IServiceBase<ProjectGeneralInfoDTO>
     {
     }
 }

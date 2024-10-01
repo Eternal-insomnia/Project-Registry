@@ -16,7 +16,7 @@ namespace Backend.Models
         public required string Stage { get; set; }
 
         [Column(TypeName = "float4")]
-        public required float Priority { get; set; }
+        public float? Priority { get; set; }
 
         public string? Monitoring { get; set; }
         public string? Activity { get; set; }
@@ -26,8 +26,11 @@ namespace Backend.Models
 
         [Column(TypeName = "char")]
         public string? RGT { get; set; }
+        public string? Description { get; set; }
 
 
-        public required ProjectCondition Condition { get; set; }
+        public ProjectCondition? Condition { get; set; }
+        public ProjectTeam? Team { get; set; }
+        public ProjectGoals? Goals { get; set; }
     }
 }

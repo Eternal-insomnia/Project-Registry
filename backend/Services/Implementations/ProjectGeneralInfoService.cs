@@ -11,7 +11,7 @@ namespace Backend.Services.Implementations
 
         public async Task<List<ProjectGeneralInfoDTO>> GetAll()
         {
-            _logger.LogInformation("Get All ProjectGeneralInfo Service");
+            _logger.LogInformation("get all ProjectGeneralInfo [service]");
             return await _projectGeneralInfoRepository.GetAll();
         }
 
