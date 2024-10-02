@@ -9,7 +9,7 @@ namespace Backend.DTOs
     {
         public MappingProfile()
         {
-            CreateMap<DateTime?, string>()
+            CreateMap<DateOnly?, string>()
                 .ConvertUsing(src => src.HasValue ? src.Value.ToString("dd.MM.yyyy") : string.Empty);
 
             CreateMap<string, string>()
