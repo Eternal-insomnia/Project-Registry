@@ -1,0 +1,13 @@
+[
+  {
+    "code": "Код",
+    "name": "Наименование",
+    "stage": "Этап",
+    "implStartDecision": "Решение о начале реализации",
+    "timelines": "Сроки",
+    "budget": "Бюджет",
+    "contents": "Содержание",
+    "stopResumeDecision": "Решение о приостановке/возобновлении",
+    "closeCompleteDecision": "Решение о завершении/закрытии"
+  }
+]

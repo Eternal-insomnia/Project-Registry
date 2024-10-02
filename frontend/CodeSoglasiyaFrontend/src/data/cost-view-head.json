@@ -1,0 +1,17 @@
+[
+  {
+    "code": "Код",
+    "name": "Наименование",
+    "stage": "Этап",
+    "profitability": "Доходность",
+    "baseCAPEXExt": "Базовый CAPEX (внешний)",
+    "baseCAPEXWF": "Базовый CAPEX ФОТ",
+    "baseOPEX": "Базовый OPEX",
+    "passportCAPEXExt": "CAPEX (внешний) по паспорту",
+    "passportCAPEXWF": "CAPEX ФОТ по паспорту",
+    "passportOPEX": "OPEX по паспорту",
+    "actualCAPEXExt": "Фактический CAPEX (внешний)",
+    "actualCAPEXWF": "Фактический CAPEX ФОТ",
+    "actualOPEX": "Фактический OPEX"
+  }
+]

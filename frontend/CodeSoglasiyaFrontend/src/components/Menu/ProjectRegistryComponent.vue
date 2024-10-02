@@ -24,8 +24,8 @@
       <button :class="{'picked-button': tableHead === ConditionView}" @click="fetchItems(ConditionView, 'ConditionView')">Состояние</button>
       <button :class="{'picked-button': tableHead === TeamView}" @click="fetchItems(TeamView, 'TeamView')">Команда проекта</button>
       <button :class="{'picked-button': tableHead === TimelinesView}" @click="fetchItems(TimelinesView, 'TimelinesView')">Сроки</button>
-      <button :class="{'picked-button': tableHead === Costs}" @click="tableHead = Costs">Стоимость</button>
-      <button :class="{'picked-button': tableHead === Documents}" @click="tableHead = Documents">Документация</button>
+      <button :class="{'picked-button': tableHead === CostView}" @click="fetchItems(CostView, 'CostView')">Стоимость</button>
+      <button :class="{'picked-button': tableHead === DocumentsView}" @click="fetchItems(DocumentsView, 'DocumentsView')">Документация</button>
       <button :class="{'picked-button': tableHead === GoalsView}" @click="fetchItems(GoalsView, 'GoalsView')">Цели</button>
     </div>
   </div>
@@ -47,8 +47,8 @@ import GeneralInfoJSON from "@/data/general-info-head.json"
 import ConditionViewJSON from "@/data/condition-view-head.json"
 import TeamViewJSON from "@/data/team-view-head.json"
 import TimelinesViewJSON from "@/data/timelines-view-head.json"
-import CostsJSON from "@/data/cost-head.json"
-import DocumentsJSON from "@/data/docs-head.json"
+import CostViewJSON from "@/data/cost-view-head.json"
+import DocumentsViewJSON from "@/data/documents-view-head.json"
 import GoalsViewJSON from "@/data/goals-view-head.json"
 
 import api from "@/api"
@@ -66,8 +66,8 @@ export default {
       ConditionView: ConditionViewJSON,
       TeamView: TeamViewJSON,
       TimelinesView: TimelinesViewJSON,
-      Costs: CostsJSON,
-      Documents: DocumentsJSON,
+      CostView: CostViewJSON,
+      DocumentsView: DocumentsViewJSON,
       GoalsView: GoalsViewJSON,
       searchQuery: "",
       thisYearProjects: true,
