@@ -13,19 +13,20 @@
         Группировать
       </button>
       Поиск:
-      <input @keydown.enter="search" v-model="searchQuery">
+      <input @keydown.enter="fetchItems('search', searchQuery)" v-model="searchQuery">
     </div>
 
     <div class="filter-buttons">
       <button class="home-button" @click="goHome">
         <img src="@/assets/svg/home.svg" width="16px" height="16px">
       </button>
-      <button :class="{'picked-button': tableHead === generalInfo}" @click="tableHead = generalInfo">Общая информация</button>
-      <button :class="{'picked-button': tableHead === states}" @click="tableHead = states">Состояние</button>
-      <button :class="{'picked-button': tableHead === projectTeam}" @click="tableHead = projectTeam">Команда проекта</button>
-      <button :class="{'picked-button': tableHead === deadlines}" @click="tableHead = deadlines">Сроки</button>
-      <button :class="{'picked-button': tableHead === costs}" @click="tableHead = costs">Стоимость</button>
-      <button :class="{'picked-button': tableHead === documents}" @click="tableHead = documents">Документация</button>
+      <button :class="{'picked-button': tableHead === GeneralInfo}" @click="fetchItems(GeneralInfo, 'GeneralInfo')">Общая информация</button>
+      <button :class="{'picked-button': tableHead === ConditionView}" @click="fetchItems(ConditionView, 'ConditionView')">Состояние</button>
+      <button :class="{'picked-button': tableHead === TeamView}" @click="fetchItems(TeamView, 'TeamView')">Команда проекта</button>
+      <button :class="{'picked-button': tableHead === TimelinesView}" @click="fetchItems(TimelinesView, 'TimelinesView')">Сроки</button>
+      <button :class="{'picked-button': tableHead === Costs}" @click="tableHead = Costs">Стоимость</button>
+      <button :class="{'picked-button': tableHead === Documents}" @click="tableHead = Documents">Документация</button>
+      <button :class="{'picked-button': tableHead === GoalsView}" @click="fetchItems(GoalsView, 'GoalsView')">Цели</button>
     </div>
   </div>
 
@@ -40,14 +41,17 @@
 <script>
 import TableComponent from "./Table/TableComponent.vue"
 
-import defaultColumns from "@/data/default-head.json"
-import tableData from "@/data/projects-table.json"
-import generalInfo from "@/data/general-info-head.json"
-import states from "@/data/states-head.json"
-import projectTeam from "@/data/project-team-head.json"
-import deadlines from "@/data/deadlines-head.json"
-import costs from "@/data/cost-head.json"
-import documents from "@/data/docs-head.json"
+// Headers for table
+import DefaultColumnsJSON from "@/data/default-head.json"
+import GeneralInfoJSON from "@/data/general-info-head.json"
+import ConditionViewJSON from "@/data/condition-view-head.json"
+import TeamViewJSON from "@/data/team-view-head.json"
+import TimelinesViewJSON from "@/data/timelines-view-head.json"
+import CostsJSON from "@/data/cost-head.json"
+import DocumentsJSON from "@/data/docs-head.json"
+import GoalsViewJSON from "@/data/goals-view-head.json"
+
+import api from "@/api"
 
 export default {
   components: {
@@ -55,29 +59,45 @@ export default {
   },
   data() {
     return {
-      defaultColumns: defaultColumns,
-      tableData: tableData,
-      tableHead: defaultColumns,
-      generalInfo: generalInfo,
-      states: states,
-      projectTeam: projectTeam,
-      deadlines: deadlines,
-      costs: costs,
-      documents: documents,
+      DefaultColumns: DefaultColumnsJSON,
+      tableData: [],
+      tableHead: DefaultColumnsJSON,
+      GeneralInfo: GeneralInfoJSON,
+      ConditionView: ConditionViewJSON,
+      TeamView: TeamViewJSON,
+      TimelinesView: TimelinesViewJSON,
+      Costs: CostsJSON,
+      Documents: DocumentsJSON,
+      GoalsView: GoalsViewJSON,
       searchQuery: "",
       thisYearProjects: true,
-      archiveProjects: false
+      archiveProjects: false,
+      startURL: "http://localhost:5000/ProjectRegistry"
     }
   },
   methods: {
-    search() {
-      console.log(this.searchQuery)
-      // request to backend
-    },
     goHome() {
       this.thisYearProjects = true
       this.archiveProjects = false
       this.tableHead = this.defaultColumns
+    },
+    async fetchItems(headers, endURL) {
+      try {
+        let URL = ""
+        if (headers === "search") {
+          this.tableHead = this.defaultColumns
+          URL = this.startURL + "?searchQuery=" + endURL 
+          // on testing check the URL
+        } else {
+          this.tableHead = headers
+          URL = this.startURL + "/Projects" + endURL
+        }
+        console.log(URL)
+        const response = await api.getItems(URL)
+        this.tableData = response.data
+      } catch (error) {
+        console.error('Error fetching items:', error)
+      }
     }
   }
 }

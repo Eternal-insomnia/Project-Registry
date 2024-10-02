@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 table {
   border-radius: 3px;
   background-color: #969696;
@@ -85,6 +85,8 @@ th {
 
 td {
   background-color: #f9f9f9;
+  text-align: center;
+  max-height: 15px;
 }
 
 th,

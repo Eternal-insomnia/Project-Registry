@@ -9,10 +9,10 @@ const apiClient = axios.create({
 });
 
 export default {
-    getItems() {
-        return apiClient.get('/ProjectRegistry/ProjectsGeneralInfo');
+    getItems(URL) {
+        return apiClient.get(URL);
     },
-    createItem(data) {
-        return apiClient.get('/items', data);
+    createItem(URL) {
+        return apiClient.get(URL);
     },
 };

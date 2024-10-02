@@ -1,0 +1,13 @@
+[
+  {
+    "code": "Код",
+    "name": "Наименование",
+    "stage": "Этап",
+    "product": "Продукт проекта",
+    "implCriteria": "Критерии реализации",
+    "goalsStatus": "Статус целей, %",
+    "businessGoals": "Бизнес-цели",
+    "achieveCriteria": "Критерии достижения",
+    "businessGoalsStatus": "Статус бизнес-целей, %"
+  }
+]
