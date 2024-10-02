@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20241002173556_CreateDatabase")]
+    [Migration("20241002213744_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -54,6 +54,119 @@ namespace Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProjectsCondition");
+                });
+
+            modelBuilder.Entity("Backend.Models.ProjectCost", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<float?>("ActualCAPEXExt")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("ActualCAPEXExtDelta")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("ActualCAPEXExtDeltaPercent")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("ActualCAPEXWF")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("ActualOPEX")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("BaseCAPEXExt")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("BaseCAPEXWF")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("BaseOPEX")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PassportCAPEXExt")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PassportCAPEXExtDelta")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PassportCAPEXExtDeltaPercent")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PassportCAPEXWF")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PassportOPEX")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PreCAPEXExt")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PreCAPEXExtActual")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PreCAPEXExtDeltaPercent")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PreCAPEXWF")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PreOPEX")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Profitability")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectsCost");
+                });
+
+            modelBuilder.Entity("Backend.Models.ProjectDocuments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CloseCompleteDecision")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CloseReason")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Contents")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImplStartDecision")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PrePStartDecision")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ReasonCRBudget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ReasonCRContents")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ReasonCRTimelines")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StopReason")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StopResumeDecision")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Timelines")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectsDocuments");
                 });
 
             modelBuilder.Entity("Backend.Models.ProjectGeneralInfo", b =>
@@ -274,6 +387,89 @@ namespace Backend.Migrations
                     b.ToView("ProjectsConditionView", (string)null);
                 });
 
+            modelBuilder.Entity("Backend.Models.Views.ProjectCostView", b =>
+                {
+                    b.Property<float?>("ActualCAPEXExt")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("ActualCAPEXWF")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("ActualOPEX")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("BaseCAPEXExt")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("BaseCAPEXWF")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("BaseOPEX")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<float?>("PassportCAPEXExt")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PassportCAPEXWF")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PassportOPEX")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Stage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ProjectsCostView", (string)null);
+                });
+
+            modelBuilder.Entity("Backend.Models.Views.ProjectDocumentsView", b =>
+                {
+                    b.Property<string>("Budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CloseCompleteDecision")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Contents")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImplStartDecision")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Stage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("StopResumeDecision")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Timelines")
+                        .HasColumnType("text");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ProjectsDocumentsView", (string)null);
+                });
+
             modelBuilder.Entity("Backend.Models.Views.ProjectGoalsView", b =>
                 {
                     b.Property<string>("AchieveCriteria")
@@ -347,31 +543,37 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Models.Views.ProjectTimelinesView", b =>
                 {
-                    b.Property<string>("BusinessAnalyst")
-                        .HasColumnType("text");
+                    b.Property<int?>("ActualDuration")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly?>("ActualEnd")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly?>("ActualStart")
+                        .HasColumnType("date");
+
+                    b.Property<int?>("BaseDeviation")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly?>("BaseEnd")
+                        .HasColumnType("date");
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Customer")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MCPeople")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Manager")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("PassportEndYear")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PassportStartYear")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Stage")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TeamLead")
                         .HasColumnType("text");
 
                     b.ToTable((string)null);
@@ -384,6 +586,28 @@ namespace Backend.Migrations
                     b.HasOne("Backend.Models.ProjectGeneralInfo", "GeneralInfo")
                         .WithOne("Condition")
                         .HasForeignKey("Backend.Models.ProjectCondition", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GeneralInfo");
+                });
+
+            modelBuilder.Entity("Backend.Models.ProjectCost", b =>
+                {
+                    b.HasOne("Backend.Models.ProjectGeneralInfo", "GeneralInfo")
+                        .WithOne("Cost")
+                        .HasForeignKey("Backend.Models.ProjectCost", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GeneralInfo");
+                });
+
+            modelBuilder.Entity("Backend.Models.ProjectDocuments", b =>
+                {
+                    b.HasOne("Backend.Models.ProjectGeneralInfo", "GeneralInfo")
+                        .WithOne("Documents")
+                        .HasForeignKey("Backend.Models.ProjectDocuments", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -426,6 +650,10 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Models.ProjectGeneralInfo", b =>
                 {
                     b.Navigation("Condition");
+
+                    b.Navigation("Cost");
+
+                    b.Navigation("Documents");
 
                     b.Navigation("Goals");
 

@@ -1,8 +1,5 @@
-﻿using Backend.DTOs;
-using Backend.Models;
+﻿using Backend.DTOs.Views;
 using Backend.Services.Implementations;
-using Backend.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
@@ -14,10 +11,12 @@ namespace Backend.Controllers
         private readonly ILogger<ProjectRegistryController> _logger;
 
         private readonly ProjectGeneralInfoService _projectGeneralInfoService;
-        private readonly ProjectConditionService _projectConditionService;
-        private readonly ProjectTeamService _projectTeamService;
-        private readonly ProjectTimelinesService _projectTimelinesService;
-        private readonly ProjectGoalsService _projectGoalsService;
+        private readonly ViewService<ProjectConditionViewDTO> _projectConditionViewService;
+        private readonly ViewService<ProjectTeamViewDTO> _projectTeamViewService;
+        private readonly ViewService<ProjectTimelinesViewDTO> _projectTimelinesViewService;
+        private readonly ViewService<ProjectCostViewDTO> _projectCostViewService;
+        private readonly ViewService<ProjectDocumentsViewDTO> _projectDocumentsViewService;
+        private readonly ViewService<ProjectGoalsViewDTO> _projectGoalsViewService;
 
         [HttpGet("ProjectsGeneralInfo")]
         public async Task<IActionResult> GetProjectsGeneralInfo()
@@ -29,44 +28,62 @@ namespace Backend.Controllers
         [HttpGet("ProjectsConditionView")]
         public async Task<IActionResult> GetProjectsConditionView()
         {
-            var projectsCondition = await _projectConditionService.GetAllView();
+            var projectsCondition = await _projectConditionViewService.GetAllView();
             return Ok(projectsCondition);
         }
 
         [HttpGet("ProjectsTeamView")]
         public async Task<IActionResult> GetProjectsTeamView()
         {
-            var projectsTeam = await _projectTeamService.GetAllView();
+            var projectsTeam = await _projectTeamViewService.GetAllView();
             return Ok(projectsTeam);
         }
 
         [HttpGet("ProjectsTimelinesView")]
         public async Task<IActionResult> GetProjectsTimelinesView()
         {
-            var projectsTimelines = await _projectTimelinesService.GetAllView();
+            var projectsTimelines = await _projectTimelinesViewService.GetAllView();
             return Ok(projectsTimelines);
+        }
+
+        [HttpGet("ProjectsCostView")]
+        public async Task<IActionResult> GetProjectsCostView()
+        {
+            var projectsCost = await _projectCostViewService.GetAllView();
+            return Ok(projectsCost);
+        }
+
+        [HttpGet("ProjectsDocumentsView")]
+        public async Task<IActionResult> GetProjectsDocumentsView()
+        {
+            var projectsDocuments = await _projectDocumentsViewService.GetAllView();
+            return Ok(projectsDocuments);
         }
 
         [HttpGet("ProjectsGoalsView")]
         public async Task<IActionResult> GetProjectsGoalsView()
         {
-            var projectsGoals = await _projectGoalsService.GetAllView();
+            var projectsGoals = await _projectGoalsViewService.GetAllView();
             return Ok(projectsGoals);
         }
 
         public ProjectRegistryController(ILogger<ProjectRegistryController> logger,
             ProjectGeneralInfoService projectGeneralInfoService,
-            ProjectConditionService projectConditionService,
-            ProjectTeamService projectTeamService,
-            ProjectTimelinesService projectTimelinesService,
-            ProjectGoalsService projectGoalsService)
+            ViewService<ProjectConditionViewDTO> projectConditionService,
+            ViewService<ProjectTeamViewDTO> projectTeamService,
+            ViewService<ProjectTimelinesViewDTO> projectTimelinesService,
+            ViewService<ProjectCostViewDTO> projectCostService,
+            ViewService<ProjectDocumentsViewDTO> projectDocumentsService,
+            ViewService<ProjectGoalsViewDTO> projectGoalsService)
         {
             _logger = logger;
             _projectGeneralInfoService = projectGeneralInfoService;
-            _projectConditionService = projectConditionService;
-            _projectTeamService = projectTeamService;
-            _projectTimelinesService = projectTimelinesService;
-            _projectGoalsService = projectGoalsService;
+            _projectConditionViewService = projectConditionService;
+            _projectTeamViewService = projectTeamService;
+            _projectTimelinesViewService = projectTimelinesService;
+            _projectCostViewService = projectCostService;
+            _projectDocumentsViewService = projectDocumentsService;
+            _projectGoalsViewService = projectGoalsService;
         }
     }
 }

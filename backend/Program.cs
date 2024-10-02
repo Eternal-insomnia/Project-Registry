@@ -33,14 +33,18 @@ builder.Services.AddScoped(typeof(IProjectGeneralInfoRepository), typeof(Project
 builder.Services.AddScoped(typeof(IViewRepository<ProjectConditionViewDTO>), typeof(ViewRepository<ProjectConditionView, ProjectConditionViewDTO>));
 builder.Services.AddScoped(typeof(IViewRepository<ProjectTeamViewDTO>), typeof(ViewRepository<ProjectTeamView, ProjectTeamViewDTO>));
 builder.Services.AddScoped(typeof(IViewRepository<ProjectTimelinesViewDTO>), typeof(ViewRepository<ProjectTimelinesView, ProjectTimelinesViewDTO>));
+builder.Services.AddScoped(typeof(IViewRepository<ProjectCostViewDTO>), typeof(ViewRepository<ProjectCostView, ProjectCostViewDTO>));
+builder.Services.AddScoped(typeof(IViewRepository<ProjectDocumentsViewDTO>), typeof(ViewRepository<ProjectDocumentsView, ProjectDocumentsViewDTO>));
 builder.Services.AddScoped(typeof(IViewRepository<ProjectGoalsViewDTO>), typeof(ViewRepository<ProjectGoalsView, ProjectGoalsViewDTO>));
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<ProjectGeneralInfoService>();
-builder.Services.AddScoped<ProjectConditionService>();
-builder.Services.AddScoped<ProjectTeamService>();
-builder.Services.AddScoped<ProjectTimelinesService>();
-builder.Services.AddScoped<ProjectGoalsService>();
+builder.Services.AddScoped<ViewService<ProjectConditionViewDTO>>();
+builder.Services.AddScoped<ViewService<ProjectTeamViewDTO>>();
+builder.Services.AddScoped<ViewService<ProjectTimelinesViewDTO>>();
+builder.Services.AddScoped<ViewService<ProjectCostViewDTO>>();
+builder.Services.AddScoped<ViewService<ProjectDocumentsViewDTO>>();
+builder.Services.AddScoped<ViewService<ProjectGoalsViewDTO>>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

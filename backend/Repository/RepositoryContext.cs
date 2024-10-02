@@ -10,6 +10,8 @@ namespace Backend.Repository
         public DbSet<ProjectCondition> ProjectsCondition { get; set; }
         public DbSet<ProjectTeam> ProjectsTeam { get; set; }
         public DbSet<ProjectTimelines> ProjectsTimelines { get; set; }
+        public DbSet<ProjectCost> ProjectsCost { get; set; }
+        public DbSet<ProjectDocuments> ProjectsDocuments { get; set; }
         public DbSet<ProjectGoals> ProjectsGoals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,6 +33,16 @@ namespace Backend.Repository
                 .HasForeignKey<ProjectTimelines>(p => p.Id);
             modelBuilder
                 .Entity<ProjectGeneralInfo>()
+                .HasOne(u => u.Cost)
+                .WithOne(p => p.GeneralInfo)
+                .HasForeignKey<ProjectCost>(p => p.Id);
+            modelBuilder
+                .Entity<ProjectGeneralInfo>()
+                .HasOne(u => u.Documents)
+                .WithOne(p => p.GeneralInfo)
+                .HasForeignKey<ProjectDocuments>(p => p.Id);
+            modelBuilder
+                .Entity<ProjectGeneralInfo>()
                 .HasOne(u => u.Goals)
                 .WithOne(p => p.GeneralInfo)
                 .HasForeignKey<ProjectGoals>(p => p.Id);
@@ -47,6 +59,14 @@ namespace Backend.Repository
                 .Entity<ProjectTimelinesView>()
                 .HasNoKey()
                 .ToView("ProjectsTimelinesView");
+            modelBuilder
+                .Entity<ProjectCostView>()
+                .HasNoKey()
+                .ToView("ProjectsCostView");
+            modelBuilder
+                .Entity<ProjectDocumentsView>()
+                .HasNoKey()
+                .ToView("ProjectsDocumentsView");
             modelBuilder
                 .Entity<ProjectGoalsView>()
                 .HasNoKey()

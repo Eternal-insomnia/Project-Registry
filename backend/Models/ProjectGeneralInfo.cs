@@ -32,6 +32,8 @@ namespace Backend.Models
         public ProjectCondition? Condition { get; set; }
         public ProjectTeam? Team { get; set; }
         public ProjectTimelines? Timelines { get; set; }
+        public ProjectCost? Cost { get; set; }
+        public ProjectDocuments? Documents { get; set; }
         public ProjectGoals? Goals { get; set; }
     }
 }

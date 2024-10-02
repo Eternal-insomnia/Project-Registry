@@ -60,6 +60,71 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProjectsCost",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Profitability = table.Column<string>(type: "text", nullable: true),
+                    PreCAPEXExt = table.Column<float>(type: "real", nullable: true),
+                    PreCAPEXWF = table.Column<float>(type: "real", nullable: true),
+                    PreOPEX = table.Column<float>(type: "real", nullable: true),
+                    PreCAPEXExtActual = table.Column<float>(type: "real", nullable: true),
+                    PreCAPEXExtDeltaPercent = table.Column<float>(type: "real", nullable: true),
+                    BaseCAPEXExt = table.Column<float>(type: "real", nullable: true),
+                    BaseCAPEXWF = table.Column<float>(type: "real", nullable: true),
+                    BaseOPEX = table.Column<float>(type: "real", nullable: true),
+                    PassportCAPEXExt = table.Column<float>(type: "real", nullable: true),
+                    PassportCAPEXWF = table.Column<float>(type: "real", nullable: true),
+                    PassportOPEX = table.Column<float>(type: "real", nullable: true),
+                    PassportCAPEXExtDelta = table.Column<float>(type: "real", nullable: true),
+                    PassportCAPEXExtDeltaPercent = table.Column<float>(type: "real", nullable: true),
+                    ActualCAPEXExt = table.Column<float>(type: "real", nullable: true),
+                    ActualCAPEXWF = table.Column<float>(type: "real", nullable: true),
+                    ActualOPEX = table.Column<float>(type: "real", nullable: true),
+                    ActualCAPEXExtDelta = table.Column<float>(type: "real", nullable: true),
+                    ActualCAPEXExtDeltaPercent = table.Column<float>(type: "real", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectsCost", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectsCost_ProjectsGeneralInfo_Id",
+                        column: x => x.Id,
+                        principalTable: "ProjectsGeneralInfo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectsDocuments",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PrePStartDecision = table.Column<string>(type: "text", nullable: true),
+                    ImplStartDecision = table.Column<string>(type: "text", nullable: true),
+                    Timelines = table.Column<string>(type: "text", nullable: true),
+                    ReasonCRTimelines = table.Column<string>(type: "text", nullable: true),
+                    Budget = table.Column<string>(type: "text", nullable: true),
+                    ReasonCRBudget = table.Column<string>(type: "text", nullable: true),
+                    Contents = table.Column<string>(type: "text", nullable: true),
+                    ReasonCRContents = table.Column<string>(type: "text", nullable: true),
+                    StopResumeDecision = table.Column<string>(type: "text", nullable: true),
+                    StopReason = table.Column<string>(type: "text", nullable: true),
+                    CloseCompleteDecision = table.Column<string>(type: "text", nullable: true),
+                    CloseReason = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectsDocuments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectsDocuments_ProjectsGeneralInfo_Id",
+                        column: x => x.Id,
+                        principalTable: "ProjectsGeneralInfo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProjectsGoals",
                 columns: table => new
                 {
@@ -148,6 +213,12 @@ namespace Backend.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ProjectsCondition");
+
+            migrationBuilder.DropTable(
+                name: "ProjectsCost");
+
+            migrationBuilder.DropTable(
+                name: "ProjectsDocuments");
 
             migrationBuilder.DropTable(
                 name: "ProjectsGoals");
