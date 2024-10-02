@@ -5,6 +5,7 @@
         public required string Code { get; set; }
         public required string Name { get; set; }
         public required string Stage { get; set; }
+        public string? Profitability { get; set; }
         public float? BaseCAPEXExt { get; set; }
         public float? BaseCAPEXWF { get; set; }
         public float? BaseOPEX { get; set; }
