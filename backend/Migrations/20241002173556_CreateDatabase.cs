@@ -109,6 +109,38 @@ namespace Backend.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectsTimelines",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PreStart = table.Column<DateOnly>(type: "date", nullable: true),
+                    PreEndActual = table.Column<DateOnly>(type: "date", nullable: true),
+                    PreDuration = table.Column<int>(type: "integer", nullable: true),
+                    PreEndPlanned = table.Column<DateOnly>(type: "date", nullable: true),
+                    PreDeviation = table.Column<int>(type: "integer", nullable: true),
+                    ActualStart = table.Column<DateOnly>(type: "date", nullable: true),
+                    ActualEnd = table.Column<DateOnly>(type: "date", nullable: true),
+                    ActualDuration = table.Column<int>(type: "integer", nullable: true),
+                    BaseStart = table.Column<DateOnly>(type: "date", nullable: true),
+                    BaseEnd = table.Column<DateOnly>(type: "date", nullable: true),
+                    BaseDeviation = table.Column<int>(type: "integer", nullable: true),
+                    PassportEnd = table.Column<DateOnly>(type: "date", nullable: true),
+                    PassportDeviation = table.Column<int>(type: "integer", nullable: true),
+                    PassportStartYear = table.Column<int>(type: "integer", nullable: true),
+                    PassportEndYear = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectsTimelines", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectsTimelines_ProjectsGeneralInfo_Id",
+                        column: x => x.Id,
+                        principalTable: "ProjectsGeneralInfo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
         }
 
         /// <inheritdoc />
@@ -122,6 +154,9 @@ namespace Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProjectsTeam");
+
+            migrationBuilder.DropTable(
+                name: "ProjectsTimelines");
 
             migrationBuilder.DropTable(
                 name: "ProjectsGeneralInfo");

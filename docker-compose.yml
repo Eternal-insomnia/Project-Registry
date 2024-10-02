@@ -23,11 +23,12 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
       POSTGRES_DB: project_registry
+      POSTGRES_INITDB_ARGS: "-c datestyle='German, DMY'"
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./Database/Init:/docker-entrypoint-initdb.d/
+      - ./Database/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   postgres_data:

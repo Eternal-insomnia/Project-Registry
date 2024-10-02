@@ -9,14 +9,17 @@ namespace Backend.DTOs
     {
         public MappingProfile()
         {
-            CreateMap<ProjectGeneralInfo, ProjectGeneralInfoDTO>()
-                .AddTransform<string>(s => s ?? string.Empty);
-            CreateMap<ProjectConditionView, ProjectConditionViewDTO>()
-                .AddTransform<string>(s => s ?? string.Empty);
-            CreateMap<ProjectTeamView, ProjectTeamViewDTO>()
-                .AddTransform<string>(s => s ?? string.Empty);
-            CreateMap<ProjectGoalsView, ProjectGoalsViewDTO>()
-                .AddTransform<string>(s => s ?? string.Empty);
+            CreateMap<DateTime?, string>()
+                .ConvertUsing(src => src.HasValue ? src.Value.ToString("dd.MM.yyyy") : string.Empty);
+
+            CreateMap<string, string>()
+                .ConvertUsing(src => src ?? string.Empty);
+
+            CreateMap<ProjectGeneralInfo, ProjectGeneralInfoDTO>();
+            CreateMap<ProjectConditionView, ProjectConditionViewDTO>();
+            CreateMap<ProjectTeamView, ProjectTeamViewDTO>();
+            CreateMap<ProjectTimelinesView, ProjectTimelinesViewDTO>();
+            CreateMap<ProjectGoalsView, ProjectGoalsViewDTO>();
         }
     }
 }

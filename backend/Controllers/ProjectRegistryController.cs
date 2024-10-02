@@ -16,6 +16,7 @@ namespace Backend.Controllers
         private readonly ProjectGeneralInfoService _projectGeneralInfoService;
         private readonly ProjectConditionService _projectConditionService;
         private readonly ProjectTeamService _projectTeamService;
+        private readonly ProjectTimelinesService _projectTimelinesService;
         private readonly ProjectGoalsService _projectGoalsService;
 
         [HttpGet("ProjectsGeneralInfo")]
@@ -39,6 +40,13 @@ namespace Backend.Controllers
             return Ok(projectsTeam);
         }
 
+        [HttpGet("ProjectsTimelinesView")]
+        public async Task<IActionResult> GetProjectsTimelinesView()
+        {
+            var projectsTimelines = await _projectTimelinesService.GetAllView();
+            return Ok(projectsTimelines);
+        }
+
         [HttpGet("ProjectsGoalsView")]
         public async Task<IActionResult> GetProjectsGoalsView()
         {
@@ -50,12 +58,14 @@ namespace Backend.Controllers
             ProjectGeneralInfoService projectGeneralInfoService,
             ProjectConditionService projectConditionService,
             ProjectTeamService projectTeamService,
+            ProjectTimelinesService projectTimelinesService,
             ProjectGoalsService projectGoalsService)
         {
             _logger = logger;
             _projectGeneralInfoService = projectGeneralInfoService;
             _projectConditionService = projectConditionService;
             _projectTeamService = projectTeamService;
+            _projectTimelinesService = projectTimelinesService;
             _projectGoalsService = projectGoalsService;
         }
     }

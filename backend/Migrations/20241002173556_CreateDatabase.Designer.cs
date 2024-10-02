@@ -3,6 +3,7 @@ using System;
 using Backend.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20241002173556_CreateDatabase")]
+    partial class CreateDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,6 +182,61 @@ namespace Backend.Migrations
                     b.ToTable("ProjectsTeam");
                 });
 
+            modelBuilder.Entity("Backend.Models.ProjectTimelines", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<int?>("ActualDuration")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly?>("ActualEnd")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly?>("ActualStart")
+                        .HasColumnType("date");
+
+                    b.Property<int?>("BaseDeviation")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly?>("BaseEnd")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly?>("BaseStart")
+                        .HasColumnType("date");
+
+                    b.Property<int?>("PassportDeviation")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly?>("PassportEnd")
+                        .HasColumnType("date");
+
+                    b.Property<int?>("PassportEndYear")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PassportStartYear")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PreDeviation")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("PreDuration")
+                        .HasColumnType("integer");
+
+                    b.Property<DateOnly?>("PreEndActual")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly?>("PreEndPlanned")
+                        .HasColumnType("date");
+
+                    b.Property<DateOnly?>("PreStart")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectsTimelines");
+                });
+
             modelBuilder.Entity("Backend.Models.Views.ProjectConditionView", b =>
                 {
                     b.Property<int?>("Budget")
@@ -287,6 +345,40 @@ namespace Backend.Migrations
                     b.ToView("ProjectsTeamView", (string)null);
                 });
 
+            modelBuilder.Entity("Backend.Models.Views.ProjectTimelinesView", b =>
+                {
+                    b.Property<string>("BusinessAnalyst")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Customer")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MCPeople")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Manager")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Stage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TeamLead")
+                        .HasColumnType("text");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ProjectsTimelinesView", (string)null);
+                });
+
             modelBuilder.Entity("Backend.Models.ProjectCondition", b =>
                 {
                     b.HasOne("Backend.Models.ProjectGeneralInfo", "GeneralInfo")
@@ -320,6 +412,17 @@ namespace Backend.Migrations
                     b.Navigation("GeneralInfo");
                 });
 
+            modelBuilder.Entity("Backend.Models.ProjectTimelines", b =>
+                {
+                    b.HasOne("Backend.Models.ProjectGeneralInfo", "GeneralInfo")
+                        .WithOne("Timelines")
+                        .HasForeignKey("Backend.Models.ProjectTimelines", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GeneralInfo");
+                });
+
             modelBuilder.Entity("Backend.Models.ProjectGeneralInfo", b =>
                 {
                     b.Navigation("Condition");
@@ -327,6 +430,8 @@ namespace Backend.Migrations
                     b.Navigation("Goals");
 
                     b.Navigation("Team");
+
+                    b.Navigation("Timelines");
                 });
 #pragma warning restore 612, 618
         }

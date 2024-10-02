@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="zagruzka-resheniya-6024\**" />
+    <Content Remove="zagruzka-resheniya-6024\**" />
+    <EmbeddedResource Remove="zagruzka-resheniya-6024\**" />
+    <None Remove="zagruzka-resheniya-6024\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
       <PrivateAssets>all</PrivateAssets>

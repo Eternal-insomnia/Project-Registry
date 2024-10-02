@@ -43,6 +43,27 @@ CREATE TABLE "ProjectsTeam" (
     FOREIGN KEY ("Id") REFERENCES "ProjectsGeneralInfo"("Id") ON DELETE CASCADE
 );
 
+CREATE TABLE "ProjectsTimelines" (
+    "Id" uuid NOT NULL UNIQUE PRIMARY KEY,
+    "PreStart" date,
+    "PreEndActual" date,
+    "PreDuration" int,
+    "PreEndPlanned" date,
+    "PreDeviation" int,
+    "ActualStart" date,
+    "ActualEnd" date,
+    "ActualDuration" int,
+    "BaseStart" date,
+    "BaseEnd" date,
+    "BaseDeviation" int,
+    "PassportEnd" date,
+    "PassportDeviation" int,
+    "PassportStartYear" int,
+    "PassportEndYear" int,
+    FOREIGN KEY ("Id") REFERENCES "ProjectsGeneralInfo"("Id") ON DELETE CASCADE
+);
+
+
 CREATE TABLE "ProjectsGoals" (
     "Id" uuid NOT NULL UNIQUE PRIMARY KEY,
     "Product" text,
@@ -69,6 +90,11 @@ COPY "ProjectsTeam" ("Id", "Customer", "ProductOwner", "Manager", "TeamLead", "B
 b7eadf4f-e161-42fe-9db6-9f906432025f	customer2	\N	me	me	me	\N	\N	\N	\N	\N	school
 \.
 
+COPY "ProjectsTimelines" ("Id", "PreStart", "PreEndActual", "PreDuration", "PreEndPlanned", "PreDeviation", "ActualStart", "ActualEnd", "ActualDuration", "BaseStart", "BaseEnd", "BaseDeviation", "PassportEnd", "PassportDeviation", "PassportStartYear", "PassportEndYear") FROM stdin;
+15a84b93-e3a6-4bd0-9130-e9cddfe42328	07.07.2022	25.06.2023	11	15.09.2022	-283	27.06.2023	02.12.2024	17	27.06.2023	02.12.2024	0	05.06.2024	-180	2023	2024
+b7eadf4f-e161-42fe-9db6-9f906432025f	30.10.2023	20.01.2024	2	20.01.2024	0	26.02.2024	25.12.2024	9	26.02.2024	25.12.2024	0	25.12.2024	0	2024	2024
+\.
+
 COPY "ProjectsGoals" ("Id", "Product", "ImplCriteria", "GoalsStatus", "BusinessGoals", "AchieveCriteria", "BusinessGoalsStatus") FROM stdin;
 15a84b93-e3a6-4bd0-9130-e9cddfe42328	wot	1%	started	gold	million	far
 b7eadf4f-e161-42fe-9db6-9f906432025f	telegram	bought	thought	money	porsche	dreams
@@ -81,6 +107,10 @@ CREATE VIEW "ProjectsConditionView" AS
 CREATE VIEW "ProjectsTeamView" AS
     SELECT "Code", "Name", "Stage", "Customer", "Manager", "TeamLead", "BusinessAnalyst", "MCPeople"
     FROM "ProjectsGeneralInfo" JOIN "ProjectsTeam" ON "ProjectsGeneralInfo"."Id" = "ProjectsTeam"."Id"; 
+
+CREATE VIEW "ProjectsTimelinesView" AS
+    SELECT "Code", "Name", "Stage", "ActualStart", "ActualEnd", "ActualDuration", "BaseEnd", "BaseDeviation", "PassportStartYear", "PassportEndYear"
+    FROM "ProjectsGeneralInfo" JOIN "ProjectsTimelines" ON "ProjectsGeneralInfo"."Id" = "ProjectsTimelines"."Id"; 
 
 CREATE VIEW "ProjectsGoalsView" AS
     SELECT "Code", "Name", "Stage", "Product", "ImplCriteria", "GoalsStatus", "BusinessGoals", "AchieveCriteria", "BusinessGoalsStatus"

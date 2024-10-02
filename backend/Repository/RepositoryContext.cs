@@ -9,6 +9,7 @@ namespace Backend.Repository
         public DbSet<ProjectGeneralInfo> ProjectsGeneralInfo { get; set; }
         public DbSet<ProjectCondition> ProjectsCondition { get; set; }
         public DbSet<ProjectTeam> ProjectsTeam { get; set; }
+        public DbSet<ProjectTimelines> ProjectsTimelines { get; set; }
         public DbSet<ProjectGoals> ProjectsGoals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,6 +26,11 @@ namespace Backend.Repository
                 .HasForeignKey<ProjectTeam>(p => p.Id);
             modelBuilder
                 .Entity<ProjectGeneralInfo>()
+                .HasOne(u => u.Timelines)
+                .WithOne(p => p.GeneralInfo)
+                .HasForeignKey<ProjectTimelines>(p => p.Id);
+            modelBuilder
+                .Entity<ProjectGeneralInfo>()
                 .HasOne(u => u.Goals)
                 .WithOne(p => p.GeneralInfo)
                 .HasForeignKey<ProjectGoals>(p => p.Id);
@@ -37,6 +43,10 @@ namespace Backend.Repository
                 .Entity<ProjectTeamView>()
                 .HasNoKey()
                 .ToView("ProjectsTeamView");
+            modelBuilder
+                .Entity<ProjectTimelinesView>()
+                .HasNoKey()
+                .ToView("ProjectsTimelinesView");
             modelBuilder
                 .Entity<ProjectGoalsView>()
                 .HasNoKey()
