@@ -17,6 +17,11 @@ const apiClientFormData = axios.create({
         'Content-Type': 'multipart/form-data',
     }
 })
+const apiClientExportFile = axios.create({
+    baseURL: baseURL,
+    timeout: timeout,
+    responseType: 'blob'
+})
 
 export default {
     getItemsJSON(URL) {
@@ -25,4 +30,7 @@ export default {
     createItemFormData(URL, data) {
         return apiClientFormData.post(URL, data);
     },
+    apiClientExportFile(URL) {
+        return apiClientExportFile.get(URL);
+    }
 };

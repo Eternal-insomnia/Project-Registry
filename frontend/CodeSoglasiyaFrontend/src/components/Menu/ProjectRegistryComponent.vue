@@ -6,7 +6,7 @@
 
   <div class="buttons">
     <div class="functional-buttons">
-      <button>
+      <button @click="exportFile()">
         Экспорт
       </button>
       <button>
@@ -33,7 +33,8 @@
   <div class="projects-table">
     <TableComponent
       :data="tableData"
-      :columns="tableHead">
+      :columns="tableHead"
+      :filter-key="searchQuery">
     </TableComponent>
   </div>
 </template>
@@ -81,6 +82,25 @@ export default {
       this.archiveProjects = false  
       this.tableHead = this.defaultColumns
     },
+    // Excel file export
+    async exportFile() {
+      try {
+        let filename = (Math.floor(Date.now() / 1000)) + '.html';
+        const response = await api.apiClientExportFile('/swagger/index.html')
+        let url = window.URL.createObjectURL(new Blob([response.data], { type: 'text/html' }));
+        let link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        
+        link.parentNode.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        console.log('Error downloading the file', error);
+      }
+    },
+    // Fetches table data
     async fetchItems(headers, endURL) {
       try {
         let URL = ""
@@ -98,6 +118,7 @@ export default {
         console.error('Error fetching items:', error)
       }
     },
+    // Updates checkbox filters
     async updateFilters () {
       try {
         const URL = this.startURL + "?thisYearProjects=" + this.thisYearProjects + "&archiveProjects=" + this.archiveProjects
