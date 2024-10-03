@@ -4,9 +4,17 @@
       Импортировать проект
     </button>
   </div>
+  <TestComponent/>
 </template>
 
 <script>
+import TestComponent from '@/test/TestComponent.vue';
+
+export default {
+  components: {
+    TestComponent
+  }
+}
 </script>
 
 <style scoped>

@@ -1,41 +1,36 @@
 <template>
-  <div>
-    <h1>Items</h1>
-    <ul v-for="item in items" :key="item.id">
-      <li v-for="(col, key) in item">{{ key }} : {{ col }}</li>
-    </ul>
-    <button @click="fetchItems">Load Items</button>
-    <button @click="addItem">Add Item</button>
+  <div class="container">
+    <div class="large-12 medium-12 small-12 cell">
+      <label>File
+        <input type="file" id="file" ref="file" @change="handleFileUpload()"/>
+      </label>
+      <button @click="submitFile()">Submit</button>
+    </div>
   </div>
 </template>
 
 <script>
-import api from '@/api';
+import api from "@/api"
 
 export default {
   data() {
     return {
-      items: [],
-    };
+      file: ''
+    }
   },
   methods: {
-    async fetchItems() {
-      try {
-        const response = await api.getItems();
-        this.items = response.data;
-      } catch (error) {
-        console.error('Error fetching items:', error);
-      }
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
     },
-    async addItem() {
-      const newItem = { name: 'New Item' }; // Пример данных
+    submitFile() {
+      let formData = new FormData();
+      formData.append('file', this.file);
       try {
-        await api.createItem(newItem);
-        this.fetchItems(); // Обновляем список после добавления
+        api.createItemFormData("/file", formData)
       } catch (error) {
-        console.error('Error adding item:', error);
+        console.error('Error sending file', error)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

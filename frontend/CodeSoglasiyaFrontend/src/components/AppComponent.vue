@@ -1,7 +1,11 @@
 <template>
   <div class="app">
     <div class="banner">
-      <img src="@/assets/images/zaglushka.jpg">
+      <!-- <img src="@/assets/images/zaglushka.jpg"> -->
+      <a href="https://soglasietech.ru/">
+        <img src="@/assets/svg/logo-soglasie.svg" alt="ЛОГО СОГЛАСИЕ">
+      </a>
+      <p>ПОРТАЛ<br>  ПРОЕКТНОГО УПРАВЛЕНИЯ</p>
     </div>
     <div class="menu">
       <button :class="{'picked-button': currentComponent === 'MainPageComponent'}" @click="currentComponent = 'MainPageComponent'">
@@ -40,9 +44,14 @@ export default {
 </script>
 
 <style scoped>
-.banner img{
+.banner {
   width: 100%;
-  max-height: 100px;
+  min-height: 100px;
+  background-image: url(@/assets/images/zaglushka.jpg);
+  background-size: contain;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .menu {
   display: flex;

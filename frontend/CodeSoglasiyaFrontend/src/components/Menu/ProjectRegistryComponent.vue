@@ -1,7 +1,7 @@
 <template>
   <div class="checkboxes">
-    <input type="checkbox" v-model="thisYearProjects" @click="thisYearProjects = !thisYearProjects" checked>Портфель проектов 2024
-    <input type="checkbox" v-model="archiveProjects" @click="archiveProjects = !archiveProjects">Архивные проекты
+    <input type="checkbox" v-model="thisYearProjects" @click="thisYearProjects = !thisYearProjects; updateFilters()" checked>Портфель проектов 2024
+    <input type="checkbox" v-model="archiveProjects" @click="archiveProjects = !archiveProjects; updateFilters()">Архивные проекты
   </div>
 
   <div class="buttons">
@@ -72,13 +72,13 @@ export default {
       searchQuery: "",
       thisYearProjects: true,
       archiveProjects: false,
-      startURL: "http://localhost:5000/ProjectRegistry"
+      startURL: "/ProjectRegistry"
     }
   },
   methods: {
     goHome() {
       this.thisYearProjects = true
-      this.archiveProjects = false
+      this.archiveProjects = false  
       this.tableHead = this.defaultColumns
     },
     async fetchItems(headers, endURL) {
@@ -92,11 +92,19 @@ export default {
           this.tableHead = headers
           URL = this.startURL + "/Projects" + endURL
         }
-        console.log(URL)
-        const response = await api.getItems(URL)
+        const response = await api.getItemsJSON(URL)
         this.tableData = response.data
       } catch (error) {
         console.error('Error fetching items:', error)
+      }
+    },
+    async updateFilters () {
+      try {
+        const URL = this.startURL + "?thisYearProjects=" + this.thisYearProjects + "&archiveProjects=" + this.archiveProjects
+        const response = await api.getItemsJSON(URL)
+        this.tableData = response.data
+      } catch (error) {
+        console.error('Error updating filters:', error)
       }
     }
   }
