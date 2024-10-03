@@ -22,13 +22,14 @@ namespace Backend.Migrations
                     Name = table.Column<string>(type: "text", nullable: false),
                     Stage = table.Column<string>(type: "text", nullable: false),
                     Priority = table.Column<float>(type: "float4", nullable: true),
-                    Monitoring = table.Column<string>(type: "text", nullable: true),
+                    PostMonitoring = table.Column<string>(type: "text", nullable: true),
                     Activity = table.Column<string>(type: "text", nullable: true),
                     Category = table.Column<string>(type: "text", nullable: true),
                     Program = table.Column<string>(type: "text", nullable: true),
                     StrategyBelonging = table.Column<string>(type: "text", nullable: true),
                     RGT = table.Column<string>(type: "char(1)", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true)
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Dependencies = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,9 +42,9 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Progress = table.Column<int>(type: "integer", nullable: true),
-                    Status = table.Column<string>(type: "text", nullable: true),
+                    GeneralStatus = table.Column<string>(type: "text", nullable: true),
                     Goals = table.Column<int>(type: "integer", nullable: true),
-                    Deadlines = table.Column<int>(type: "integer", nullable: true),
+                    Timelines = table.Column<int>(type: "integer", nullable: true),
                     Budget = table.Column<int>(type: "integer", nullable: true),
                     Contents = table.Column<int>(type: "integer", nullable: true),
                     ReportLink = table.Column<string>(type: "text", nullable: true)
@@ -148,6 +149,30 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProjectsMonitoring",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Sign = table.Column<string>(type: "text", nullable: true),
+                    MonitoringStatus = table.Column<string>(type: "text", nullable: true),
+                    EndYear = table.Column<int>(type: "integer", nullable: true),
+                    Product = table.Column<string>(type: "text", nullable: true),
+                    Manager = table.Column<string>(type: "text", nullable: true),
+                    Characteristics = table.Column<string>(type: "text", nullable: true),
+                    ShortName = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectsMonitoring", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProjectsMonitoring_ProjectsGeneralInfo_Id",
+                        column: x => x.Id,
+                        principalTable: "ProjectsGeneralInfo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProjectsTeam",
                 columns: table => new
                 {
@@ -222,6 +247,9 @@ namespace Backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProjectsGoals");
+
+            migrationBuilder.DropTable(
+                name: "ProjectsMonitoring");
 
             migrationBuilder.DropTable(
                 name: "ProjectsTeam");

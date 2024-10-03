@@ -13,8 +13,15 @@ namespace Backend.Repository
         public DbSet<ProjectCost> ProjectsCost { get; set; }
         public DbSet<ProjectDocuments> ProjectsDocuments { get; set; }
         public DbSet<ProjectGoals> ProjectsGoals { get; set; }
+        public DbSet<ProjectMonitoring> ProjectsMonitoring { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            ConfigureForeignKeys(modelBuilder);
+            ConfigureViews(modelBuilder);
+        }
+
+        private static void ConfigureForeignKeys(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Entity<ProjectGeneralInfo>()
@@ -46,7 +53,23 @@ namespace Backend.Repository
                 .HasOne(u => u.Goals)
                 .WithOne(p => p.GeneralInfo)
                 .HasForeignKey<ProjectGoals>(p => p.Id);
+            modelBuilder
+                .Entity<ProjectGeneralInfo>()
+                .HasOne(u => u.Monitoring)
+                .WithOne(p => p.GeneralInfo)
+                .HasForeignKey<ProjectMonitoring>(p => p.Id);
+        }
 
+        private static void ConfigureViews(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<HomeView>()
+                .HasNoKey()
+                .ToView("HomeView");
+            modelBuilder
+                .Entity<ProjectGeneralInfoView>()
+                .HasNoKey()
+                .ToView("ProjectsGeneralInfoView");
             modelBuilder
                 .Entity<ProjectConditionView>()
                 .HasNoKey()
@@ -71,6 +94,10 @@ namespace Backend.Repository
                 .Entity<ProjectGoalsView>()
                 .HasNoKey()
                 .ToView("ProjectsGoalsView");
+            modelBuilder
+                .Entity<ProjectMonitoringView>()
+                .HasNoKey()
+                .ToView("ProjectsMonitoringView");
         }
     }
 }

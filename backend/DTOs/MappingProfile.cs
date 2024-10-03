@@ -21,13 +21,15 @@ namespace Backend.DTOs
             CreateMap<int?, string>()
                 .ConvertUsing(src => src.HasValue ? src.Value.ToString() : string.Empty);
 
-            CreateMap<ProjectGeneralInfo, ProjectGeneralInfoDTO>();
+            CreateMap<HomeView, HomeViewDTO>();
+            CreateMap<ProjectGeneralInfoView, ProjectGeneralInfoViewDTO>();
             CreateMap<ProjectConditionView, ProjectConditionViewDTO>();
             CreateMap<ProjectTeamView, ProjectTeamViewDTO>();
             CreateMap<ProjectTimelinesView, ProjectTimelinesViewDTO>();
             CreateMap<ProjectCostView, ProjectCostViewDTO>();
             CreateMap<ProjectDocumentsView, ProjectDocumentsViewDTO>();
             CreateMap<ProjectGoalsView, ProjectGoalsViewDTO>();
+            CreateMap<ProjectMonitoringView, ProjectMonitoringViewDTO>();
         }
     }
 }

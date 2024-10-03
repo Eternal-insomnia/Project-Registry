@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20241002213744_CreateDatabase")]
+    [Migration("20241003224456_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -36,8 +36,8 @@ namespace Backend.Migrations
                     b.Property<int?>("Contents")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("Deadlines")
-                        .HasColumnType("integer");
+                    b.Property<string>("GeneralStatus")
+                        .HasColumnType("text");
 
                     b.Property<int?>("Goals")
                         .HasColumnType("integer");
@@ -48,8 +48,8 @@ namespace Backend.Migrations
                     b.Property<string>("ReportLink")
                         .HasColumnType("text");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
+                    b.Property<int?>("Timelines")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -185,14 +185,17 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Dependencies")
                         .HasColumnType("text");
 
-                    b.Property<string>("Monitoring")
+                    b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PostMonitoring")
                         .HasColumnType("text");
 
                     b.Property<float?>("Priority")
@@ -250,6 +253,37 @@ namespace Backend.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProjectsGoals");
+                });
+
+            modelBuilder.Entity("Backend.Models.ProjectMonitoring", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Characteristics")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("EndYear")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Manager")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MonitoringStatus")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Product")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ShortName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Sign")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectsMonitoring");
                 });
 
             modelBuilder.Entity("Backend.Models.ProjectTeam", b =>
@@ -350,6 +384,43 @@ namespace Backend.Migrations
                     b.ToTable("ProjectsTimelines");
                 });
 
+            modelBuilder.Entity("Backend.Models.Views.HomeView", b =>
+                {
+                    b.Property<DateOnly?>("ActualEnd")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("GeneralStatus")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Manager")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<float?>("Priority")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("Progress")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Stage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("HomeView", (string)null);
+                });
+
             modelBuilder.Entity("Backend.Models.Views.ProjectConditionView", b =>
                 {
                     b.Property<int?>("Budget")
@@ -360,9 +431,6 @@ namespace Backend.Migrations
                         .HasColumnType("text");
 
                     b.Property<int?>("Contents")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("Deadlines")
                         .HasColumnType("integer");
 
                     b.Property<int?>("Goals")
@@ -381,6 +449,9 @@ namespace Backend.Migrations
                     b.Property<string>("Stage")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int?>("Timelines")
+                        .HasColumnType("integer");
 
                     b.ToTable((string)null);
 
@@ -423,6 +494,9 @@ namespace Backend.Migrations
 
                     b.Property<float?>("PassportOPEX")
                         .HasColumnType("real");
+
+                    b.Property<string>("Profitability")
+                        .HasColumnType("text");
 
                     b.Property<string>("Stage")
                         .IsRequired()
@@ -470,6 +544,40 @@ namespace Backend.Migrations
                     b.ToView("ProjectsDocumentsView", (string)null);
                 });
 
+            modelBuilder.Entity("Backend.Models.Views.ProjectGeneralInfoView", b =>
+                {
+                    b.Property<string>("Activity")
+                        .HasColumnType("text");
+
+                    b.Property<string>("BusinessGoals")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Program")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RGT")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Stage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ProjectsGeneralInfoView", (string)null);
+                });
+
             modelBuilder.Entity("Backend.Models.Views.ProjectGoalsView", b =>
                 {
                     b.Property<string>("AchieveCriteria")
@@ -505,6 +613,46 @@ namespace Backend.Migrations
                     b.ToTable((string)null);
 
                     b.ToView("ProjectsGoalsView", (string)null);
+                });
+
+            modelBuilder.Entity("Backend.Models.Views.ProjectMonitoringView", b =>
+                {
+                    b.Property<string>("Characteristics")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int?>("EndYear")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Manager")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MonitoringStatus")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Product")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ShortName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Sign")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Stage")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("ProjectsMonitoringView", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Models.Views.ProjectTeamView", b =>
@@ -625,6 +773,17 @@ namespace Backend.Migrations
                     b.Navigation("GeneralInfo");
                 });
 
+            modelBuilder.Entity("Backend.Models.ProjectMonitoring", b =>
+                {
+                    b.HasOne("Backend.Models.ProjectGeneralInfo", "GeneralInfo")
+                        .WithOne("Monitoring")
+                        .HasForeignKey("Backend.Models.ProjectMonitoring", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GeneralInfo");
+                });
+
             modelBuilder.Entity("Backend.Models.ProjectTeam", b =>
                 {
                     b.HasOne("Backend.Models.ProjectGeneralInfo", "GeneralInfo")
@@ -656,6 +815,8 @@ namespace Backend.Migrations
                     b.Navigation("Documents");
 
                     b.Navigation("Goals");
+
+                    b.Navigation("Monitoring");
 
                     b.Navigation("Team");
 

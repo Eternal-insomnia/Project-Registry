@@ -18,7 +18,7 @@ namespace Backend.Models
         [Column(TypeName = "float4")]
         public float? Priority { get; set; }
 
-        public string? Monitoring { get; set; }
+        public string? PostMonitoring { get; set; }
         public string? Activity { get; set; }
         public string? Category { get; set; }
         public string? Program { get; set; }
@@ -27,6 +27,7 @@ namespace Backend.Models
         [Column(TypeName = "char")]
         public string? RGT { get; set; }
         public string? Description { get; set; }
+        public string? Dependencies { get; set; }
 
 
         public ProjectCondition? Condition { get; set; }
@@ -35,5 +36,6 @@ namespace Backend.Models
         public ProjectCost? Cost { get; set; }
         public ProjectDocuments? Documents { get; set; }
         public ProjectGoals? Goals { get; set; }
+        public ProjectMonitoring? Monitoring { get; set; }
     }
 }
