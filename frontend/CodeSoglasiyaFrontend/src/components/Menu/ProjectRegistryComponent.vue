@@ -85,9 +85,10 @@ export default {
     // Excel file export
     async exportFile() {
       try {
-        let filename = (Math.floor(Date.now() / 1000)) + '.html';
+        let filename = (Math.floor(Date.now() / 1000)) + '.xlsx';
         const response = await api.apiClientExportFile('/swagger/index.html')
-        let url = window.URL.createObjectURL(new Blob([response.data], { type: 'text/html' }));
+        // or use application/vnd.ms-excel for .xls
+        let url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
         let link = document.createElement('a');
         link.href = url;
         link.setAttribute('download', filename);
