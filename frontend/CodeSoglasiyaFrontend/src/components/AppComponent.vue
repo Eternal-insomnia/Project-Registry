@@ -8,13 +8,13 @@
       <p>ПОРТАЛ<br>  ПРОЕКТНОГО УПРАВЛЕНИЯ</p>
     </div>
     <div class="menu">
-      <button :class="{'picked-button': currentComponent === 'MainPageComponent'}" @click="currentComponent = 'MainPageComponent'">
+      <button class="menu__button" :class="{'picked-button': currentComponent === 'MainPageComponent'}" @click="currentComponent = 'MainPageComponent'">
         Главная
       </button>
-      <button :class="{'picked-button': currentComponent === 'ProjectRegistryComponent'}" @click="currentComponent = 'ProjectRegistryComponent'">
+      <button class="menu__button" :class="{'picked-button': currentComponent === 'ProjectRegistryComponent'}" @click="currentComponent = 'ProjectRegistryComponent'">
         Реестр проектов
       </button>
-      <button :class="{'picked-button': currentComponent === 'LibraryComponent'}" @click="currentComponent = 'LibraryComponent'">
+      <button class="menu__button" :class="{'picked-button': currentComponent === 'LibraryComponent'}" @click="currentComponent = 'LibraryComponent'">
         Библиотека
       </button>
     </div>
@@ -57,8 +57,9 @@ export default {
   display: flex;
   justify-content: center;
   padding: 5px;
+  margin: 20px;
 }
-.menu button {
+.menu__button {
   margin: 0 10px;
   min-width: 150px;
   min-height: 40px;
