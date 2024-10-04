@@ -2,6 +2,7 @@
   <div class="checkboxes">
     <input type="checkbox" v-model="thisYearProjects" @click="thisYearProjects = !thisYearProjects; updateFilters()" checked>Портфель проектов 2024
     <input type="checkbox" v-model="archiveProjects" @click="archiveProjects = !archiveProjects; updateFilters()">Архивные проекты
+    <input type="checkbox" v-model="portfolioProject" @click="portfolioProject = !portfolioProject; updateFilters()">Проект портфеля 2024
   </div>
 
   <div class="buttons">
@@ -9,9 +10,16 @@
       <button @click="exportFile()">
         Экспорт
       </button>
-      <button>
-        Группировать
-      </button>
+      <div class="custom-select">
+        <button class="select-selected" @click="optionsHide = !optionsHide">
+          Группировать
+        </button>
+        <div class="select-items" :class="{'select-hide': optionsHide}">
+          <div v-for="option in options" :key="option" @click="filteredData = dataGrouping(option)">
+            {{ option }}
+          </div>
+        </div>
+      </div>
       Поиск:
       <input @keydown.enter="fetchSearchResponse()" v-model="searchTerm">
     </div>
@@ -33,7 +41,7 @@
 
   <div class="projects-table">
     <TableComponent
-      :data="tableData"
+      :data="filteredData"
       :columns="tableHead"
       :filter-key="searchTerm">
     </TableComponent>
@@ -42,7 +50,7 @@
 
 <script>
 import TableComponent from "./Table/TableComponent.vue"
-
+import optionsJSON from "@/data/select-options.json"
 // Headers for table
 import HomeJSON from "@/data/headers/home-head.json"
 import GeneralInfoJSON from "@/data/headers/general-info-head.json"
@@ -64,6 +72,7 @@ export default {
     return {
       startURL: "/ProjectRegistry/Views",
       tableData: [],
+      filteredData: [],
       tableHead: HomeJSON,
       Home: HomeJSON,
       GeneralInfo: GeneralInfoJSON,
@@ -74,9 +83,12 @@ export default {
       Documents: DocumentsJSON,
       Goals: GoalsJSON,
       Monitoring: MonitoringJSON,
+      options: optionsJSON,
+      optionsHide: true,
       searchTerm: "",
       thisYearProjects: true,
       archiveProjects: false,
+      portfolioProject: false,
     }
   },
   methods: {
@@ -107,6 +119,7 @@ export default {
         URL = this.startURL + "/Project" + endURL
         const response = await api.getItemsJSON(URL)
         this.tableData = response.data
+        this.filteredData = response.data
       } catch (error) {
         console.error('Error fetching items:', error)
       }
@@ -120,6 +133,7 @@ export default {
         const URL = this.startURL + "/Home"
         const response = await api.getItemsJSON(URL)
         this.tableData = response.data
+        this.filteredData = response.data
       } catch (error) {
         console.error('Error fetching items home:', error)
       }
@@ -137,6 +151,24 @@ export default {
     // Updates checkbox filters
     async updateFilters() {
       console.log('ыыыыы')
+    },
+    // Grouping table data
+    dataGrouping(option) {
+      this.optionsHide = !this.optionsHide
+      if (option === "Не группировать") {
+        option = ''
+        this.filteredData = this.tableData
+      }
+      const filterKey = option && option.toLowerCase()
+      let data = this.tableData
+      if (filterKey) {
+        data = data.filter((row) => {
+          return Object.keys(row).some((key) => {
+            return String(row[key]).toLowerCase().indexOf(filterKey) > -1
+          })
+        })
+      }
+      return data
     }
   }
 }
@@ -166,6 +198,33 @@ export default {
 }
 .filter-buttons button {
   margin-left: 5px;
+}
+.custom-select {
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+.select-selected {
+  background-color: #2f4566;
+  padding: 10px;
+  cursor: pointer;
+}
+.select-items {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 99;
+  width: 150px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+.select-items div {
+  padding: 10px;
+  cursor: pointer;
+}
+.select-items div:hover {
+  background-color: #f1f1f1;
+}
+.select-hide {
+  display: none;
 }
 .home-button {
   background-color: #9c1c1c;

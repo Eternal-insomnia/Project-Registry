@@ -2,7 +2,7 @@
   <table v-if="filteredData.length">
     <thead>
       <tr>
-        <th v-for="(value, key) in columns[0]"
+        <th v-for="(value, key) in columns[0]" :key="value.id"
           @click="sortBy(key)"
           :class="{ active: sortKey == key }">
           {{ capitalize(value) }}
@@ -12,8 +12,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(entry, index) in filteredData">
-        <td v-for="key in Object.keys(columns[0])">
+      <tr v-for="(entry, index) in filteredData" :key="entry">
+        <td v-for="key in Object.keys(columns[0])" :key="key">
           <span v-if="key === 'num'">
             {{ incrementIndex(index) }}
           </span>
@@ -84,34 +84,30 @@ table {
   background-color: #969696;
   width: 100%;
 }
-
 th {
   background-color: #42b983;
-  color: #ffffff;
+  color: #eee;
   cursor: pointer;
   user-select: none;
 }
-
 td {
   background-color: #f9f9f9;
   text-align: center;
   max-height: 15px;
+  overflow: hidden;
+  white-space: nowrap;
 }
-
 th,
 td {
   min-width: 50px;
-  font-size: 15px;
+  font-size: 11px;
 }
-
 th.active {
   color: #fff;
 }
-
 th.active .arrow {
   opacity: 1;
 }
-
 .arrow {
   display: inline-block;
   vertical-align: middle;
@@ -120,13 +116,11 @@ th.active .arrow {
   margin-left: 5px;
   opacity: 0.66;
 }
-
 .arrow.asc {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-bottom: 4px solid #fff;
 }
-
 .arrow.dsc {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
