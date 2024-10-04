@@ -6,9 +6,9 @@
     "stage": "Этап",
     "progress": "% реализации",
     "goals": "Бизнес-цели",
-    "deadlines": "Сроки",
+    "timelines": "Сроки",
     "budget": "Бюджет",
-    "content": "Содержание",
+    "contents": "Содержание",
     "reportLink": "Ссылка на отчёт"
   }
 ]

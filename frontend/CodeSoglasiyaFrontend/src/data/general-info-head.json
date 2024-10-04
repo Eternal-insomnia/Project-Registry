@@ -4,10 +4,10 @@
     "code": "Код",
     "name": "Наименование",
     "stage": "Этап",
-    "businessLine": "Направление деятельности",
-    "programm": "Программа",
+    "activity": "Направление деятельности",
+    "program": "Программа",
     "rgt": "R / G / T",
     "description": "Краткое описание",
-    "businessGoal": "Бизнес-цели"
+    "businessGoals": "Бизнес-цели"
   }
 ]
