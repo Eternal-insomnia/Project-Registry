@@ -21,12 +21,13 @@
         <img src="@/assets/svg/home.svg" width="16px" height="16px">
       </button>
       <button :class="{'picked-button': tableHead === GeneralInfo}" @click="fetchItems(GeneralInfo, 'GeneralInfo')">Общая информация</button>
-      <button :class="{'picked-button': tableHead === ConditionView}" @click="fetchItems(ConditionView, 'ConditionView')">Состояние</button>
-      <button :class="{'picked-button': tableHead === TeamView}" @click="fetchItems(TeamView, 'TeamView')">Команда проекта</button>
-      <button :class="{'picked-button': tableHead === TimelinesView}" @click="fetchItems(TimelinesView, 'TimelinesView')">Сроки</button>
-      <button :class="{'picked-button': tableHead === CostView}" @click="fetchItems(CostView, 'CostView')">Стоимость</button>
-      <button :class="{'picked-button': tableHead === DocumentsView}" @click="fetchItems(DocumentsView, 'DocumentsView')">Документация</button>
-      <button :class="{'picked-button': tableHead === GoalsView}" @click="fetchItems(GoalsView, 'GoalsView')">Цели</button>
+      <button :class="{'picked-button': tableHead === Condition}" @click="fetchItems(Condition, 'Condition')">Состояние</button>
+      <button :class="{'picked-button': tableHead === Team}" @click="fetchItems(Team, 'Team')">Команда проекта</button>
+      <button :class="{'picked-button': tableHead === Timelines}" @click="fetchItems(Timelines, 'Timelines')">Сроки</button>
+      <button :class="{'picked-button': tableHead === Cost}" @click="fetchItems(Cost, 'Cost')">Стоимость</button>
+      <button :class="{'picked-button': tableHead === Documents}" @click="fetchItems(Documents, 'Documents')">Документация</button>
+      <button :class="{'picked-button': tableHead === Goals}" @click="fetchItems(Goals, 'Goals')">Цели</button>
+      <button :class="{'picked-button': tableHead === Monitoring}" @click="fetchItems(Monitoring, 'Monitoring')">Мониторинг</button>
     </div>
   </div>
 
@@ -43,14 +44,15 @@
 import TableComponent from "./Table/TableComponent.vue"
 
 // Headers for table
-import DefaultColumnsJSON from "@/data/default-head.json"
+import HomeJSON from "@/data/home-head.json"
 import GeneralInfoJSON from "@/data/general-info-head.json"
-import ConditionViewJSON from "@/data/condition-view-head.json"
-import TeamViewJSON from "@/data/team-view-head.json"
-import TimelinesViewJSON from "@/data/timelines-view-head.json"
-import CostViewJSON from "@/data/cost-view-head.json"
-import DocumentsViewJSON from "@/data/documents-view-head.json"
-import GoalsViewJSON from "@/data/goals-view-head.json"
+import ConditionJSON from "@/data/condition-head.json"
+import TeamJSON from "@/data/team-head.json"
+import TimelinesJSON from "@/data/timelines-head.json"
+import CostJSON from "@/data/cost-head.json"
+import DocumentsJSON from "@/data/documents-head.json"
+import GoalsJSON from "@/data/goals-head.json"
+import MonitoringJSON from "@/data/monitoring-head.json"
 
 import api from "@/api"
 
@@ -60,27 +62,29 @@ export default {
   },
   data() {
     return {
-      DefaultColumns: DefaultColumnsJSON,
       tableData: [],
-      tableHead: DefaultColumnsJSON,
+      tableHead: HomeJSON,
+      Home: HomeJSON,
       GeneralInfo: GeneralInfoJSON,
-      ConditionView: ConditionViewJSON,
-      TeamView: TeamViewJSON,
-      TimelinesView: TimelinesViewJSON,
-      CostView: CostViewJSON,
-      DocumentsView: DocumentsViewJSON,
-      GoalsView: GoalsViewJSON,
+      Condition: ConditionJSON,
+      Team: TeamJSON,
+      Timelines: TimelinesJSON,
+      Cost: CostJSON,
+      Documents: DocumentsJSON,
+      Goals: GoalsJSON,
+      Monitoring: MonitoringJSON,
       searchQuery: "",
       thisYearProjects: true,
       archiveProjects: false,
-      startURL: "/ProjectRegistry"
+      startURL: "/ProjectRegistry/Views"
     }
   },
   methods: {
     goHome() {
       this.thisYearProjects = true
       this.archiveProjects = false  
-      this.tableHead = this.defaultColumns
+      this.tableHead = this.Home
+      this.fetchItems('home', '/Home')
     },
     // Excel file export
     async exportFile() {
@@ -106,9 +110,11 @@ export default {
       try {
         let URL = ""
         if (headers === "search") {
-          this.tableHead = this.defaultColumns
           URL = this.startURL + "?searchQuery=" + endURL 
           // on testing check the URL
+        } else if (headers === "home") {
+          URL = this.startURL + endURL
+          console.log(URL)
         } else {
           this.tableHead = headers
           URL = this.startURL + "/Projects" + endURL
