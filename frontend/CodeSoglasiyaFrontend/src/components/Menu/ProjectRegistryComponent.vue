@@ -44,15 +44,15 @@
 import TableComponent from "./Table/TableComponent.vue"
 
 // Headers for table
-import HomeJSON from "@/data/home-head.json"
-import GeneralInfoJSON from "@/data/general-info-head.json"
-import ConditionJSON from "@/data/condition-head.json"
-import TeamJSON from "@/data/team-head.json"
-import TimelinesJSON from "@/data/timelines-head.json"
-import CostJSON from "@/data/cost-head.json"
-import DocumentsJSON from "@/data/documents-head.json"
-import GoalsJSON from "@/data/goals-head.json"
-import MonitoringJSON from "@/data/monitoring-head.json"
+import HomeJSON from "@/data/headers/home-head.json"
+import GeneralInfoJSON from "@/data/headers/general-info-head.json"
+import ConditionJSON from "@/data/headers/condition-head.json"
+import TeamJSON from "@/data/headers/team-head.json"
+import TimelinesJSON from "@/data/headers/timelines-head.json"
+import CostJSON from "@/data/headers/cost-head.json"
+import DocumentsJSON from "@/data/headers/documents-head.json"
+import GoalsJSON from "@/data/headers/goals-head.json"
+import MonitoringJSON from "@/data/headers/monitoring-head.json"
 
 import api from "@/api"
 

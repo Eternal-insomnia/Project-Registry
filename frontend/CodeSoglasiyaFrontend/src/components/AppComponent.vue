@@ -1,7 +1,6 @@
 <template>
   <div class="app">
     <div class="banner">
-      <!-- <img src="@/assets/images/zaglushka.jpg"> -->
       <a href="https://soglasietech.ru/">
         <img src="@/assets/svg/logo-soglasie.svg" alt="ЛОГО СОГЛАСИЕ">
       </a>
