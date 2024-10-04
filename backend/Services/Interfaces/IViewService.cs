@@ -2,8 +2,9 @@
 
 namespace Backend.Services.Interfaces
 {
-    public interface IViewService<T> where T : class
+    public interface IViewService<DTO> where DTO : class
     {
-        Task<List<T>> GetAllView();
+        Task<List<DTO>> GetAllView();
+        Task<List<DTO>> FullTextSearch(string searchTerm);
     }
 }

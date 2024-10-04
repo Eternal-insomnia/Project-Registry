@@ -6,27 +6,27 @@ namespace Backend.Models
     public class ProjectCost
     {
         [Key]
-        [ForeignKey("ProjectsGeneralInfo")]
+        [ForeignKey("ProjectGeneralInfo")]
         public required Guid Id { get; set; }
         public string? Profitability { get; set; }
-        public float? PreCAPEXExt { get; set; }
-        public float? PreCAPEXWF { get; set; }
-        public float? PreOPEX { get; set; }
-        public float? PreCAPEXExtActual { get; set; }
-        public float? PreCAPEXExtDeltaPercent { get; set; }
-        public float? BaseCAPEXExt { get; set; }
-        public float? BaseCAPEXWF { get; set; }
-        public float? BaseOPEX { get; set; }
-        public float? PassportCAPEXExt { get; set; }
-        public float? PassportCAPEXWF { get; set; }
-        public float? PassportOPEX { get; set; }
-        public float? PassportCAPEXExtDelta { get; set; }
-        public float? PassportCAPEXExtDeltaPercent { get; set; }
-        public float? ActualCAPEXExt { get; set; }
-        public float? ActualCAPEXWF { get; set; }
-        public float? ActualOPEX { get; set; }
-        public float? ActualCAPEXExtDelta { get; set; }
-        public float? ActualCAPEXExtDeltaPercent { get; set; }
+        public string? PreCAPEXExt { get; set; }
+        public string? PreCAPEXWF { get; set; }
+        public string? PreOPEX { get; set; }
+        public string? PreCAPEXExtActual { get; set; }
+        public string? PreCAPEXExtDeltaPercent { get; set; }
+        public string? BaseCAPEXExt { get; set; }
+        public string? BaseCAPEXWF { get; set; }
+        public string? BaseOPEX { get; set; }
+        public string? PassportCAPEXExt { get; set; }
+        public string? PassportCAPEXWF { get; set; }
+        public string? PassportOPEX { get; set; }
+        public string? PassportCAPEXExtDelta { get; set; }
+        public string? PassportCAPEXExtDeltaPercent { get; set; }
+        public string? ActualCAPEXExt { get; set; }
+        public string? ActualCAPEXWF { get; set; }
+        public string? ActualOPEX { get; set; }
+        public string? ActualCAPEXExtDelta { get; set; }
+        public string? ActualCAPEXExtDeltaPercent { get; set; }
 
         public required ProjectGeneralInfo GeneralInfo { get; set; }
     }

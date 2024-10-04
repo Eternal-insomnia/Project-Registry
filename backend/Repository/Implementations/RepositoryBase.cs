@@ -1,4 +1,5 @@
 ﻿using Backend.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository.Implementations
 {
@@ -7,6 +8,8 @@ namespace Backend.Repository.Implementations
         protected RepositoryContext _repositoryContext;
 
         public IQueryable<T> FindAll() => _repositoryContext.Set<T>();
+
+        public DbSet<T> FindAllRaw() => _repositoryContext.Set<T>();
 
         public RepositoryBase(RepositoryContext repositoryContext)
             => _repositoryContext = repositoryContext;

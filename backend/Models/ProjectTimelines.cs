@@ -6,23 +6,23 @@ namespace Backend.Models
     public class ProjectTimelines
     {
         [Key]
-        [ForeignKey("ProjectsGeneralInfo")]
+        [ForeignKey("ProjectGeneralInfo")]
         public required Guid Id { get; set; }
-        public DateOnly? PreStart { get; set; }
-        public DateOnly? PreEndActual { get; set; }
-        public int? PreDuration { get; set; }
-        public DateOnly? PreEndPlanned { get; set; }
-        public int? PreDeviation { get; set; }
-        public DateOnly? ActualStart { get; set; }
-        public DateOnly? ActualEnd { get; set; }
-        public int? ActualDuration { get; set; }
-        public DateOnly? BaseStart { get; set; }
-        public DateOnly? BaseEnd { get; set; }
-        public int? BaseDeviation { get; set; }
-        public DateOnly? PassportEnd { get; set; }
-        public int? PassportDeviation { get; set; }
-        public int? PassportStartYear { get; set; }
-        public int? PassportEndYear { get; set; }
+        public string? PreStart { get; set; }
+        public string? PreEndActual { get; set; }
+        public string? PreDuration { get; set; }
+        public string? PreEndPlanned { get; set; }
+        public string? PreDeviation { get; set; }
+        public string? ActualStart { get; set; }
+        public string? ActualEnd { get; set; }
+        public string? ActualDuration { get; set; }
+        public string? BaseStart { get; set; }
+        public string? BaseEnd { get; set; }
+        public string? BaseDeviation { get; set; }
+        public string? PassportEnd { get; set; }
+        public string? PassportDeviation { get; set; }
+        public string? PassportStartYear { get; set; }
+        public string? PassportEndYear { get; set; }
 
         public required ProjectGeneralInfo GeneralInfo { get; set; }
     }

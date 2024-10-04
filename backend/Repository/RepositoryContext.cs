@@ -6,14 +6,14 @@ namespace Backend.Repository
 {
     public class RepositoryContext(DbContextOptions options) : DbContext(options)
     {
-        public DbSet<ProjectGeneralInfo> ProjectsGeneralInfo { get; set; }
-        public DbSet<ProjectCondition> ProjectsCondition { get; set; }
-        public DbSet<ProjectTeam> ProjectsTeam { get; set; }
-        public DbSet<ProjectTimelines> ProjectsTimelines { get; set; }
-        public DbSet<ProjectCost> ProjectsCost { get; set; }
-        public DbSet<ProjectDocuments> ProjectsDocuments { get; set; }
-        public DbSet<ProjectGoals> ProjectsGoals { get; set; }
-        public DbSet<ProjectMonitoring> ProjectsMonitoring { get; set; }
+        public DbSet<ProjectGeneralInfo> ProjectGeneralInfo { get; set; }
+        public DbSet<ProjectCondition> ProjectCondition { get; set; }
+        public DbSet<ProjectTeam> ProjectTeam { get; set; }
+        public DbSet<ProjectTimelines> ProjectTimelines { get; set; }
+        public DbSet<ProjectCost> ProjectCost { get; set; }
+        public DbSet<ProjectDocuments> ProjectDocuments { get; set; }
+        public DbSet<ProjectGoals> ProjectGoals { get; set; }
+        public DbSet<ProjectMonitoring> ProjectMonitoring { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -69,35 +69,35 @@ namespace Backend.Repository
             modelBuilder
                 .Entity<ProjectGeneralInfoView>()
                 .HasNoKey()
-                .ToView("ProjectsGeneralInfoView");
+                .ToView("ProjectGeneralInfoView");
             modelBuilder
                 .Entity<ProjectConditionView>()
                 .HasNoKey()
-                .ToView("ProjectsConditionView");
+                .ToView("ProjectConditionView");
             modelBuilder
                 .Entity<ProjectTeamView>()
                 .HasNoKey()
-                .ToView("ProjectsTeamView");
+                .ToView("ProjectTeamView");
             modelBuilder
                 .Entity<ProjectTimelinesView>()
                 .HasNoKey()
-                .ToView("ProjectsTimelinesView");
+                .ToView("ProjectTimelinesView");
             modelBuilder
                 .Entity<ProjectCostView>()
                 .HasNoKey()
-                .ToView("ProjectsCostView");
+                .ToView("ProjectCostView");
             modelBuilder
                 .Entity<ProjectDocumentsView>()
                 .HasNoKey()
-                .ToView("ProjectsDocumentsView");
+                .ToView("ProjectDocumentsView");
             modelBuilder
                 .Entity<ProjectGoalsView>()
                 .HasNoKey()
-                .ToView("ProjectsGoalsView");
+                .ToView("ProjectGoalsView");
             modelBuilder
                 .Entity<ProjectMonitoringView>()
                 .HasNoKey()
-                .ToView("ProjectsMonitoringView");
+                .ToView("ProjectMonitoringView");
         }
     }
 }

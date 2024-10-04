@@ -2,14 +2,14 @@
 using Backend.Services.Implementations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Backend.Controllers
+namespace Backend.Controllers.ProjectRegistry
 {
     [ApiController]
     [Route("ProjectRegistry/Views")]
-    public class ProjectRegistryViewsController : ControllerBase
+    public class GetViewsController : ControllerBase
     {
-        private readonly ILogger<ProjectRegistryViewsController> _logger;
-
+        private readonly ILogger<GetViewsController> _logger;
+        
         private readonly ViewService<HomeViewDTO> _homeViewService;
         private readonly ViewService<ProjectGeneralInfoViewDTO> _projectGeneralInfoViewService;
         private readonly ViewService<ProjectConditionViewDTO> _projectConditionViewService;
@@ -27,63 +27,63 @@ namespace Backend.Controllers
             return Ok(homeView);
         }
 
-        [HttpGet("ProjectsGeneralInfo")]
-        public async Task<IActionResult> GetProjectsGeneralInfoView()
+        [HttpGet("ProjectGeneralInfo")]
+        public async Task<IActionResult> GetProjectGeneralInfoView()
         {
             var projectsGeneralInfo = await _projectGeneralInfoViewService.GetAllView();
             return Ok(projectsGeneralInfo);
         }
 
-        [HttpGet("ProjectsCondition")]
-        public async Task<IActionResult> GetProjectsConditionView()
+        [HttpGet("ProjectCondition")]
+        public async Task<IActionResult> GetProjectConditionView()
         {
             var projectsCondition = await _projectConditionViewService.GetAllView();
             return Ok(projectsCondition);
         }
 
-        [HttpGet("ProjectsTeam")]
-        public async Task<IActionResult> GetProjectsTeamView()
+        [HttpGet("ProjectTeam")]
+        public async Task<IActionResult> GetProjectTeamView()
         {
             var projectsTeam = await _projectTeamViewService.GetAllView();
             return Ok(projectsTeam);
         }
 
-        [HttpGet("ProjectsTimelines")]
-        public async Task<IActionResult> GetProjectsTimelinesView()
+        [HttpGet("ProjectTimelines")]
+        public async Task<IActionResult> GetProjectTimelinesView()
         {
             var projectsTimelines = await _projectTimelinesViewService.GetAllView();
             return Ok(projectsTimelines);
         }
 
-        [HttpGet("ProjectsCost")]
-        public async Task<IActionResult> GetProjectsCostView()
+        [HttpGet("ProjectCost")]
+        public async Task<IActionResult> GetProjectCostView()
         {
             var projectsCost = await _projectCostViewService.GetAllView();
             return Ok(projectsCost);
         }
 
-        [HttpGet("ProjectsDocuments")]
-        public async Task<IActionResult> GetProjectsDocumentsView()
+        [HttpGet("ProjectDocuments")]
+        public async Task<IActionResult> GetProjectDocumentsView()
         {
             var projectsDocuments = await _projectDocumentsViewService.GetAllView();
             return Ok(projectsDocuments);
         }
 
-        [HttpGet("ProjectsGoals")]
-        public async Task<IActionResult> GetProjectsGoalsView()
+        [HttpGet("ProjectGoals")]
+        public async Task<IActionResult> GetProjectGoalsView()
         {
             var projectsGoals = await _projectGoalsViewService.GetAllView();
             return Ok(projectsGoals);
         }
 
-        [HttpGet("ProjectsMonitoring")]
-        public async Task<IActionResult> GetProjectsMonitoringView()
+        [HttpGet("ProjectMonitoring")]
+        public async Task<IActionResult> GetProjectMonitoringView()
         {
             var projectsMonitoring = await _projectMonitoringViewService.GetAllView();
             return Ok(projectsMonitoring);
         }
 
-        public ProjectRegistryViewsController(ILogger<ProjectRegistryViewsController> logger,
+        public GetViewsController(ILogger<GetViewsController> logger,
             ViewService<HomeViewDTO> homeViewService,
             ViewService<ProjectGeneralInfoViewDTO> projectGeneralInfoViewService,
             ViewService<ProjectConditionViewDTO> projectConditionService,

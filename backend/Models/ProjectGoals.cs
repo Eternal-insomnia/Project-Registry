@@ -6,7 +6,7 @@ namespace Backend.Models
     public class ProjectGoals
     {
         [Key]
-        [ForeignKey("ProjectsGeneralInfo")]
+        [ForeignKey("ProjectGeneralInfo")]
         public required Guid Id { get; set; }
         public string? Product { get; set; }
         public string? ImplCriteria { get; set; }

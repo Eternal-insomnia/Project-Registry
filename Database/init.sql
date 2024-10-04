@@ -1,13 +1,13 @@
-CREATE TABLE "ProjectsGeneralInfo" (
+CREATE TABLE "ProjectGeneralInfo" (
     "Id" uuid NOT NULL UNIQUE PRIMARY KEY,
     "Year" text NOT NULL,
     "Status" text NOT NULL,
     "Code" text NOT NULL,
     "Name" text NOT NULL,
     "Stage" text NOT NULL,
-    "Priority" real,
+    "Priority" text,
     "PostMonitoring" text,
-    "Activity" text,
+    "Activity" text,    
     "Category" text,
     "Program" text,
     "StrategyBelonging" text,
@@ -16,19 +16,19 @@ CREATE TABLE "ProjectsGeneralInfo" (
     "Dependencies" text
 );
 
-CREATE TABLE "ProjectsCondition" (
+CREATE TABLE "ProjectCondition" (
     "Id" uuid NOT NULL UNIQUE PRIMARY KEY,
-    "Progress" int,
+    "Progress" text,
     "GeneralStatus" text,
-    "Goals" int,
-    "Timelines" int,
-    "Budget" int,
-    "Contents" int,
+    "Goals" text,
+    "Timelines" text,
+    "Budget" text,
+    "Contents" text,
     "ReportLink" text,
-    FOREIGN KEY ("Id") REFERENCES "ProjectsGeneralInfo"("Id") ON DELETE CASCADE
+    FOREIGN KEY ("Id") REFERENCES "ProjectGeneralInfo"("Id") ON DELETE CASCADE
 );
 
-CREATE TABLE "ProjectsTeam" (
+CREATE TABLE "ProjectTeam" (
     "Id" uuid NOT NULL UNIQUE PRIMARY KEY,
     "Customer" text,
     "ProductOwner" text,
@@ -41,54 +41,54 @@ CREATE TABLE "ProjectsTeam" (
     "ADM" text,
     "FRC" text,
     "BusinessLines" text,
-    FOREIGN KEY ("Id") REFERENCES "ProjectsGeneralInfo"("Id") ON DELETE CASCADE
+    FOREIGN KEY ("Id") REFERENCES "ProjectGeneralInfo"("Id") ON DELETE CASCADE
 );
 
-CREATE TABLE "ProjectsTimelines" (
+CREATE TABLE "ProjectTimelines" (
     "Id" uuid NOT NULL UNIQUE PRIMARY KEY,
-    "PreStart" date,
-    "PreEndActual" date,
-    "PreDuration" int,
-    "PreEndPlanned" date,
-    "PreDeviation" int,
-    "ActualStart" date,
-    "ActualEnd" date,
-    "ActualDuration" int,
-    "BaseStart" date,
-    "BaseEnd" date,
-    "BaseDeviation" int,
-    "PassportEnd" date,
-    "PassportDeviation" int,
-    "PassportStartYear" int,
-    "PassportEndYear" int,
-    FOREIGN KEY ("Id") REFERENCES "ProjectsGeneralInfo"("Id") ON DELETE CASCADE
+    "PreStart" text,
+    "PreEndActual" text,
+    "PreDuration" text,
+    "PreEndPlanned" text,
+    "PreDeviation" text,
+    "ActualStart" text,
+    "ActualEnd" text,
+    "ActualDuration" text,
+    "BaseStart" text,
+    "BaseEnd" text,
+    "BaseDeviation" text,
+    "PassportEnd" text,
+    "PassportDeviation" text,
+    "PassportStartYear" text,
+    "PassportEndYear" text,
+    FOREIGN KEY ("Id") REFERENCES "ProjectGeneralInfo"("Id") ON DELETE CASCADE
 );
 
-CREATE TABLE "ProjectsCost" (
+CREATE TABLE "ProjectCost" (
     "Id" uuid NOT NULL UNIQUE PRIMARY KEY,
     "Profitability" text,
-    "PreCAPEXExt" real,
-    "PreCAPEXWF" real,
-    "PreOPEX" real,
-    "PreCAPEXExtActual" real,
-    "PreCAPEXExtDeltaPercent" real,
-    "BaseCAPEXExt" real,
-    "BaseCAPEXWF" real,
-    "BaseOPEX" real,
-    "PassportCAPEXExt" real,
-    "PassportCAPEXWF" real,
-    "PassportOPEX" real,
-    "PassportCAPEXExtDelta" real,
-    "PassportCAPEXExtDeltaPercent" real,
-    "ActualCAPEXExt" real,
-    "ActualCAPEXWF" real,
-    "ActualOPEX" real,
-    "ActualCAPEXExtDelta" real,
-    "ActualCAPEXExtDeltaPercent" real,
-    FOREIGN KEY ("Id") REFERENCES "ProjectsGeneralInfo"("Id") ON DELETE CASCADE
+    "PreCAPEXExt" text,
+    "PreCAPEXWF" text,
+    "PreOPEX" text,
+    "PreCAPEXExtActual" text,
+    "PreCAPEXExtDeltaPercent" text,
+    "BaseCAPEXExt" text,
+    "BaseCAPEXWF" text,
+    "BaseOPEX" text,
+    "PassportCAPEXExt" text,
+    "PassportCAPEXWF" text,
+    "PassportOPEX" text,
+    "PassportCAPEXExtDelta" text,
+    "PassportCAPEXExtDeltaPercent" text,
+    "ActualCAPEXExt" text,
+    "ActualCAPEXWF" text,
+    "ActualOPEX" text,
+    "ActualCAPEXExtDelta" text,
+    "ActualCAPEXExtDeltaPercent" text,
+    FOREIGN KEY ("Id") REFERENCES "ProjectGeneralInfo"("Id") ON DELETE CASCADE
 );
 
-CREATE TABLE "ProjectsDocuments" (
+CREATE TABLE "ProjectDocuments" (
     "Id" uuid NOT NULL UNIQUE PRIMARY KEY,
     "PrePStartDecision" text,
     "ImplStartDecision" text,
@@ -102,11 +102,11 @@ CREATE TABLE "ProjectsDocuments" (
     "StopReason" text,
     "CloseCompleteDecision" text,
     "CloseReason" text,
-    FOREIGN KEY ("Id") REFERENCES "ProjectsGeneralInfo"("Id") ON DELETE CASCADE
+    FOREIGN KEY ("Id") REFERENCES "ProjectGeneralInfo"("Id") ON DELETE CASCADE
 );
 
 
-CREATE TABLE "ProjectsGoals" (
+CREATE TABLE "ProjectGoals" (
     "Id" uuid NOT NULL UNIQUE PRIMARY KEY,
     "Product" text,
     "ImplCriteria" text,
@@ -114,96 +114,96 @@ CREATE TABLE "ProjectsGoals" (
     "BusinessGoals" text,
     "AchieveCriteria" text,
     "BusinessGoalsStatus" text,
-    FOREIGN KEY ("Id") REFERENCES "ProjectsGeneralInfo"("Id") ON DELETE CASCADE
+    FOREIGN KEY ("Id") REFERENCES "ProjectGeneralInfo"("Id") ON DELETE CASCADE
 );
 
-CREATE TABLE "ProjectsMonitoring" (
+CREATE TABLE "ProjectMonitoring" (
     "Id" uuid NOT NULL UNIQUE PRIMARY KEY,
     "Sign" text,
     "MonitoringStatus" text,
-    "EndYear" int,
+    "EndYear" text,
     "Product" text,
     "Manager" text,
     "Characteristics" text,
     "ShortName" text,
-    FOREIGN KEY ("Id") REFERENCES "ProjectsGeneralInfo"("Id") ON DELETE CASCADE
+    FOREIGN KEY ("Id") REFERENCES "ProjectGeneralInfo"("Id") ON DELETE CASCADE
 );
 
-COPY "ProjectsGeneralInfo" ("Id", "Year", "Status", "Code", "Name", "Stage", "Priority", "PostMonitoring", "Activity", "Category", "Program", "StrategyBelonging", "RGT", "Description", "Dependencies") FROM stdin;
+COPY "ProjectGeneralInfo" ("Id", "Year", "Status", "Code", "Name", "Stage", "Priority", "PostMonitoring", "Activity", "Category", "Program", "StrategyBelonging", "RGT", "Description", "Dependencies") FROM stdin;
 15a84b93-e3a6-4bd0-9130-e9cddfe42328	23	Archived	preCOC	Game	Done	3	\N	\N	\N	\N	\N	\N	mmm good	\N
 b7eadf4f-e161-42fe-9db6-9f906432025f	24	Archived	COC1	Web App	In Progress	7	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
-COPY "ProjectsCondition" ("Id", "Progress", "GeneralStatus", "Goals", "Timelines", "Budget", "Contents", "ReportLink") FROM stdin;
+COPY "ProjectCondition" ("Id", "Progress", "GeneralStatus", "Goals", "Timelines", "Budget", "Contents", "ReportLink") FROM stdin;
 15a84b93-e3a6-4bd0-9130-e9cddfe42328	50	Almost Archived	4	1	100	7	www.ya.ru
 b7eadf4f-e161-42fe-9db6-9f906432025f	86	Paused	8	18	1000	3	www.ya.ru
 \.
 
-COPY "ProjectsTeam" ("Id", "Customer", "ProductOwner", "Manager", "TeamLead", "BusinessAnalyst", "MCPeople", "Stakeholders", "ExternalPeople", "ADM", "FRC", "BusinessLines") FROM stdin;
+COPY "ProjectTeam" ("Id", "Customer", "ProductOwner", "Manager", "TeamLead", "BusinessAnalyst", "MCPeople", "Stakeholders", "ExternalPeople", "ADM", "FRC", "BusinessLines") FROM stdin;
 15a84b93-e3a6-4bd0-9130-e9cddfe42328	customer1	mom	dad	dog	\N	\N	\N	\N	\N	\N	university
 b7eadf4f-e161-42fe-9db6-9f906432025f	customer2	\N	me	me	me	\N	\N	\N	\N	\N	school
 \.
 
-COPY "ProjectsTimelines" ("Id", "PreStart", "PreEndActual", "PreDuration", "PreEndPlanned", "PreDeviation", "ActualStart", "ActualEnd", "ActualDuration", "BaseStart", "BaseEnd", "BaseDeviation", "PassportEnd", "PassportDeviation", "PassportStartYear", "PassportEndYear") FROM stdin;
+COPY "ProjectTimelines" ("Id", "PreStart", "PreEndActual", "PreDuration", "PreEndPlanned", "PreDeviation", "ActualStart", "ActualEnd", "ActualDuration", "BaseStart", "BaseEnd", "BaseDeviation", "PassportEnd", "PassportDeviation", "PassportStartYear", "PassportEndYear") FROM stdin;
 15a84b93-e3a6-4bd0-9130-e9cddfe42328	07.07.2022	25.06.2023	11	15.09.2022	-283	27.06.2023	02.12.2024	17	27.06.2023	02.12.2024	0	05.06.2024	-180	2023	2024
 b7eadf4f-e161-42fe-9db6-9f906432025f	30.10.2023	20.01.2024	2	20.01.2024	0	26.02.2024	25.12.2024	9	26.02.2024	25.12.2024	0	25.12.2024	0	2024	2024
 \.
 
-COPY "ProjectsCost" ("Id", "Profitability", "PreCAPEXExt", "PreCAPEXWF", "PreOPEX", "PreCAPEXExtActual", "PreCAPEXExtDeltaPercent", "BaseCAPEXExt", "BaseCAPEXWF", "BaseOPEX", "PassportCAPEXExt", "PassportCAPEXWF", "PassportOPEX", "PassportCAPEXExtDelta", "PassportCAPEXExtDeltaPercent", "ActualCAPEXExt", "ActualCAPEXWF", "ActualOPEX", "ActualCAPEXExtDelta", "ActualCAPEXExtDeltaPercent") FROM stdin;
+COPY "ProjectCost" ("Id", "Profitability", "PreCAPEXExt", "PreCAPEXWF", "PreOPEX", "PreCAPEXExtActual", "PreCAPEXExtDeltaPercent", "BaseCAPEXExt", "BaseCAPEXWF", "BaseOPEX", "PassportCAPEXExt", "PassportCAPEXWF", "PassportOPEX", "PassportCAPEXExtDelta", "PassportCAPEXExtDeltaPercent", "ActualCAPEXExt", "ActualCAPEXWF", "ActualOPEX", "ActualCAPEXExtDelta", "ActualCAPEXExtDeltaPercent") FROM stdin;
 15a84b93-e3a6-4bd0-9130-e9cddfe42328	да	\N	\N	\N	\N	\N	22984	4700	0.0	22984	4700	0.0	0.0	100	\N	\N	\N	\N	\N
 b7eadf4f-e161-42fe-9db6-9f906432025f	нет	\N	\N	\N	\N	\N	4042	3161	0.0	4042	3161	0.0	0.0	100	\N	\N	\N	\N	\N
 \.
 
-COPY "ProjectsDocuments" ("Id", "PrePStartDecision", "ImplStartDecision", "Timelines", "ReasonCRTimelines", "Budget", "ReasonCRBudget", "Contents", "ReasonCRContents", "StopResumeDecision", "StopReason", "CloseCompleteDecision", "CloseReason") FROM stdin;
+COPY "ProjectDocuments" ("Id", "PrePStartDecision", "ImplStartDecision", "Timelines", "ReasonCRTimelines", "Budget", "ReasonCRBudget", "Contents", "ReasonCRContents", "StopResumeDecision", "StopReason", "CloseCompleteDecision", "CloseReason") FROM stdin;
 15a84b93-e3a6-4bd0-9130-e9cddfe42328	\N	ПК №08 от 07.07.2022	ПК №06 от 27.06.2023г.	\N	Уточнение требований в процессе реализации проекта:	\N	Уточнение требований в процессе реализации проекта:	\N	Уточнение требований в процессе реализации проекта:	\N	\N	\N
 b7eadf4f-e161-42fe-9db6-9f906432025f	\N	ПК №10 от 24.10.2023г.	ПК №02 от 11.03.2024г.	\N	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
-COPY "ProjectsGoals" ("Id", "Product", "ImplCriteria", "GoalsStatus", "BusinessGoals", "AchieveCriteria", "BusinessGoalsStatus") FROM stdin;
+COPY "ProjectGoals" ("Id", "Product", "ImplCriteria", "GoalsStatus", "BusinessGoals", "AchieveCriteria", "BusinessGoalsStatus") FROM stdin;
 15a84b93-e3a6-4bd0-9130-e9cddfe42328	wot	1%	started	gold	million	far
 b7eadf4f-e161-42fe-9db6-9f906432025f	telegram	bought	thought	money	porsche	dreams
 \.
 
-COPY "ProjectsMonitoring" ("Id", "Sign", "MonitoringStatus", "EndYear", "Product", "Manager", "Characteristics", "ShortName") FROM stdin;
+COPY "ProjectMonitoring" ("Id", "Sign", "MonitoringStatus", "EndYear", "Product", "Manager", "Characteristics", "ShortName") FROM stdin;
 15a84b93-e3a6-4bd0-9130-e9cddfe42328	да	\N	\N	\N	\N	\N	far
 b7eadf4f-e161-42fe-9db6-9f906432025f	нет	\N	\N	\N	\N	\N	dreams
 \.
 
 CREATE VIEW "HomeView" AS
     SELECT "Code", "Name", "Stage", "Priority", "Progress", "GeneralStatus", "ActualEnd", "Manager", "Description"
-    FROM "ProjectsGeneralInfo"
-    JOIN "ProjectsCondition" ON "ProjectsGeneralInfo"."Id" = "ProjectsCondition"."Id"
-    JOIN "ProjectsTimelines" ON "ProjectsGeneralInfo"."Id" = "ProjectsTimelines"."Id"
-    JOIN "ProjectsTeam" ON "ProjectsGeneralInfo"."Id" = "ProjectsTeam"."Id";
+    FROM "ProjectGeneralInfo"
+    JOIN "ProjectCondition" ON "ProjectGeneralInfo"."Id" = "ProjectCondition"."Id"
+    JOIN "ProjectTimelines" ON "ProjectGeneralInfo"."Id" = "ProjectTimelines"."Id"
+    JOIN "ProjectTeam" ON "ProjectGeneralInfo"."Id" = "ProjectTeam"."Id";
 
-CREATE VIEW "ProjectsGeneralInfoView" AS
+CREATE VIEW "ProjectGeneralInfoView" AS
     SELECT "Code", "Name", "Stage", "Activity", "Program", "RGT", "Description", "BusinessGoals"
-    FROM "ProjectsGeneralInfo" JOIN "ProjectsGoals" ON "ProjectsGeneralInfo"."Id" = "ProjectsGoals"."Id"; 
+    FROM "ProjectGeneralInfo" JOIN "ProjectGoals" ON "ProjectGeneralInfo"."Id" = "ProjectGoals"."Id"; 
 
-CREATE VIEW "ProjectsConditionView" AS
+CREATE VIEW "ProjectConditionView" AS
     SELECT "Code", "Name", "Stage", "Progress", "Goals", "Timelines", "Budget", "Contents", "ReportLink"
-    FROM "ProjectsGeneralInfo" JOIN "ProjectsCondition" ON "ProjectsGeneralInfo"."Id" = "ProjectsCondition"."Id"; 
+    FROM "ProjectGeneralInfo" JOIN "ProjectCondition" ON "ProjectGeneralInfo"."Id" = "ProjectCondition"."Id"; 
 
-CREATE VIEW "ProjectsTeamView" AS
+CREATE VIEW "ProjectTeamView" AS
     SELECT "Code", "Name", "Stage", "Customer", "Manager", "TeamLead", "BusinessAnalyst", "MCPeople"
-    FROM "ProjectsGeneralInfo" JOIN "ProjectsTeam" ON "ProjectsGeneralInfo"."Id" = "ProjectsTeam"."Id"; 
+    FROM "ProjectGeneralInfo" JOIN "ProjectTeam" ON "ProjectGeneralInfo"."Id" = "ProjectTeam"."Id"; 
 
-CREATE VIEW "ProjectsTimelinesView" AS
+CREATE VIEW "ProjectTimelinesView" AS
     SELECT "Code", "Name", "Stage", "ActualStart", "ActualEnd", "ActualDuration", "BaseEnd", "BaseDeviation", "PassportStartYear", "PassportEndYear"
-    FROM "ProjectsGeneralInfo" JOIN "ProjectsTimelines" ON "ProjectsGeneralInfo"."Id" = "ProjectsTimelines"."Id"; 
+    FROM "ProjectGeneralInfo" JOIN "ProjectTimelines" ON "ProjectGeneralInfo"."Id" = "ProjectTimelines"."Id"; 
 
-CREATE VIEW "ProjectsCostView" AS
+CREATE VIEW "ProjectCostView" AS
     SELECT "Code", "Name", "Stage", "Profitability", "BaseCAPEXExt", "BaseCAPEXWF", "BaseOPEX", "PassportCAPEXExt", "PassportCAPEXWF", "PassportOPEX", "ActualCAPEXExt", "ActualCAPEXWF", "ActualOPEX"
-    FROM "ProjectsGeneralInfo" JOIN "ProjectsCost" ON "ProjectsGeneralInfo"."Id" = "ProjectsCost"."Id"; 
+    FROM "ProjectGeneralInfo" JOIN "ProjectCost" ON "ProjectGeneralInfo"."Id" = "ProjectCost"."Id"; 
 
-CREATE VIEW "ProjectsDocumentsView" AS
+CREATE VIEW "ProjectDocumentsView" AS
     SELECT "Code", "Name", "Stage", "ImplStartDecision", "Timelines", "Budget", "Contents", "StopResumeDecision", "CloseCompleteDecision"
-    FROM "ProjectsGeneralInfo" JOIN "ProjectsDocuments" ON "ProjectsGeneralInfo"."Id" = "ProjectsDocuments"."Id"; 
+    FROM "ProjectGeneralInfo" JOIN "ProjectDocuments" ON "ProjectGeneralInfo"."Id" = "ProjectDocuments"."Id"; 
 
-CREATE VIEW "ProjectsGoalsView" AS
+CREATE VIEW "ProjectGoalsView" AS
     SELECT "Code", "Name", "Stage", "Product", "ImplCriteria", "GoalsStatus", "BusinessGoals", "AchieveCriteria", "BusinessGoalsStatus"
-    FROM "ProjectsGeneralInfo" JOIN "ProjectsGoals" ON "ProjectsGeneralInfo"."Id" = "ProjectsGoals"."Id";
+    FROM "ProjectGeneralInfo" JOIN "ProjectGoals" ON "ProjectGeneralInfo"."Id" = "ProjectGoals"."Id";
 
-CREATE VIEW "ProjectsMonitoringView" AS
+CREATE VIEW "ProjectMonitoringView" AS
     SELECT "Code", "Name", "Stage", "Sign", "MonitoringStatus", "EndYear", "Product", "Manager", "Characteristics", "ShortName"
-    FROM "ProjectsGeneralInfo" JOIN "ProjectsMonitoring" ON "ProjectsGeneralInfo"."Id" = "ProjectsMonitoring"."Id";
+    FROM "ProjectGeneralInfo" JOIN "ProjectMonitoring" ON "ProjectGeneralInfo"."Id" = "ProjectMonitoring"."Id";

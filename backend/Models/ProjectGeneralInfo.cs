@@ -14,9 +14,7 @@ namespace Backend.Models
         public required string Code { get; set; }
         public required string Name { get; set; }
         public required string Stage { get; set; }
-
-        [Column(TypeName = "float4")]
-        public float? Priority { get; set; }
+        public string? Priority { get; set; }
 
         public string? PostMonitoring { get; set; }
         public string? Activity { get; set; }

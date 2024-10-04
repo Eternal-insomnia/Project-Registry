@@ -5,12 +5,12 @@
         public required string Code { get; set; }
         public required string Name { get; set; }
         public required string Stage { get; set; }
-        public DateOnly? ActualStart { get; set; }
-        public DateOnly? ActualEnd { get; set; }
-        public int? ActualDuration { get; set; }
-        public DateOnly? BaseEnd { get; set; }
-        public int? BaseDeviation { get; set; }
-        public int? PassportStartYear { get; set; }
-        public int? PassportEndYear { get; set; }
+        public string? ActualStart { get; set; }
+        public string? ActualEnd { get; set; }
+        public string? ActualDuration { get; set; }
+        public string? BaseEnd { get; set; }
+        public string? BaseDeviation { get; set; }
+        public string? PassportStartYear { get; set; }
+        public string? PassportEndYear { get; set; }
     }
 }

@@ -6,14 +6,14 @@
         public required string Name { get; set; }
         public required string Stage { get; set; }
         public string? Profitability { get; set; }
-        public float? BaseCAPEXExt { get; set; }
-        public float? BaseCAPEXWF { get; set; }
-        public float? BaseOPEX { get; set; }
-        public float? PassportCAPEXExt { get; set; }
-        public float? PassportCAPEXWF { get; set; }
-        public float? PassportOPEX { get; set; }
-        public float? ActualCAPEXExt { get; set; }
-        public float? ActualCAPEXWF { get; set; }
-        public float? ActualOPEX { get; set; }
+        public string? BaseCAPEXExt { get; set; }
+        public string? BaseCAPEXWF { get; set; }
+        public string? BaseOPEX { get; set; }
+        public string? PassportCAPEXExt { get; set; }
+        public string? PassportCAPEXWF { get; set; }
+        public string? PassportOPEX { get; set; }
+        public string? ActualCAPEXExt { get; set; }
+        public string? ActualCAPEXWF { get; set; }
+        public string? ActualOPEX { get; set; }
     }
 }

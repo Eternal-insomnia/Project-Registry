@@ -6,7 +6,7 @@ namespace Backend.Models
     public class ProjectDocuments
     {
         [Key]
-        [ForeignKey("ProjectsGeneralInfo")]
+        [ForeignKey("ProjectGeneralInfo")]
         public required Guid Id { get; set; }
         public string? PrePStartDecision { get; set; }
         public string? ImplStartDecision { get; set; }

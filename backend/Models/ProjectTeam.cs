@@ -6,7 +6,7 @@ namespace Backend.Models
     public class ProjectTeam
     {
         [Key]
-        [ForeignKey("ProjectsGeneralInfo")]
+        [ForeignKey("ProjectGeneralInfo")]
         public required Guid Id { get; set; }
         public string? Customer { get; set; }
         public string? ProductOwner { get; set; }

@@ -6,11 +6,11 @@ namespace Backend.Models
     public class ProjectMonitoring
     {
         [Key]
-        [ForeignKey("ProjectsGeneralInfo")]
+        [ForeignKey("ProjectGeneralInfo")]
         public required Guid Id { get; set; }
         public string? Sign { get; set; }
         public string? MonitoringStatus { get; set; }
-        public int? EndYear { get; set; }
+        public string? EndYear { get; set; }
         public string? Product { get; set; }
         public string? Manager { get; set; }
         public string? Characteristics { get; set; }
