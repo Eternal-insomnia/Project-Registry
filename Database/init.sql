@@ -130,8 +130,8 @@ CREATE TABLE "ProjectMonitoring" (
 );
 
 COPY "ProjectGeneralInfo" ("Id", "Year", "Status", "Code", "Name", "Stage", "Priority", "PostMonitoring", "Activity", "Category", "Program", "StrategyBelonging", "RGT", "Description", "Dependencies") FROM stdin;
-15a84b93-e3a6-4bd0-9130-e9cddfe42328	23	Archived	preCOC	Game	Done	3	\N	\N	\N	\N	\N	\N	mmm good	\N
-b7eadf4f-e161-42fe-9db6-9f906432025f	24	Archived	COC1	Web App	In Progress	7	\N	\N	\N	\N	\N	\N	\N	\N
+15a84b93-e3a6-4bd0-9130-e9cddfe42328	23	Архив	preCOC	Game	Done	3	\N	\N	\N	\N	\N	\N	mmm good	\N
+b7eadf4f-e161-42fe-9db6-9f906432025f	24	В портфеле	COC1	Web App	In Progress	7	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
 COPY "ProjectCondition" ("Id", "Progress", "GeneralStatus", "Goals", "Timelines", "Budget", "Contents", "ReportLink") FROM stdin;
