@@ -170,40 +170,40 @@ b7eadf4f-e161-42fe-9db6-9f906432025f	нет	\N	\N	\N	\N	\N	dreams
 \.
 
 CREATE VIEW "HomeView" AS
-    SELECT "Code", "Name", "Stage", "Priority", "Progress", "GeneralStatus", "ActualEnd", "Manager", "Description"
+    SELECT "ProjectGeneralInfo"."Id", "Year", "Status", "Code", "Name", "Stage", "Priority", "Progress", "GeneralStatus", "ActualEnd", "Manager", "Description"
     FROM "ProjectGeneralInfo"
     JOIN "ProjectCondition" ON "ProjectGeneralInfo"."Id" = "ProjectCondition"."Id"
     JOIN "ProjectTimelines" ON "ProjectGeneralInfo"."Id" = "ProjectTimelines"."Id"
     JOIN "ProjectTeam" ON "ProjectGeneralInfo"."Id" = "ProjectTeam"."Id";
 
 CREATE VIEW "ProjectGeneralInfoView" AS
-    SELECT "Code", "Name", "Stage", "Activity", "Program", "RGT", "Description", "BusinessGoals"
+    SELECT "ProjectGeneralInfo"."Id", "Year", "Status", "Code", "Name", "Stage", "Activity", "Program", "RGT", "Description", "BusinessGoals"
     FROM "ProjectGeneralInfo" JOIN "ProjectGoals" ON "ProjectGeneralInfo"."Id" = "ProjectGoals"."Id"; 
 
 CREATE VIEW "ProjectConditionView" AS
-    SELECT "Code", "Name", "Stage", "Progress", "Goals", "Timelines", "Budget", "Contents", "ReportLink"
+    SELECT "ProjectGeneralInfo"."Id", "Year", "Status", "Code", "Name", "Stage", "Progress", "Goals", "Timelines", "Budget", "Contents", "ReportLink"
     FROM "ProjectGeneralInfo" JOIN "ProjectCondition" ON "ProjectGeneralInfo"."Id" = "ProjectCondition"."Id"; 
 
 CREATE VIEW "ProjectTeamView" AS
-    SELECT "Code", "Name", "Stage", "Customer", "Manager", "TeamLead", "BusinessAnalyst", "MCPeople"
+    SELECT "ProjectGeneralInfo"."Id", "Year", "Status", "Code", "Name", "Stage", "Customer", "Manager", "TeamLead", "BusinessAnalyst", "MCPeople"
     FROM "ProjectGeneralInfo" JOIN "ProjectTeam" ON "ProjectGeneralInfo"."Id" = "ProjectTeam"."Id"; 
 
 CREATE VIEW "ProjectTimelinesView" AS
-    SELECT "Code", "Name", "Stage", "ActualStart", "ActualEnd", "ActualDuration", "BaseEnd", "BaseDeviation", "PassportStartYear", "PassportEndYear"
+    SELECT "ProjectGeneralInfo"."Id", "Year", "Status", "Code", "Name", "Stage", "ActualStart", "ActualEnd", "ActualDuration", "BaseEnd", "BaseDeviation", "PassportStartYear", "PassportEndYear"
     FROM "ProjectGeneralInfo" JOIN "ProjectTimelines" ON "ProjectGeneralInfo"."Id" = "ProjectTimelines"."Id"; 
 
 CREATE VIEW "ProjectCostView" AS
-    SELECT "Code", "Name", "Stage", "Profitability", "BaseCAPEXExt", "BaseCAPEXWF", "BaseOPEX", "PassportCAPEXExt", "PassportCAPEXWF", "PassportOPEX", "ActualCAPEXExt", "ActualCAPEXWF", "ActualOPEX"
+    SELECT "ProjectGeneralInfo"."Id", "Year", "Status", "Code", "Name", "Stage", "Profitability", "BaseCAPEXExt", "BaseCAPEXWF", "BaseOPEX", "PassportCAPEXExt", "PassportCAPEXWF", "PassportOPEX", "ActualCAPEXExt", "ActualCAPEXWF", "ActualOPEX"
     FROM "ProjectGeneralInfo" JOIN "ProjectCost" ON "ProjectGeneralInfo"."Id" = "ProjectCost"."Id"; 
 
 CREATE VIEW "ProjectDocumentsView" AS
-    SELECT "Code", "Name", "Stage", "ImplStartDecision", "Timelines", "Budget", "Contents", "StopResumeDecision", "CloseCompleteDecision"
+    SELECT "ProjectGeneralInfo"."Id", "Year", "Status", "Code", "Name", "Stage", "ImplStartDecision", "Timelines", "Budget", "Contents", "StopResumeDecision", "CloseCompleteDecision"
     FROM "ProjectGeneralInfo" JOIN "ProjectDocuments" ON "ProjectGeneralInfo"."Id" = "ProjectDocuments"."Id"; 
 
 CREATE VIEW "ProjectGoalsView" AS
-    SELECT "Code", "Name", "Stage", "Product", "ImplCriteria", "GoalsStatus", "BusinessGoals", "AchieveCriteria", "BusinessGoalsStatus"
+    SELECT "ProjectGeneralInfo"."Id", "Year", "Status", "Code", "Name", "Stage", "Product", "ImplCriteria", "GoalsStatus", "BusinessGoals", "AchieveCriteria", "BusinessGoalsStatus"
     FROM "ProjectGeneralInfo" JOIN "ProjectGoals" ON "ProjectGeneralInfo"."Id" = "ProjectGoals"."Id";
 
 CREATE VIEW "ProjectMonitoringView" AS
-    SELECT "Code", "Name", "Stage", "Sign", "MonitoringStatus", "EndYear", "Product", "Manager", "Characteristics", "ShortName"
+    SELECT "ProjectGeneralInfo"."Id", "Year", "Status", "Code", "Name", "Stage", "Sign", "MonitoringStatus", "EndYear", "Product", "Manager", "Characteristics", "ShortName"
     FROM "ProjectGeneralInfo" JOIN "ProjectMonitoring" ON "ProjectGeneralInfo"."Id" = "ProjectMonitoring"."Id";
