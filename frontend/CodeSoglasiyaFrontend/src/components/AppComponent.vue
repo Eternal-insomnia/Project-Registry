@@ -4,13 +4,13 @@
       <a href="https://soglasietech.ru/">
         <img src="@/assets/svg/logo-soglasie.svg" alt="ЛОГО СОГЛАСИЕ">
       </a>
-      <p>ПОРТАЛ<br>  ПРОЕКТНОГО УПРАВЛЕНИЯ</p>
+      <p class="banner__p">ПОРТАЛ<br>  ПРОЕКТНОГО УПРАВЛЕНИЯ</p>
     </div>
     <div class="menu">
       <button class="menu__button" :class="{'picked-button': currentComponent === 'MainPageComponent'}" @click="currentComponent = 'MainPageComponent'">
         Главная
       </button>
-      <button class="menu__button" :class="{'picked-button': currentComponent === 'ProjectRegistryComponent'}" @click="currentComponent = 'ProjectRegistryComponent'">
+      <button class="menu__button" :class="{'picked-button': currentComponent === 'ProjectRegistryComponent'}" @click="currentComponent = 'ProjectRegistryComponent'; clickHome()">
         Реестр проектов
       </button>
       <button class="menu__button" :class="{'picked-button': currentComponent === 'LibraryComponent'}" @click="currentComponent = 'LibraryComponent'">
@@ -18,7 +18,7 @@
       </button>
     </div>
     <div class="menu-page">
-      <component :is="currentComponent"/>
+      <component ref="homeClick" :is="currentComponent"/>
     </div>
   </div>
 </template>
@@ -38,6 +38,13 @@ export default {
     return {
       currentComponent: "MainPageComponent"
     }
+  },
+  methods: {
+    clickHome() {
+      setTimeout(() => {
+        this.$refs.homeClick.fetchItemsHome()
+      }, 10)
+    }
   }
 }
 </script>
@@ -46,11 +53,15 @@ export default {
 .banner {
   width: 100%;
   min-height: 100px;
-  background-image: url(@/assets/images/zaglushka.jpg);
+  /* background-image: url(@/assets/images/zaglushka.jpg); */
+  background-color: #cdf;
   background-size: contain;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.banner__p {
+  margin-right: 20px;
 }
 .menu {
   display: flex;

@@ -13,11 +13,11 @@
         Группировать
       </button>
       Поиск:
-      <input @keydown.enter="fetchItems('search', searchQuery)" v-model="searchQuery">
+      <input @keydown.enter="fetchSearchResponse()" v-model="searchTerm">
     </div>
 
     <div class="filter-buttons">
-      <button class="home-button" @click="goHome">
+      <button class="home-button" @click="fetchItemsHome">
         <img src="@/assets/svg/home.svg" width="16px" height="16px">
       </button>
       <button :class="{'picked-button': tableHead === GeneralInfo}" @click="fetchItems(GeneralInfo, 'GeneralInfo')">Общая информация</button>
@@ -35,7 +35,7 @@
     <TableComponent
       :data="tableData"
       :columns="tableHead"
-      :filter-key="searchQuery">
+      :filter-key="searchTerm">
     </TableComponent>
   </div>
 </template>
@@ -62,6 +62,7 @@ export default {
   },
   data() {
     return {
+      startURL: "/ProjectRegistry/Views",
       tableData: [],
       tableHead: HomeJSON,
       Home: HomeJSON,
@@ -73,19 +74,12 @@ export default {
       Documents: DocumentsJSON,
       Goals: GoalsJSON,
       Monitoring: MonitoringJSON,
-      searchQuery: "",
+      searchTerm: "",
       thisYearProjects: true,
       archiveProjects: false,
-      startURL: "/ProjectRegistry/Views"
     }
   },
   methods: {
-    goHome() {
-      this.thisYearProjects = true
-      this.archiveProjects = false  
-      this.tableHead = this.Home
-      this.fetchItems('home', '/Home')
-    },
     // Excel file export
     async exportFile() {
       try {
@@ -109,31 +103,40 @@ export default {
     async fetchItems(headers, endURL) {
       try {
         let URL = ""
-        if (headers === "search") {
-          URL = this.startURL + "?searchQuery=" + endURL 
-          // on testing check the URL
-        } else if (headers === "home") {
-          URL = this.startURL + endURL
-          console.log(URL)
-        } else {
-          this.tableHead = headers
-          URL = this.startURL + "/Projects" + endURL
-        }
+        this.tableHead = headers
+        URL = this.startURL + "/Project" + endURL
         const response = await api.getItemsJSON(URL)
         this.tableData = response.data
       } catch (error) {
         console.error('Error fetching items:', error)
       }
     },
-    // Updates checkbox filters
-    async updateFilters () {
+    // Fetches home table data
+    async fetchItemsHome() {
+      this.thisYearProjects = true
+      this.archiveProjects = false  
+      this.tableHead = this.Home
       try {
-        const URL = this.startURL + "?thisYearProjects=" + this.thisYearProjects + "&archiveProjects=" + this.archiveProjects
+        const URL = this.startURL + "/Home"
         const response = await api.getItemsJSON(URL)
         this.tableData = response.data
       } catch (error) {
-        console.error('Error updating filters:', error)
+        console.error('Error fetching items home:', error)
       }
+    },
+    // Fetches table search result
+    async fetchSearchResponse() {
+      const URL = this.startURL + "/Search?searchTerm=" + this.searchTerm
+      try {
+        const response = await api.getItemsJSON(URL)
+        this.tableData = response.data
+      } catch (error) {
+        console.error('Error fetching search response:', error)
+      }
+    },
+    // Updates checkbox filters
+    async updateFilters() {
+      console.log('ыыыыы')
     }
   }
 }

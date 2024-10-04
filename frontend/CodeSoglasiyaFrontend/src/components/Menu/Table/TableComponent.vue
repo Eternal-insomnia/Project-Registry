@@ -14,7 +14,7 @@
     <tbody>
       <tr v-for="(entry, index) in filteredData">
         <td v-for="key in Object.keys(columns[0])">
-          <span v-if="key === 'id'">
+          <span v-if="key === 'num'">
             {{ incrementIndex(index) }}
           </span>
           <span v-else>
