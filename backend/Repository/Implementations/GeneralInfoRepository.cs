@@ -6,17 +6,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository.Implementations
 {
-    public class ProjectGeneralInfoRepository : RepositoryBase<ProjectGeneralInfo>, IProjectGeneralInfoRepository
+    public class GeneralInfoRepository : RepositoryBase<ProjectGeneralInfo>, IGeneralInfoRepository
     {
         private readonly IMapper _mapper;
 
         public async Task<List<ProjectGeneralInfoDTO>> GetAll()
         {
-            var projectsGeneralInfo = await FindAll().ToListAsync();
-            return _mapper.Map<List<ProjectGeneralInfoDTO>>(projectsGeneralInfo);
+            var generalInfo = await FindAll().ToListAsync();
+            return _mapper.Map<List<ProjectGeneralInfoDTO>>(generalInfo);
         }
 
-        public ProjectGeneralInfoRepository(RepositoryContext repositoryContext, IMapper mapper)
+        public GeneralInfoRepository(RepositoryContext repositoryContext, IMapper mapper)
             : base(repositoryContext)
         {
             _repositoryContext = repositoryContext;

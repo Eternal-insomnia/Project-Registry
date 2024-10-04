@@ -7,7 +7,7 @@ namespace Backend.Services.Implementations
     public class ProjectGeneralInfoService : IProjectGeneralInfoService
     {
         private readonly ILogger<ProjectGeneralInfoService> _logger;
-        private readonly IProjectGeneralInfoRepository _projectGeneralInfoRepository;
+        private readonly IGeneralInfoRepository _projectGeneralInfoRepository;
 
         public async Task<List<ProjectGeneralInfoDTO>> GetAll()
         {
@@ -15,7 +15,7 @@ namespace Backend.Services.Implementations
             return await _projectGeneralInfoRepository.GetAll();
         }
 
-        public ProjectGeneralInfoService(ILogger<ProjectGeneralInfoService> logger, IProjectGeneralInfoRepository projectGeneralInfoRepository)
+        public ProjectGeneralInfoService(ILogger<ProjectGeneralInfoService> logger, IGeneralInfoRepository projectGeneralInfoRepository)
         {
             _logger = logger;
             _projectGeneralInfoRepository = projectGeneralInfoRepository;

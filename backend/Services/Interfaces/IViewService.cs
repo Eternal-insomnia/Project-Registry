@@ -1,10 +1,8 @@
-﻿using Backend.DTOs.Views;
-
-namespace Backend.Services.Interfaces
+﻿namespace Backend.Services.Interfaces
 {
-    public interface IViewService<DTO> where DTO : class
+    public interface IViewService<T> where T : class
     {
-        Task<List<DTO>> GetAllView();
-        Task<List<DTO>> FullTextSearch(string searchTerm);
+        Task<List<T>> GetAllView();
+        Task<List<T>> FullTextSearch(string searchTerm);
     }
 }

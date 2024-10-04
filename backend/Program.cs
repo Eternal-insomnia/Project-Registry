@@ -1,6 +1,4 @@
 using Backend.DTOs;
-using Backend.DTOs.Views;
-using Backend.Models.Views;
 using Backend.Repository;
 using Backend.Services;
 using Microsoft.EntityFrameworkCore;

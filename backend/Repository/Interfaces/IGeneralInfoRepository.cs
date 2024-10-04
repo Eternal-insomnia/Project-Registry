@@ -2,7 +2,7 @@
 
 namespace Backend.Repository.Interfaces
 {
-    public interface IProjectGeneralInfoRepository
+    public interface IGeneralInfoRepository
     {
         Task<List<ProjectGeneralInfoDTO>> GetAll();
     }

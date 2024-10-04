@@ -1,6 +1,4 @@
-﻿using Backend.DTOs;
-
-namespace Backend.Services.Interfaces
+﻿namespace Backend.Services.Interfaces
 {
     public interface IServiceBase<T> where T : class
     {

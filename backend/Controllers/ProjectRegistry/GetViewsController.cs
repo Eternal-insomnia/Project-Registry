@@ -1,4 +1,4 @@
-﻿using Backend.DTOs.Views;
+﻿using Backend.Models.Views;
 using Backend.Services.Implementations;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,100 +10,100 @@ namespace Backend.Controllers.ProjectRegistry
     {
         private readonly ILogger<GetViewsController> _logger;
         
-        private readonly ViewService<HomeViewDTO> _homeViewService;
-        private readonly ViewService<ProjectGeneralInfoViewDTO> _projectGeneralInfoViewService;
-        private readonly ViewService<ProjectConditionViewDTO> _projectConditionViewService;
-        private readonly ViewService<ProjectTeamViewDTO> _projectTeamViewService;
-        private readonly ViewService<ProjectTimelinesViewDTO> _projectTimelinesViewService;
-        private readonly ViewService<ProjectCostViewDTO> _projectCostViewService;
-        private readonly ViewService<ProjectDocumentsViewDTO> _projectDocumentsViewService;
-        private readonly ViewService<ProjectGoalsViewDTO> _projectGoalsViewService;
-        private readonly ViewService<ProjectMonitoringViewDTO> _projectMonitoringViewService;
+        private readonly ViewService<HomeView>               _homeViewService;
+        private readonly ViewService<GeneralInfoView> _generalInfoViewService;
+        private readonly ViewService<ConditionView>   _conditionViewService;
+        private readonly ViewService<TeamView>        _teamViewService;
+        private readonly ViewService<ProjectTimelinesView>   _timelinesViewService;
+        private readonly ViewService<CostView>        _costViewService;
+        private readonly ViewService<DocumentsView>   _documentsViewService;
+        private readonly ViewService<GoalsView>       _goalsViewService;
+        private readonly ViewService<MonitoringView>  _monitoringViewService;
 
         [HttpGet("Home")]
         public async Task<IActionResult> GetHomeView()
         {
-            var homeView = await _homeViewService.GetAllView();
-            return Ok(homeView);
+            var home = await _homeViewService.GetAllView();
+            return Ok(home);
         }
 
-        [HttpGet("ProjectGeneralInfo")]
-        public async Task<IActionResult> GetProjectGeneralInfoView()
+        [HttpGet("GeneralInfo")]
+        public async Task<IActionResult> GetGeneralInfoView()
         {
-            var projectsGeneralInfo = await _projectGeneralInfoViewService.GetAllView();
-            return Ok(projectsGeneralInfo);
+            var generalInfo = await _generalInfoViewService.GetAllView();
+            return Ok(generalInfo);
         }
 
-        [HttpGet("ProjectCondition")]
-        public async Task<IActionResult> GetProjectConditionView()
+        [HttpGet("Condition")]
+        public async Task<IActionResult> GetConditionView()
         {
-            var projectsCondition = await _projectConditionViewService.GetAllView();
-            return Ok(projectsCondition);
+            var condition = await _conditionViewService.GetAllView();
+            return Ok(condition);
         }
 
-        [HttpGet("ProjectTeam")]
-        public async Task<IActionResult> GetProjectTeamView()
+        [HttpGet("Team")]
+        public async Task<IActionResult> GetTeamView()
         {
-            var projectsTeam = await _projectTeamViewService.GetAllView();
-            return Ok(projectsTeam);
+            var team = await _teamViewService.GetAllView();
+            return Ok(team);
         }
 
-        [HttpGet("ProjectTimelines")]
-        public async Task<IActionResult> GetProjectTimelinesView()
+        [HttpGet("Timelines")]
+        public async Task<IActionResult> GetTimelinesView()
         {
-            var projectsTimelines = await _projectTimelinesViewService.GetAllView();
-            return Ok(projectsTimelines);
+            var timelines = await _timelinesViewService.GetAllView();
+            return Ok(timelines);
         }
 
-        [HttpGet("ProjectCost")]
-        public async Task<IActionResult> GetProjectCostView()
+        [HttpGet("Cost")]
+        public async Task<IActionResult> GetCostView()
         {
-            var projectsCost = await _projectCostViewService.GetAllView();
-            return Ok(projectsCost);
+            var cost = await _costViewService.GetAllView();
+            return Ok(cost);
         }
 
-        [HttpGet("ProjectDocuments")]
-        public async Task<IActionResult> GetProjectDocumentsView()
+        [HttpGet("Documents")]
+        public async Task<IActionResult> GetDocumentsView()
         {
-            var projectsDocuments = await _projectDocumentsViewService.GetAllView();
-            return Ok(projectsDocuments);
+            var documents = await _documentsViewService.GetAllView();
+            return Ok(documents);
         }
 
-        [HttpGet("ProjectGoals")]
-        public async Task<IActionResult> GetProjectGoalsView()
+        [HttpGet("Goals")]
+        public async Task<IActionResult> GetGoalsView()
         {
-            var projectsGoals = await _projectGoalsViewService.GetAllView();
-            return Ok(projectsGoals);
+            var goals = await _goalsViewService.GetAllView();
+            return Ok(goals);
         }
 
-        [HttpGet("ProjectMonitoring")]
-        public async Task<IActionResult> GetProjectMonitoringView()
+        [HttpGet("Monitoring")]
+        public async Task<IActionResult> GetMonitoringView()
         {
-            var projectsMonitoring = await _projectMonitoringViewService.GetAllView();
-            return Ok(projectsMonitoring);
+            var monitoring = await _monitoringViewService.GetAllView();
+            return Ok(monitoring);
         }
 
         public GetViewsController(ILogger<GetViewsController> logger,
-            ViewService<HomeViewDTO> homeViewService,
-            ViewService<ProjectGeneralInfoViewDTO> projectGeneralInfoViewService,
-            ViewService<ProjectConditionViewDTO> projectConditionService,
-            ViewService<ProjectTeamViewDTO> projectTeamService,
-            ViewService<ProjectTimelinesViewDTO> projectTimelinesService,
-            ViewService<ProjectCostViewDTO> projectCostService,
-            ViewService<ProjectDocumentsViewDTO> projectDocumentsService,
-            ViewService<ProjectGoalsViewDTO> projectGoalsService,
-            ViewService<ProjectMonitoringViewDTO> projectMonitoringViewService)
+            ViewService<HomeView>               homeViewService,
+            ViewService<GeneralInfoView> generalInfoViewService,
+            ViewService<ConditionView>   conditionService,
+            ViewService<TeamView>        teamService,
+            ViewService<ProjectTimelinesView>   timelinesService,
+            ViewService<CostView>        costService,
+            ViewService<DocumentsView>   documentsService,
+            ViewService<GoalsView>       goalsService,
+            ViewService<MonitoringView>  monitoringViewService)
         {
             _logger = logger;
-            _homeViewService = homeViewService;
-            _projectGeneralInfoViewService = projectGeneralInfoViewService;
-            _projectConditionViewService = projectConditionService;
-            _projectTeamViewService = projectTeamService;
-            _projectTimelinesViewService = projectTimelinesService;
-            _projectCostViewService = projectCostService;
-            _projectDocumentsViewService = projectDocumentsService;
-            _projectGoalsViewService = projectGoalsService;
-            _projectMonitoringViewService = projectMonitoringViewService;
+            _homeViewService        = homeViewService;
+            _generalInfoViewService = generalInfoViewService;
+            _conditionViewService   = conditionService;
+            _teamViewService        = teamService;
+            _timelinesViewService   = timelinesService;
+            _costViewService        = costService;
+            _documentsViewService   = documentsService;
+            _goalsViewService       = goalsService;
+            _monitoringViewService  = monitoringViewService;
         }
     }
 }

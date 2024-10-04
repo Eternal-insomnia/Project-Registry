@@ -1,6 +1,5 @@
-﻿using Backend.DTOs.Views;
+﻿using Backend.Models.Views;
 using Backend.Services.Implementations;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers.ProjectRegistry
@@ -11,15 +10,16 @@ namespace Backend.Controllers.ProjectRegistry
     {
         private readonly ILogger<SearchInViewsController> _logger;
 
-        private readonly ViewService<HomeViewDTO> _homeViewService;
-        private readonly ViewService<ProjectGeneralInfoViewDTO> _projectGeneralInfoViewService;
-        private readonly ViewService<ProjectConditionViewDTO> _projectConditionViewService;
-        private readonly ViewService<ProjectTeamViewDTO> _projectTeamViewService;
-        private readonly ViewService<ProjectTimelinesViewDTO> _projectTimelinesViewService;
-        private readonly ViewService<ProjectCostViewDTO> _projectCostViewService;
-        private readonly ViewService<ProjectDocumentsViewDTO> _projectDocumentsViewService;
-        private readonly ViewService<ProjectGoalsViewDTO> _projectGoalsViewService;
-        private readonly ViewService<ProjectMonitoringViewDTO> _projectMonitoringViewService;
+        private readonly ViewService<HomeView>                _homeViewService;
+        private readonly ViewService<GeneralInfoView>  _generalInfoViewService;
+        private readonly ViewService<ConditionView>    _conditionViewService;
+        private readonly ViewService<TeamView>         _teamViewService;
+        private readonly ViewService<ProjectTimelinesView>    _timelinesViewService;
+        private readonly ViewService<CostView>         _costViewService;
+        private readonly ViewService<DocumentsView>    _documentsViewService;
+        private readonly ViewService<GoalsView>        _goalsViewService;
+        private readonly ViewService<MonitoringView>   _monitoringViewService;
+        private readonly NotDisplayedViewService       _notDisplayedViewService;
 
         [HttpGet("Home/Search")]
         public async Task<IActionResult> SearchInHomeView([FromQuery] string searchTerm)
@@ -28,83 +28,92 @@ namespace Backend.Controllers.ProjectRegistry
             return Ok(searchResult);
         }
 
-        [HttpGet("ProjectGeneralInfo/Search")]
+        [HttpGet("GeneralInfo/Search")]
         public async Task<IActionResult> SearchInGeneralInfoView([FromQuery] string searchTerm)
         {
-            var searchResult = await _projectGeneralInfoViewService.FullTextSearch(searchTerm);
+            var searchResult = await _generalInfoViewService.FullTextSearch(searchTerm);
             return Ok(searchResult);
         }
 
-        [HttpGet("ProjectsCondition/Search")]
-        public async Task<IActionResult> SearchInProjectsConditionView([FromQuery] string searchTerm)
+        [HttpGet("Condition/Search")]
+        public async Task<IActionResult> SearchInConditionView([FromQuery] string searchTerm)
         {
-            var searchResult = await _projectConditionViewService.FullTextSearch(searchTerm);
+            var searchResult = await _conditionViewService.FullTextSearch(searchTerm);
             return Ok(searchResult);
         }
 
-        [HttpGet("ProjectsTeam/Search")]
-        public async Task<IActionResult> SearchInProjectsTeamView([FromQuery] string searchTerm)
+        [HttpGet("Team/Search")]
+        public async Task<IActionResult> SearchInTeamView([FromQuery] string searchTerm)
         {
-            var searchResult = await _projectTeamViewService.FullTextSearch(searchTerm);
+            var searchResult = await _teamViewService.FullTextSearch(searchTerm);
             return Ok(searchResult);
         }
 
-        [HttpGet("ProjectsTimelines/Search")]
-        public async Task<IActionResult> SearchInProjectsTimelinesView([FromQuery] string searchTerm)
+        [HttpGet("Timelines/Search")]
+        public async Task<IActionResult> SearchInTimelinesView([FromQuery] string searchTerm)
         {
-            var searchResult = await _projectTimelinesViewService.FullTextSearch(searchTerm);
+            var searchResult = await _timelinesViewService.FullTextSearch(searchTerm);
             return Ok(searchResult);
         }
 
-        [HttpGet("ProjectsCost/Search")]
-        public async Task<IActionResult> SearchInProjectsCostView([FromQuery] string searchTerm)
+        [HttpGet("Cost/Search")]
+        public async Task<IActionResult> SearchInCostView([FromQuery] string searchTerm)
         {
-            var homeView = await _projectCostViewService.FullTextSearch(searchTerm);
-            return Ok(homeView);
+            var searchResult = await _costViewService.FullTextSearch(searchTerm);
+            return Ok(searchResult);
         }
 
-        [HttpGet("ProjectsDocuments/Search")]
-        public async Task<IActionResult> SearchInProjectsDocumentsView([FromQuery] string searchTerm)
+        [HttpGet("Documents/Search")]
+        public async Task<IActionResult> SearchInDocumentsView([FromQuery] string searchTerm)
         {
-            var homeView = await _projectDocumentsViewService.FullTextSearch(searchTerm);
-            return Ok(homeView);
+            var searchResult = await _documentsViewService.FullTextSearch(searchTerm);
+            return Ok(searchResult);
         }
 
-        [HttpGet("ProjectsGoals/Search")]
-        public async Task<IActionResult> SearchInProjectsGoalsView([FromQuery] string searchTerm)
+        [HttpGet("Goals/Search")]
+        public async Task<IActionResult> SearchInGoalsView([FromQuery] string searchTerm)
         {
-            var homeView = await _projectGoalsViewService.FullTextSearch(searchTerm);
-            return Ok(homeView);
+            var searchResult = await _goalsViewService.FullTextSearch(searchTerm);
+            return Ok(searchResult);
         }
 
-        [HttpGet("ProjectsMonitoring/Search")]
-        public async Task<IActionResult> SearchInProjectsMonitoringView([FromQuery] string searchTerm)
+        [HttpGet("Monitoring/Search")]
+        public async Task<IActionResult> SearchInMonitoringView([FromQuery] string searchTerm)
         {
-            var homeView = await _projectMonitoringViewService.FullTextSearch(searchTerm);
-            return Ok(homeView);
+            var searchResult = await _monitoringViewService.FullTextSearch(searchTerm);
+            return Ok(searchResult);
+        }
+
+        [HttpGet("NotDisplayed/Search")]
+        public async Task<IActionResult> SearchInNotDisplayedView([FromQuery] string searchTerm)
+        {
+            var searchResult = await _notDisplayedViewService.FullTextSearch(searchTerm);
+            return Ok(searchResult);
         }
 
         public SearchInViewsController(ILogger<SearchInViewsController> logger,
-            ViewService<HomeViewDTO> homeViewService,
-            ViewService<ProjectGeneralInfoViewDTO> projectGeneralInfoViewService,
-            ViewService<ProjectConditionViewDTO> projectConditionService,
-            ViewService<ProjectTeamViewDTO> projectTeamService,
-            ViewService<ProjectTimelinesViewDTO> projectTimelinesService,
-            ViewService<ProjectCostViewDTO> projectCostService,
-            ViewService<ProjectDocumentsViewDTO> projectDocumentsService,
-            ViewService<ProjectGoalsViewDTO> projectGoalsService,
-            ViewService<ProjectMonitoringViewDTO> projectMonitoringViewService)
+            ViewService<HomeView>                homeViewService,
+            ViewService<GeneralInfoView>  generalInfoViewService,
+            ViewService<ConditionView>    conditionService,
+            ViewService<TeamView>         teamService,
+            ViewService<ProjectTimelinesView>    timelinesService,
+            ViewService<CostView>         costService,
+            ViewService<DocumentsView>    documentsService,
+            ViewService<GoalsView>        goalsService,
+            ViewService<MonitoringView>   monitoringViewService,
+            NotDisplayedViewService       notDisplayedViewService)
         {
             _logger = logger;
-            _homeViewService = homeViewService;
-            _projectGeneralInfoViewService = projectGeneralInfoViewService;
-            _projectConditionViewService = projectConditionService;
-            _projectTeamViewService = projectTeamService;
-            _projectTimelinesViewService = projectTimelinesService;
-            _projectCostViewService = projectCostService;
-            _projectDocumentsViewService = projectDocumentsService;
-            _projectGoalsViewService = projectGoalsService;
-            _projectMonitoringViewService = projectMonitoringViewService;
+            _homeViewService         = homeViewService;
+            _generalInfoViewService  = generalInfoViewService;
+            _conditionViewService    = conditionService;
+            _teamViewService         = teamService;
+            _timelinesViewService    = timelinesService;
+            _costViewService         = costService;
+            _documentsViewService    = documentsService;
+            _goalsViewService        = goalsService;
+            _monitoringViewService   = monitoringViewService;
+            _notDisplayedViewService = notDisplayedViewService;
         }
     }
 }

@@ -5,46 +5,37 @@ using System.Reflection;
 
 namespace Backend.Repository.Implementations
 {
-    public class ViewRepository<Model, DTO>: RepositoryBase<Model>, IViewRepository<DTO>
-        where Model : class
-        where DTO : class
+    public class ViewRepository<T>: RepositoryBase<T>, IViewRepository<T>
+        where T : class
     {
-        private readonly IMapper _mapper;
+        public async Task<List<T>> GetAllView() => await FindAll().ToListAsync();
 
-        public async Task<List<DTO>> GetAllView()
+        public async Task<List<T>> FullTextSearch(string searchTerm)
         {
-            var dataView = await FindAll().ToListAsync();
-            return _mapper.Map<List<DTO>>(dataView);
-        }
-
-        public async Task<List<DTO>> FullTextSearch(string searchTerm)
-        {
-            var properties = typeof(Model)
+            var properties = typeof(T)
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Where(p => p.PropertyType == typeof(string) && p.Name != "Id")
                 .Select(p => $"COALESCE(\"{p.Name}\", '')")
                 .ToList();
 
-            if (!properties.Any())
+            if (properties.Count == 0)
             {
                 throw new InvalidOperationException("no string properties found to search");
             }
 
             string concatenatedFields = string.Join(" || ' ' || ", properties);
             string sql = $@"
-            SELECT * FROM ""{typeof(Model).Name}""
+            SELECT * FROM ""{typeof(T).Name}""
             WHERE to_tsvector('russian', {concatenatedFields})
             @@ phraseto_tsquery('russian', {{0}})";
 
-            var searchResult = await FindAllRaw().FromSqlRaw(sql, searchTerm).ToListAsync();
-            return _mapper.Map<List<DTO>>(searchResult);
+            return await FindAllRaw().FromSqlRaw(sql, searchTerm).ToListAsync();
         }
 
-        public ViewRepository(RepositoryContext repositoryContext, IMapper mapper)
+        public ViewRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
             _repositoryContext = repositoryContext;
-            _mapper = mapper;
         }
     }
 }

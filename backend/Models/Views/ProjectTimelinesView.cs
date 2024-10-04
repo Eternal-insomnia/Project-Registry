@@ -8,12 +8,12 @@
         public required string Code { get; set; }
         public required string Name { get; set; }
         public required string Stage { get; set; }
-        public string? ActualStart { get; set; }
-        public string? ActualEnd { get; set; }
-        public string? ActualDuration { get; set; }
-        public string? BaseEnd { get; set; }
-        public string? BaseDeviation { get; set; }
-        public string? PassportStartYear { get; set; }
-        public string? PassportEndYear { get; set; }
+        public required string ActualStart { get; set; }
+        public required string ActualEnd { get; set; }
+        public required string ActualDuration { get; set; }
+        public required string BaseEnd { get; set; }
+        public required string BaseDeviation { get; set; }
+        public required string PassportStartYear { get; set; }
+        public required string PassportEndYear { get; set; }
     }
 }
