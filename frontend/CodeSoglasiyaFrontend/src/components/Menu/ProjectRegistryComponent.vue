@@ -28,14 +28,14 @@
       <button class="home-button" @click="fetchItemsHome">
         <img src="@/assets/svg/home.svg" width="16px" height="16px">
       </button>
-      <button :class="{'picked-button': tableHead === GeneralInfo}" @click="fetchItems(GeneralInfo, 'GeneralInfo')">Общая информация</button>
-      <button :class="{'picked-button': tableHead === Condition}" @click="fetchItems(Condition, 'Condition')">Состояние</button>
-      <button :class="{'picked-button': tableHead === Team}" @click="fetchItems(Team, 'Team')">Команда проекта</button>
-      <button :class="{'picked-button': tableHead === Timelines}" @click="fetchItems(Timelines, 'Timelines')">Сроки</button>
-      <button :class="{'picked-button': tableHead === Cost}" @click="fetchItems(Cost, 'Cost')">Стоимость</button>
-      <button :class="{'picked-button': tableHead === Documents}" @click="fetchItems(Documents, 'Documents')">Документация</button>
-      <button :class="{'picked-button': tableHead === Goals}" @click="fetchItems(Goals, 'Goals')">Цели</button>
-      <button :class="{'picked-button': tableHead === Monitoring}" @click="fetchItems(Monitoring, 'Monitoring')">Мониторинг</button>
+      <button :class="{'picked-button': tableHead === GeneralInfo}" @click="fetchItems(GeneralInfo, '/GeneralInfo')">Общая информация</button>
+      <button :class="{'picked-button': tableHead === Condition}" @click="fetchItems(Condition, '/Condition')">Состояние</button>
+      <button :class="{'picked-button': tableHead === Team}" @click="fetchItems(Team, '/Team')">Команда проекта</button>
+      <button :class="{'picked-button': tableHead === Timelines}" @click="fetchItems(Timelines, '/Timelines')">Сроки</button>
+      <button :class="{'picked-button': tableHead === Cost}" @click="fetchItems(Cost, '/Cost')">Стоимость</button>
+      <button :class="{'picked-button': tableHead === Documents}" @click="fetchItems(Documents, '/Documents')">Документация</button>
+      <button :class="{'picked-button': tableHead === Goals}" @click="fetchItems(Goals, '/Goals')">Цели</button>
+      <button :class="{'picked-button': tableHead === Monitoring}" @click="fetchItems(Monitoring, '/Monitoring')">Мониторинг</button>
     </div>
   </div>
 
@@ -116,7 +116,7 @@ export default {
       try {
         let URL = ""
         this.tableHead = headers
-        URL = this.startURL + "/Project" + endURL
+        URL = this.startURL + endURL
         const response = await api.getItemsJSON(URL)
         this.tableData = response.data
         this.filteredData = response.data
