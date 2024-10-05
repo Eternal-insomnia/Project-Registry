@@ -25,7 +25,7 @@
     </div>
 
     <div class="filter-buttons">
-      <button class="home-button" @click="fetchItemsHome; tableHeadName = Home">
+      <button class="home-button" @click="fetchItemsHome(); tableHeadName = Home">
         <img src="@/assets/svg/home.svg" width="16px" height="16px">
       </button>
       <button 
@@ -167,8 +167,6 @@ export default {
     },
     // Fetches home table data
     async fetchItemsHome() {
-      this.thisYearProjects = true
-      this.archiveProjects = false  
       this.tableHead = this.Home
       try {
         const URL = this.startURL + "/Home"
@@ -178,6 +176,10 @@ export default {
       } catch (error) {
         console.error('Error fetching items home:', error)
       }
+      this.thisYearProjects = true
+      this.archiveProjects = false  
+      this.portfolioProject = false
+      // call filter function
     },
     // Fetches table search result
     async fetchSearchResponse() {
