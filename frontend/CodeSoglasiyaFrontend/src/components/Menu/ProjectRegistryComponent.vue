@@ -1,8 +1,8 @@
 <template>
   <div class="checkboxes">
-    <input type="checkbox" v-model="thisYearProjects" @click="thisYearProjects = !thisYearProjects; updateFilters()" checked>Портфель проектов 2024
-    <input type="checkbox" v-model="archiveProjects" @click="archiveProjects = !archiveProjects; updateFilters()">Архивные проекты
-    <input type="checkbox" v-model="portfolioProject" @click="portfolioProject = !portfolioProject; updateFilters()">Проект портфеля 2024
+    <input type="checkbox" v-model="thisYearProjects" @change="filteredData = dataGrouping(currentOption)" checked>Портфель проектов 2024
+    <input type="checkbox" v-model="archiveProjects" @change="filteredData = dataGrouping(currentOption)">Архивные проекты
+    <input type="checkbox" v-model="portfolioProject" @change="filteredData = dataGrouping(currentOption)">Проект портфеля 2024
   </div>
 
   <div class="buttons">
@@ -15,7 +15,7 @@
           Группировать
         </button>
         <div class="select-items" :class="{'select-hide': optionsHide}">
-          <div v-for="option in options" :key="option" @click="filteredData = dataGrouping(option)">
+          <div v-for="option in options" :key="option" @click="filteredData = dataGrouping(option); currentOption = option">
             {{ option }}
           </div>
         </div>
@@ -125,6 +125,7 @@ export default {
       Goals: GoalsJSON,
       Monitoring: MonitoringJSON,
       options: optionsJSON,
+      currentOption: 'Не группировать',
       optionsHide: true,
       searchTerm: "",
       thisYearProjects: true,
@@ -172,14 +173,13 @@ export default {
         const URL = this.startURL + "/Home"
         const response = await api.getItemsJSON(URL)
         this.tableData = response.data
-        this.filteredData = response.data
       } catch (error) {
         console.error('Error fetching items home:', error)
       }
       this.thisYearProjects = true
       this.archiveProjects = false  
       this.portfolioProject = false
-      // call filter function
+      this.filteredData = this.dataGrouping(this.currentOption)
     },
     // Fetches table search result
     async fetchSearchResponse() {
@@ -191,25 +191,60 @@ export default {
         console.error('Error fetching search response:', error)
       }
     },
-    // Updates checkbox filters
-    async updateFilters() {
-      console.log('ыыыыы')
-    },
-    // Grouping table data
-    dataGrouping(option) {
-      this.optionsHide = !this.optionsHide
-      if (option === "Не группировать") {
-        option = ''
-        this.filteredData = this.tableData
-      }
-      const filterKey = option && option.toLowerCase()
-      let data = this.tableData
-      if (filterKey) {
+    // Searching data
+    dataFilter(data, filter) {
+      console.log(data, filter)
+      if (filter) {
         data = data.filter((row) => {
           return Object.keys(row).some((key) => {
-            return String(row[key]).toLowerCase().indexOf(filterKey) > -1
+            return String(row[key]).toLowerCase().indexOf(filter) > -1
           })
         })
+        return data
+      }
+    },
+    // Searching year by the current year
+    yearFilter(data) {
+      let filteredData = []
+      let index = 0
+      for(let project in data) {
+        if (data[project].year === '24') {
+          filteredData[index] = data[project]
+          index++
+        }
+      }
+      return data = filteredData
+    },
+    // Searching status by the filter
+    statusFilter(data, filter) {
+      let filteredData = []
+      let index = 0
+      for(let project in data) {
+        if (data[project].status.toLowerCase() === filter.toLowerCase()) {
+          filteredData[index] = data[project]
+          index++
+        }
+      }
+      return data = filteredData
+    },
+    // Searching data with filters
+    dataGrouping(option) {
+      this.optionsHide = true
+      let data = this.tableData
+      let filter = option.toLowerCase()
+      if (option !== "Не группировать") {
+        data = this.dataFilter(data, filter)
+      }
+      if (this.thisYearProjects) {
+        data = this.yearFilter(data)
+      }
+      if (this.archiveProjects) {
+        filter = 'архив'
+        data = this.statusFilter(data, filter)
+      }
+      if (this.portfolioProject) {
+        filter = 'проектная инициатива'
+        data = this.statusFilter(data, filter)
       }
       return data
     }

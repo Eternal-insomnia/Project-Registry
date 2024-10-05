@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(entry, index) in filteredData" :key="entry">
+      <tr v-for="(entry, index) in filteredData" :key="index">
         <td v-for="key in Object.keys(columns[0])" :key="key" :class="{'abbreviated': contains(key)}" :title="entry[key]">
           <span v-if="key === 'num'">
             {{ incrementIndex(index) }}
@@ -34,7 +34,7 @@ export default {
   props: {
     data: Array,
     columns: Array,
-    filterKey: String
+    filterKey: String,
   },
   data() {
     return {
