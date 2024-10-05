@@ -87,10 +87,10 @@
     >
     </TableComponent>
   </div>
-  <!-- <ExtraSearchResultComponent
+  <ExtraSearchResultComponent
     :filter="searchTerm"
   >
-  </ExtraSearchResultComponent> -->
+  </ExtraSearchResultComponent>
 </template>
 
 <script>

@@ -1,23 +1,20 @@
 <template>
-  <div v-for="table in tables" :key="table" :class="{'hide': hide}">
-    <p v-if="filter !== ''"></p>
-    <table v-if="filter !== ''">
+  <!-- <button @click="showLogs()">LOG</button> -->
+  <div class="tables" v-for="(value, index) in tables" :key="index">
+    <p v-if="filter != ''">Что-то нашлось в таблице {{ Object.keys(headers[index]) }}</p>
+    <table v-if="filter != ''">
       <thead>
-        <tr>
-          <th v-for="(value, key) in table[0]" :key="value.id"
-            @click="sortBy(key)"
-            :class="{ active: sortKey == key }">
-            {{ capitalize(value) }}
-            <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
-            </span>
+        <tr v-for="(value, key) in headers[index]" :key="key">
+          <th v-for="(val, key) in value" :key="key">
+            {{ val }}
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(entry, index) in filteredData" :key="index">
-          <td v-for="key in Object.keys(columns[0])" :key="key" :class="{'abbreviated': contains(key)}" :title="entry[key]">
+        <tr v-for="(entry, i) in tables[index]" :key="i">
+          <td v-for="key in deArray(headers[index])" :key="key" :class="{'abbreviated': contains(key)}" :title="entry[key]">
             <span v-if="key === 'num'">
-              {{ incrementIndex(index) }}
+              {{ incrementIndex(i) }}
             </span>
             <span v-else>
               {{ entry[key] }}
@@ -31,15 +28,8 @@
 
 <script>
 import api from "@/api"
-import GeneralInfoJSON from "@/data/headers/general-info-head.json"
-import ConditionJSON from "@/data/headers/condition-head.json"
-import TeamJSON from "@/data/headers/team-head.json"
-import TimelinesJSON from "@/data/headers/timelines-head.json"
-import CostJSON from "@/data/headers/cost-head.json"
-import DocumentsJSON from "@/data/headers/documents-head.json"
-import GoalsJSON from "@/data/headers/goals-head.json"
-import MonitoringJSON from "@/data/headers/monitoring-head.json"
-import NotDisplayedJSON from "@/data/headers/not-displayed.json"
+import allHeaders from "@/data/headers/all-headers.json"
+import abbreviatedJSON from '@/data/abbreviated.json'
 
 export default {
   props: {
@@ -57,43 +47,63 @@ export default {
       monitoring: [],
       notDisplayed: [],
       tables: [this.generalInfo, this.condition, this.team, this.timelines, this.cost, this.documents, this.goals, this.monitoring, this.notDisplayed],
-      GeneralInfoHead: GeneralInfoJSON,
-      ConditionHead: ConditionJSON,
-      TeamHead: TeamJSON,
-      TimelinesHead: TimelinesJSON,
-      CostHead: CostJSON,
-      DocumentsHead: DocumentsJSON,
-      GoalsHead: GoalsJSON,
-      MonitoringHead: MonitoringJSON,
-      NotDisplayedHead: NotDisplayedJSON,
+      headers: allHeaders,
+      abbreviated: abbreviatedJSON,
       hide: true,
     }
   },
   methods: {
+    deArray(arr) {
+      let key = Object.keys(arr)
+      let arr1 = Object.keys(arr[key])
+      return arr1
+    },
+    contains(elem) {
+      for (var i = 0; i < this.abbreviated.length; i++) {
+          if (this.abbreviated[i] === elem) {
+              return true;
+          }
+      }
+      return false;
+    },
     async searchRequest(tableLink) {
       const URL = '/ProjectRegistry/Views' + tableLink + "/Search?searchTerm=" + this.filter
       try {
         const response = await api.getItemsJSON(URL)
-        console.log(response.data)
         return response.data
       } catch (error) {
         console.error('Error fetching search response:', error)
       }
     },
-    showResults() {
+    async showResults() {
       if (this.filter === '') {
-        this.hide = true
-      } else { this.hide = false }
-      console.log(this.hide)
-      this.generalInfo = this.searchRequest("/GeneralInfo")
-      this.condition = this.searchRequest("/Condition")
-      this.team = this.searchRequest("/Team")
-      this.timelines = this.searchRequest("/Timelines")
-      this.cost = this.searchRequest("/Cost")
-      this.documents = this.searchRequest("/Documents")
-      this.goals = this.searchRequest("/Goals")
-      this.monitoring = this.searchRequest("/Monitoring")
-      this.notDisplayed = this.searchRequest("/NotDisplayed")
+        this.generalInfo = []
+        this.condition = []
+        this.team = []
+        this.timelines = []
+        this.cost = []
+        this.documents = []
+        this.goals = []
+        this.monitoring = []
+        this.notDisplayed = []
+        return
+      }
+      this.generalInfo = await this.searchRequest("/GeneralInfo")
+      this.condition = await this.searchRequest("/Condition")
+      this.team = await this.searchRequest("/Team")
+      this.timelines = await this.searchRequest("/Timelines")
+      this.cost = await this.searchRequest("/Cost")
+      this.documents = await this.searchRequest("/Documents")
+      this.goals = await this.searchRequest("/Goals")
+      this.monitoring = await this.searchRequest("/Monitoring")
+      this.notDisplayed = await this.searchRequest("/NotDisplayed")
+      this.tables = [this.generalInfo, this.condition, this.team, this.timelines, this.cost, this.documents, this.goals, this.monitoring, this.notDisplayed]
+    },
+    incrementIndex(index) {
+      return index + 1
+    },
+    showLogs() {
+      console.log(this.headers[0])
     }
   },
   watch: {
@@ -104,7 +114,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 table {
   border-radius: 3px;
   background-color: #969696;
@@ -153,5 +163,10 @@ th.active .arrow {
 }
 .hide {
   display: none;
+}
+.abbreviated {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
