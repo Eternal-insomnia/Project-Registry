@@ -79,7 +79,7 @@ namespace Backend.Repository
                 .HasNoKey()
                 .ToView("TeamView");
             modelBuilder
-                .Entity<ProjectTimelinesView>()
+                .Entity<TimelinesView>()
                 .HasNoKey()
                 .ToView("TimelinesView");
             modelBuilder

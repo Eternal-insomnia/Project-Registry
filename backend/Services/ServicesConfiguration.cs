@@ -11,12 +11,15 @@ namespace Backend.Services
             services.AddScoped<ViewService<GeneralInfoView>>();
             services.AddScoped<ViewService<ConditionView>>();
             services.AddScoped<ViewService<TeamView>>();
-            services.AddScoped<ViewService<ProjectTimelinesView>>();
+            services.AddScoped<ViewService<TimelinesView>>();
             services.AddScoped<ViewService<CostView>>();
             services.AddScoped<ViewService<DocumentsView>>();
             services.AddScoped<ViewService<GoalsView>>();
             services.AddScoped<ViewService<MonitoringView>>();
             services.AddScoped<NotDisplayedViewService>();
+
+            services.AddScoped<ImportService>();
+            services.AddScoped<ExportService>();
         }
     }
 }

@@ -129,45 +129,45 @@ CREATE TABLE "ProjectMonitoring" (
     FOREIGN KEY ("Id") REFERENCES "ProjectGeneralInfo"("Id") ON DELETE CASCADE
 );
 
-COPY "ProjectGeneralInfo" ("Id", "Year", "Status", "Code", "Name", "Stage", "Priority", "PostMonitoring", "Activity", "Category", "Program", "StrategyBelonging", "RGT", "Description", "Dependencies") FROM stdin;
-15a84b93-e3a6-4bd0-9130-e9cddfe42328	23	Архив	preCOC	Game	Done	3	\N	\N	\N	\N	\N	\N	mmm good	\N
-b7eadf4f-e161-42fe-9db6-9f906432025f	24	В портфеле	COC1	Web App	In Progress	7	\N	\N	\N	\N	\N	\N	\N	\N
-\.
+-- COPY "ProjectGeneralInfo" ("Id", "Year", "Status", "Code", "Name", "Stage", "Priority", "PostMonitoring", "Activity", "Category", "Program", "StrategyBelonging", "RGT", "Description", "Dependencies") FROM stdin;
+-- 15a84b93-e3a6-4bd0-9130-e9cddfe42328	23	Архив	preCOC	Game	Done	3	\N	\N	\N	\N	\N	\N	mmm good	\N
+-- b7eadf4f-e161-42fe-9db6-9f906432025f	24	В портфеле	COC1	Web App	In Progress	7	\N	\N	\N	\N	\N	\N	\N	\N
+-- \.
 
-COPY "ProjectCondition" ("Id", "Progress", "GeneralStatus", "Goals", "Timelines", "Budget", "Contents", "ReportLink") FROM stdin;
-15a84b93-e3a6-4bd0-9130-e9cddfe42328	50	Almost Archived	4	1	100	7	www.ya.ru
-b7eadf4f-e161-42fe-9db6-9f906432025f	86	Paused	8	18	1000	3	www.ya.ru
-\.
+-- COPY "ProjectCondition" ("Id", "Progress", "GeneralStatus", "Goals", "Timelines", "Budget", "Contents", "ReportLink") FROM stdin;
+-- 15a84b93-e3a6-4bd0-9130-e9cddfe42328	50	Almost Archived	4	1	100	7	www.ya.ru
+-- b7eadf4f-e161-42fe-9db6-9f906432025f	86	Paused	8	18	1000	3	www.ya.ru
+-- \.
 
-COPY "ProjectTeam" ("Id", "Customer", "ProductOwner", "Manager", "TeamLead", "BusinessAnalyst", "MCPeople", "Stakeholders", "ExternalPeople", "ADM", "FRC", "BusinessLines") FROM stdin;
-15a84b93-e3a6-4bd0-9130-e9cddfe42328	customer1	mom	dad	dog	\N	\N	\N	\N	\N	\N	university
-b7eadf4f-e161-42fe-9db6-9f906432025f	customer2	\N	me	me	me	\N	\N	\N	\N	\N	school
-\.
+-- COPY "ProjectTeam" ("Id", "Customer", "ProductOwner", "Manager", "TeamLead", "BusinessAnalyst", "MCPeople", "Stakeholders", "ExternalPeople", "ADM", "FRC", "BusinessLines") FROM stdin;
+-- 15a84b93-e3a6-4bd0-9130-e9cddfe42328	customer1	mom	dad	dog	\N	\N	\N	\N	\N	\N	university
+-- b7eadf4f-e161-42fe-9db6-9f906432025f	customer2	\N	me	me	me	\N	\N	\N	\N	\N	school
+-- \.
 
-COPY "ProjectTimelines" ("Id", "PreStart", "PreEndActual", "PreDuration", "PreEndPlanned", "PreDeviation", "ActualStart", "ActualEnd", "ActualDuration", "BaseStart", "BaseEnd", "BaseDeviation", "PassportEnd", "PassportDeviation", "PassportStartYear", "PassportEndYear") FROM stdin;
-15a84b93-e3a6-4bd0-9130-e9cddfe42328	07.07.2022	25.06.2023	11	15.09.2022	-283	27.06.2023	02.12.2024	17	27.06.2023	02.12.2024	0	05.06.2024	-180	2023	2024
-b7eadf4f-e161-42fe-9db6-9f906432025f	30.10.2023	20.01.2024	2	20.01.2024	0	26.02.2024	25.12.2024	9	26.02.2024	25.12.2024	0	25.12.2024	0	2024	2024
-\.
+-- COPY "ProjectTimelines" ("Id", "PreStart", "PreEndActual", "PreDuration", "PreEndPlanned", "PreDeviation", "ActualStart", "ActualEnd", "ActualDuration", "BaseStart", "BaseEnd", "BaseDeviation", "PassportEnd", "PassportDeviation", "PassportStartYear", "PassportEndYear") FROM stdin;
+-- 15a84b93-e3a6-4bd0-9130-e9cddfe42328	07.07.2022	25.06.2023	11	15.09.2022	-283	27.06.2023	02.12.2024	17	27.06.2023	02.12.2024	0	05.06.2024	-180	2023	2024
+-- b7eadf4f-e161-42fe-9db6-9f906432025f	30.10.2023	20.01.2024	2	20.01.2024	0	26.02.2024	25.12.2024	9	26.02.2024	25.12.2024	0	25.12.2024	0	2024	2024
+-- \.
 
-COPY "ProjectCost" ("Id", "Profitability", "PreCAPEXExt", "PreCAPEXWF", "PreOPEX", "PreCAPEXExtActual", "PreCAPEXExtDeltaPercent", "BaseCAPEXExt", "BaseCAPEXWF", "BaseOPEX", "PassportCAPEXExt", "PassportCAPEXWF", "PassportOPEX", "PassportCAPEXExtDelta", "PassportCAPEXExtDeltaPercent", "ActualCAPEXExt", "ActualCAPEXWF", "ActualOPEX", "ActualCAPEXExtDelta", "ActualCAPEXExtDeltaPercent") FROM stdin;
-15a84b93-e3a6-4bd0-9130-e9cddfe42328	да	\N	\N	\N	\N	\N	22984	4700	0.0	22984	4700	0.0	0.0	100	\N	\N	\N	\N	\N
-b7eadf4f-e161-42fe-9db6-9f906432025f	нет	\N	\N	\N	\N	\N	4042	3161	0.0	4042	3161	0.0	0.0	100	\N	\N	\N	\N	\N
-\.
+-- COPY "ProjectCost" ("Id", "Profitability", "PreCAPEXExt", "PreCAPEXWF", "PreOPEX", "PreCAPEXExtActual", "PreCAPEXExtDeltaPercent", "BaseCAPEXExt", "BaseCAPEXWF", "BaseOPEX", "PassportCAPEXExt", "PassportCAPEXWF", "PassportOPEX", "PassportCAPEXExtDelta", "PassportCAPEXExtDeltaPercent", "ActualCAPEXExt", "ActualCAPEXWF", "ActualOPEX", "ActualCAPEXExtDelta", "ActualCAPEXExtDeltaPercent") FROM stdin;
+-- 15a84b93-e3a6-4bd0-9130-e9cddfe42328	да	\N	\N	\N	\N	\N	22984	4700	0.0	22984	4700	0.0	0.0	100	\N	\N	\N	\N	\N
+-- b7eadf4f-e161-42fe-9db6-9f906432025f	нет	\N	\N	\N	\N	\N	4042	3161	0.0	4042	3161	0.0	0.0	100	\N	\N	\N	\N	\N
+-- \.
 
-COPY "ProjectDocuments" ("Id", "PrePStartDecision", "ImplStartDecision", "Timelines", "ReasonCRTimelines", "Budget", "ReasonCRBudget", "Contents", "ReasonCRContents", "StopResumeDecision", "StopReason", "CloseCompleteDecision", "CloseReason") FROM stdin;
-15a84b93-e3a6-4bd0-9130-e9cddfe42328	\N	ПК №08 от 07.07.2022	ПК №06 от 27.06.2023г.	\N	Уточнение требований в процессе реализации проекта:	\N	Уточнение требований в процессе реализации проекта:	\N	Уточнение требований в процессе реализации проекта:	\N	\N	\N
-b7eadf4f-e161-42fe-9db6-9f906432025f	\N	ПК №10 от 24.10.2023г.	ПК №02 от 11.03.2024г.	\N	\N	\N	\N	\N	\N	\N	\N	\N
-\.
+-- COPY "ProjectDocuments" ("Id", "PrePStartDecision", "ImplStartDecision", "Timelines", "ReasonCRTimelines", "Budget", "ReasonCRBudget", "Contents", "ReasonCRContents", "StopResumeDecision", "StopReason", "CloseCompleteDecision", "CloseReason") FROM stdin;
+-- 15a84b93-e3a6-4bd0-9130-e9cddfe42328	\N	ПК №08 от 07.07.2022	ПК №06 от 27.06.2023г.	\N	Уточнение требований в процессе реализации проекта:	\N	Уточнение требований в процессе реализации проекта:	\N	Уточнение требований в процессе реализации проекта:	\N	\N	\N
+-- b7eadf4f-e161-42fe-9db6-9f906432025f	\N	ПК №10 от 24.10.2023г.	ПК №02 от 11.03.2024г.	\N	\N	\N	\N	\N	\N	\N	\N	\N
+-- \.
 
-COPY "ProjectGoals" ("Id", "Product", "ImplCriteria", "GoalsStatus", "BusinessGoals", "AchieveCriteria", "BusinessGoalsStatus") FROM stdin;
-15a84b93-e3a6-4bd0-9130-e9cddfe42328	wot	1%	started	gold	million	far
-b7eadf4f-e161-42fe-9db6-9f906432025f	telegram	bought	thought	money	porsche	dreams
-\.
+-- COPY "ProjectGoals" ("Id", "Product", "ImplCriteria", "GoalsStatus", "BusinessGoals", "AchieveCriteria", "BusinessGoalsStatus") FROM stdin;
+-- 15a84b93-e3a6-4bd0-9130-e9cddfe42328	wot	1%	started	gold	million	far
+-- b7eadf4f-e161-42fe-9db6-9f906432025f	telegram	bought	thought	money	porsche	dreams
+-- \.
 
-COPY "ProjectMonitoring" ("Id", "Sign", "MonitoringStatus", "EndYear", "Product", "Manager", "Characteristics", "ShortName") FROM stdin;
-15a84b93-e3a6-4bd0-9130-e9cddfe42328	да	\N	\N	\N	\N	\N	far
-b7eadf4f-e161-42fe-9db6-9f906432025f	нет	\N	\N	\N	\N	\N	dreams
-\.
+-- COPY "ProjectMonitoring" ("Id", "Sign", "MonitoringStatus", "EndYear", "Product", "Manager", "Characteristics", "ShortName") FROM stdin;
+-- 15a84b93-e3a6-4bd0-9130-e9cddfe42328	да	\N	\N	\N	\N	\N	far
+-- b7eadf4f-e161-42fe-9db6-9f906432025f	нет	\N	\N	\N	\N	\N	dreams
+-- \.
 
 CREATE VIEW "HomeView" AS
     SELECT "ProjectGeneralInfo"."Id",

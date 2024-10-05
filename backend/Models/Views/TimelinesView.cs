@@ -1,6 +1,6 @@
 ﻿namespace Backend.Models.Views
 {
-    public class ProjectTimelinesView
+    public class TimelinesView
     {
         public required Guid Id { get; set; }
         public required string Year { get; set; }

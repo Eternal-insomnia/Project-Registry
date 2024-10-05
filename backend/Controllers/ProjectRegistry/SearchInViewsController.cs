@@ -14,7 +14,7 @@ namespace Backend.Controllers.ProjectRegistry
         private readonly ViewService<GeneralInfoView>  _generalInfoViewService;
         private readonly ViewService<ConditionView>    _conditionViewService;
         private readonly ViewService<TeamView>         _teamViewService;
-        private readonly ViewService<ProjectTimelinesView>    _timelinesViewService;
+        private readonly ViewService<TimelinesView>    _timelinesViewService;
         private readonly ViewService<CostView>         _costViewService;
         private readonly ViewService<DocumentsView>    _documentsViewService;
         private readonly ViewService<GoalsView>        _goalsViewService;
@@ -96,7 +96,7 @@ namespace Backend.Controllers.ProjectRegistry
             ViewService<GeneralInfoView>  generalInfoViewService,
             ViewService<ConditionView>    conditionService,
             ViewService<TeamView>         teamService,
-            ViewService<ProjectTimelinesView>    timelinesService,
+            ViewService<TimelinesView>    timelinesService,
             ViewService<CostView>         costService,
             ViewService<DocumentsView>    documentsService,
             ViewService<GoalsView>        goalsService,

@@ -10,11 +10,11 @@ namespace Backend.Controllers.ProjectRegistry
     {
         private readonly ILogger<GetViewsController> _logger;
         
-        private readonly ViewService<HomeView>               _homeViewService;
+        private readonly ViewService<HomeView>        _homeViewService;
         private readonly ViewService<GeneralInfoView> _generalInfoViewService;
         private readonly ViewService<ConditionView>   _conditionViewService;
         private readonly ViewService<TeamView>        _teamViewService;
-        private readonly ViewService<ProjectTimelinesView>   _timelinesViewService;
+        private readonly ViewService<TimelinesView>   _timelinesViewService;
         private readonly ViewService<CostView>        _costViewService;
         private readonly ViewService<DocumentsView>   _documentsViewService;
         private readonly ViewService<GoalsView>       _goalsViewService;
@@ -84,15 +84,15 @@ namespace Backend.Controllers.ProjectRegistry
         }
 
         public GetViewsController(ILogger<GetViewsController> logger,
-            ViewService<HomeView>               homeViewService,
+            ViewService<HomeView> homeViewService,
             ViewService<GeneralInfoView> generalInfoViewService,
-            ViewService<ConditionView>   conditionService,
-            ViewService<TeamView>        teamService,
-            ViewService<ProjectTimelinesView>   timelinesService,
-            ViewService<CostView>        costService,
-            ViewService<DocumentsView>   documentsService,
-            ViewService<GoalsView>       goalsService,
-            ViewService<MonitoringView>  monitoringViewService)
+            ViewService<ConditionView> conditionService,
+            ViewService<TeamView> teamService,
+            ViewService<TimelinesView> timelinesService,
+            ViewService<CostView> costService,
+            ViewService<DocumentsView> documentsService,
+            ViewService<GoalsView> goalsService,
+            ViewService<MonitoringView> monitoringViewService)
         {
             _logger = logger;
             _homeViewService        = homeViewService;
