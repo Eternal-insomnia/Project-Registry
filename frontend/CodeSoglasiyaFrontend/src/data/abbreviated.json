@@ -11,6 +11,7 @@
   "closeCompleteDecision",
   "product",
   "implCriteria",
-  "businessGoals",
-  "achieveCriteria"
+  "goalsStatus",
+  "achieveCriteria",
+  "businessGoalsStatus"
 ]

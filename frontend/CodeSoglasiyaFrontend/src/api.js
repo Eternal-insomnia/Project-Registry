@@ -14,6 +14,7 @@ const apiClientFormData = axios.create({
     baseURL: baseURL,
     timeout: timeout,
     headers: {
+        'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         'Content-Type': 'multipart/form-data',
     }
 })

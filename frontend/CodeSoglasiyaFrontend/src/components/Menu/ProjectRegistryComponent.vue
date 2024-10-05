@@ -25,54 +25,54 @@
     </div>
 
     <div class="filter-buttons">
-      <button class="home-button" @click="fetchItemsHome(); tableHeadName = Home">
+      <button class="home-button" @click="fetchItemsHome(); tableHeadName = Home; currentTable = 'Home'">
         <img src="@/assets/svg/home.svg" width="16px" height="16px">
       </button>
       <button 
         :class="{'picked-button': tableHead === GeneralInfo}" 
-        @click="fetchItems(GeneralInfo, '/GeneralInfo'); tableHeadName = GeneralInfo"
+        @click="fetchItems(GeneralInfo, '/GeneralInfo'); tableHeadName = GeneralInfo; currentTable = 'GeneralInfo'"
       >
         Общая информация
       </button>
       <button 
         :class="{'picked-button': tableHead === Condition}"
-        @click="fetchItems(Condition, '/Condition'); tableHeadName = Condition"
+        @click="fetchItems(Condition, '/Condition'); tableHeadName = Condition; currentTable = 'Condition'"
       >
         Состояние
       </button>
       <button 
         :class="{'picked-button': tableHead === Team}" 
-        @click="fetchItems(Team, '/Team'); tableHeadName = Team"
+        @click="fetchItems(Team, '/Team'); tableHeadName = Team; currentTable = 'Team'"
       >
         Команда проекта
       </button>
       <button 
         :class="{'picked-button': tableHead === Timelines}" 
-        @click="fetchItems(Timelines, '/Timelines'); tableHeadName = Timelines"
+        @click="fetchItems(Timelines, '/Timelines'); tableHeadName = Timelines; currentTable = 'Timelines'"
       >
         Сроки
       </button>
       <button 
         :class="{'picked-button': tableHead === Cost}" 
-        @click="fetchItems(Cost, '/Cost'); tableHeadName = Cost"
+        @click="fetchItems(Cost, '/Cost'); tableHeadName = Cost; currentTable = 'Cost'"
       >
         Стоимость
       </button>
       <button 
         :class="{'picked-button': tableHead === Documents}" 
-        @click="fetchItems(Documents, '/Documents'); tableHeadName = Documents"
+        @click="fetchItems(Documents, '/Documents'); tableHeadName = Documents; currentTable = 'Documents'"
       >
         Документация
       </button>
       <button 
         :class="{'picked-button': tableHead === Goals}" 
-        @click="fetchItems(Goals, '/Goals'); tableHeadName = Goals"
+        @click="fetchItems(Goals, '/Goals'); tableHeadName = Goals; currentTable = 'Goals'"
       >
         Цели
       </button>
       <button 
         :class="{'picked-button': tableHead === Monitoring}" 
-        @click="fetchItems(Monitoring, '/Monitoring'); tableHeadName = Monitoring"
+        @click="fetchItems(Monitoring, '/Monitoring'); tableHeadName = Monitoring; currentTable = 'Monitoring'"
       >
         Мониторинг
       </button>
@@ -83,15 +83,22 @@
     <TableComponent
       :data="filteredData"
       :columns="tableHead"
-      :filter-key="searchTerm">
+      :filter-key="searchTerm"
+    >
     </TableComponent>
   </div>
+  <ExtraSearchResultComponent
+    :filter="searchTerm"
+  >
+  </ExtraSearchResultComponent>
 </template>
 
 <script>
 import TableComponent from "./Table/TableComponent.vue"
-import optionsJSON from "@/data/select-options.json"
+import ExtraSearchResultComponent from "./Table/ExtraSearchResultComponent.vue"
+
 // Headers for table
+import optionsJSON from "@/data/select-options.json"
 import HomeJSON from "@/data/headers/home-head.json"
 import GeneralInfoJSON from "@/data/headers/general-info-head.json"
 import ConditionJSON from "@/data/headers/condition-head.json"
@@ -106,7 +113,8 @@ import api from "@/api"
 
 export default {
   components: {
-    TableComponent
+    TableComponent,
+    ExtraSearchResultComponent
   },
   data() {
     return {
@@ -126,6 +134,7 @@ export default {
       Monitoring: MonitoringJSON,
       options: optionsJSON,
       currentOption: 'Не группировать',
+      currentTable: 'Home',
       optionsHide: true,
       searchTerm: "",
       thisYearProjects: true,
@@ -138,7 +147,8 @@ export default {
     async exportFile() {
       try {
         let filename = (Math.floor(Date.now() / 1000)) + '.xlsx';
-        const response = await api.apiClientExportFile('/swagger/index.html')
+        const LINK = "/ProjectRegistry/Views/" + this.currentTable + "/Export"
+        const response = await api.apiClientExportFile(LINK)
         // or use application/vnd.ms-excel for .xls
         let url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
         let link = document.createElement('a');
@@ -165,6 +175,7 @@ export default {
       } catch (error) {
         console.error('Error fetching items:', error)
       }
+      this.filteredData = this.dataGrouping(this.currentOption)
     },
     // Fetches home table data
     async fetchItemsHome() {
@@ -183,13 +194,7 @@ export default {
     },
     // Fetches table search result
     async fetchSearchResponse() {
-      const URL = this.startURL + '/' + this.tableHeadName + "/Search?searchTerm=" + this.searchTerm
-      try {
-        const response = await api.getItemsJSON(URL)
-        this.tableData = response.data
-      } catch (error) {
-        console.error('Error fetching search response:', error)
-      }
+      // change ExtraSearchResultComponent visibility
     },
     // Searching data
     dataFilter(data, filter) {

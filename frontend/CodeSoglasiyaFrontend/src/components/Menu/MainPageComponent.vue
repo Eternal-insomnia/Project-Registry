@@ -35,7 +35,7 @@ export default {
       let formData = new FormData();
       formData.append('file', this.file);
       try {
-        api.createItemFormData("/file", formData)
+        api.createItemFormData("/ProjectRegistry/Import", formData)
       } catch (error) {
         console.error('Error sending file', error)
       }
