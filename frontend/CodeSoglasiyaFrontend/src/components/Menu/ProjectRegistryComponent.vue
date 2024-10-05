@@ -87,10 +87,10 @@
     >
     </TableComponent>
   </div>
-  <ExtraSearchResultComponent
+  <!-- <ExtraSearchResultComponent
     :filter="searchTerm"
   >
-  </ExtraSearchResultComponent>
+  </ExtraSearchResultComponent> -->
 </template>
 
 <script>
@@ -136,6 +136,7 @@ export default {
       currentOption: 'Не группировать',
       currentTable: 'Home',
       optionsHide: true,
+      extraInfoHide: true,
       searchTerm: "",
       thisYearProjects: true,
       archiveProjects: false,

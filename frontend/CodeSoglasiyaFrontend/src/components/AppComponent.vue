@@ -13,9 +13,9 @@
       <button class="menu__button" :class="{'picked-button': currentComponent === 'ProjectRegistryComponent'}" @click="currentComponent = 'ProjectRegistryComponent'; clickHome()">
         Реестр проектов
       </button>
-      <button class="menu__button" :class="{'picked-button': currentComponent === 'LibraryComponent'}" @click="currentComponent = 'LibraryComponent'">
+      <!-- <button class="menu__button" :class="{'picked-button': currentComponent === 'LibraryComponent'}" @click="currentComponent = 'LibraryComponent'">
         Библиотека
-      </button>
+      </button> -->
     </div>
     <div class="menu-page">
       <component ref="homeClick" :is="currentComponent"/>
