@@ -25,17 +25,57 @@
     </div>
 
     <div class="filter-buttons">
-      <button class="home-button" @click="fetchItemsHome">
+      <button class="home-button" @click="fetchItemsHome; tableHeadName = Home">
         <img src="@/assets/svg/home.svg" width="16px" height="16px">
       </button>
-      <button :class="{'picked-button': tableHead === GeneralInfo}" @click="fetchItems(GeneralInfo, '/GeneralInfo')">Общая информация</button>
-      <button :class="{'picked-button': tableHead === Condition}" @click="fetchItems(Condition, '/Condition')">Состояние</button>
-      <button :class="{'picked-button': tableHead === Team}" @click="fetchItems(Team, '/Team')">Команда проекта</button>
-      <button :class="{'picked-button': tableHead === Timelines}" @click="fetchItems(Timelines, '/Timelines')">Сроки</button>
-      <button :class="{'picked-button': tableHead === Cost}" @click="fetchItems(Cost, '/Cost')">Стоимость</button>
-      <button :class="{'picked-button': tableHead === Documents}" @click="fetchItems(Documents, '/Documents')">Документация</button>
-      <button :class="{'picked-button': tableHead === Goals}" @click="fetchItems(Goals, '/Goals')">Цели</button>
-      <button :class="{'picked-button': tableHead === Monitoring}" @click="fetchItems(Monitoring, '/Monitoring')">Мониторинг</button>
+      <button 
+        :class="{'picked-button': tableHead === GeneralInfo}" 
+        @click="fetchItems(GeneralInfo, '/GeneralInfo'); tableHeadName = GeneralInfo"
+      >
+        Общая информация
+      </button>
+      <button 
+        :class="{'picked-button': tableHead === Condition}"
+        @click="fetchItems(Condition, '/Condition'); tableHeadName = Condition"
+      >
+        Состояние
+      </button>
+      <button 
+        :class="{'picked-button': tableHead === Team}" 
+        @click="fetchItems(Team, '/Team'); tableHeadName = Team"
+      >
+        Команда проекта
+      </button>
+      <button 
+        :class="{'picked-button': tableHead === Timelines}" 
+        @click="fetchItems(Timelines, '/Timelines'); tableHeadName = Timelines"
+      >
+        Сроки
+      </button>
+      <button 
+        :class="{'picked-button': tableHead === Cost}" 
+        @click="fetchItems(Cost, '/Cost'); tableHeadName = Cost"
+      >
+        Стоимость
+      </button>
+      <button 
+        :class="{'picked-button': tableHead === Documents}" 
+        @click="fetchItems(Documents, '/Documents'); tableHeadName = Documents"
+      >
+        Документация
+      </button>
+      <button 
+        :class="{'picked-button': tableHead === Goals}" 
+        @click="fetchItems(Goals, '/Goals'); tableHeadName = Goals"
+      >
+        Цели
+      </button>
+      <button 
+        :class="{'picked-button': tableHead === Monitoring}" 
+        @click="fetchItems(Monitoring, '/Monitoring'); tableHeadName = Monitoring"
+      >
+        Мониторинг
+      </button>
     </div>
   </div>
 
@@ -73,6 +113,7 @@ export default {
       startURL: "/ProjectRegistry/Views",
       tableData: [],
       filteredData: [],
+      tableHeadName: 'Home',
       tableHead: HomeJSON,
       Home: HomeJSON,
       GeneralInfo: GeneralInfoJSON,
@@ -140,7 +181,7 @@ export default {
     },
     // Fetches table search result
     async fetchSearchResponse() {
-      const URL = this.startURL + "/Search?searchTerm=" + this.searchTerm
+      const URL = this.startURL + '/' + this.tableHeadName + "/Search?searchTerm=" + this.searchTerm
       try {
         const response = await api.getItemsJSON(URL)
         this.tableData = response.data
