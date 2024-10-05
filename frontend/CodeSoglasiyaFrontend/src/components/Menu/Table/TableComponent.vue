@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr v-for="(entry, index) in filteredData" :key="entry">
-        <td v-for="key in Object.keys(columns[0])" :key="key">
+        <td v-for="key in Object.keys(columns[0])" :key="key" :class="{'abbreviated': contains(key)}" :title="entry[key]">
           <span v-if="key === 'num'">
             {{ incrementIndex(index) }}
           </span>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import abbreviatedJSON from '@/data/abbreviated.json'
+
 export default {
   props: {
     data: Array,
@@ -37,7 +39,8 @@ export default {
   data() {
     return {
       sortKey: '',
-      sortOrders: Object.keys(this.columns[0]).reduce((o, key) => ((o[key] = 1), o), {})
+      sortOrders: Object.keys(this.columns[0]).reduce((o, key) => ((o[key] = 1), o), {}),
+      abbreviated: abbreviatedJSON
     }
   },
   computed: {
@@ -73,6 +76,14 @@ export default {
     },
     incrementIndex(index) {
       return index + 1
+    },
+    contains(elem) {
+      for (var i = 0; i < this.abbreviated.length; i++) {
+          if (this.abbreviated[i] === elem) {
+              return true;
+          }
+      }
+      return false;
     }
   }
 }
@@ -94,8 +105,7 @@ td {
   background-color: #f9f9f9;
   text-align: center;
   max-height: 15px;
-  overflow: hidden;
-  white-space: nowrap;
+  max-width: 100px;
 }
 th,
 td {
@@ -125,5 +135,10 @@ th.active .arrow {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 4px solid #fff;
+}
+.abbreviated {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>
